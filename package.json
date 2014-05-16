@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.paypal.com/NodeTestTools/nemo-view.git"
+    "url": "https://github.com/paypal/nemo-view.git"
   },
   "devDependencies": {
     "mocha": "~1.10.0",
@@ -16,17 +16,16 @@
     "grunt": "~0.4.1",
     "grunt-simple-mocha": "~0.4.0",
     "grunt-contrib-jshint": "^0.7.1",
-    "nemo-mocha-factory": "git://github.paypal.com/NodeTestTools/nemo-mocha-factory.git#v0.3-beta",
-	"nemo": "^0.6.0-beta",
-    "nemo-drivex": "^0.1.0",
-    "nemo-locatex": "^0.3.0-beta",
-    "nemo-paypal-locators": "git://github.paypal.com/NodeTestTools/nemo-paypal-locators.git",
+    "nemo-mocha-factory": "git+ssh://git@github.com:paypal/nemo-mocha-factory.git",
+    "nemo": "git+ssh://git@github.com:paypal/nemo.git",
+    "nemo-drivex": "git+ssh://git@github.com:paypal/nemo-drivex.git",
+    "nemo-locatex": "git+ssh://git@github.com:paypal/nemo-locatex.git",
     "nconf": "*"
   },
   "peerDependencies": {
-	"nemo-drivex": "^0.1.0",
-	"nemo-locatex": "^0.3.0-beta",
-    "nemo": "^0.6.0-beta"
+    "nemo-drivex": "git+ssh://git@github.com:paypal/nemo-drivex",
+    "nemo-locatex": "git+ssh://git@github.com:paypal/nemo-locatex",
+    "nemo": "git+ssh://git@github.com:paypal/nemo"
   },
   "keywords": [
     "Nemo",
