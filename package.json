@@ -23,9 +23,9 @@
     "nconf": "*"
   },
   "peerDependencies": {
-    "nemo-drivex": "git+ssh://git@github.com:paypal/nemo-drivex",
-    "nemo-locatex": "git+ssh://git@github.com:paypal/nemo-locatex",
-    "nemo": "git+ssh://git@github.com:paypal/nemo"
+    "nemo-drivex": "*",
+    "nemo-locatex": "*",
+    "nemo": "*"
   },
   "keywords": [
     "Nemo",
