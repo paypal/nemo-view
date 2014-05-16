@@ -1,0 +1,38 @@
+{
+  "name": "nemo-view",
+  "version": "0.3.2-beta",
+  "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.paypal.com/NodeTestTools/nemo-view.git"
+  },
+  "devDependencies": {
+    "mocha": "~1.10.0",
+    "chai": "~1.6.0",
+    "grunt": "~0.4.1",
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-contrib-jshint": "^0.7.1",
+    "nemo-mocha-factory": "git://github.paypal.com/NodeTestTools/nemo-mocha-factory.git#v0.3-beta",
+	"nemo": "^0.6.0-beta",
+    "nemo-drivex": "^0.1.0",
+    "nemo-locatex": "^0.3.0-beta",
+    "nemo-paypal-locators": "git://github.paypal.com/NodeTestTools/nemo-paypal-locators.git",
+    "nconf": "*"
+  },
+  "peerDependencies": {
+	"nemo-drivex": "^0.1.0",
+	"nemo-locatex": "^0.3.0-beta",
+    "nemo": "^0.6.0-beta"
+  },
+  "keywords": [
+    "Nemo",
+    "view",
+    "interface"
+  ],
+  "author": "Matt Edelman",
+  "license": "Apache 2"
+}

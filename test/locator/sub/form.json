@@ -1,0 +1,38 @@
+{
+	"fooText": {
+		"locator": "#foo input.texty",
+		"type": "css"
+	},
+	"fooButton": {
+		"locator": "#foo input[type='button']",
+		"type": "css"
+	},
+	"barText": {
+		"locator": "#bar input.texty",
+		"type": "css"
+	},
+	"barButton": {
+		"locator": "#bar input[type='button']",
+		"type": "css"
+	},
+	"bingText": {
+		"locator": "#bing input.texty",
+		"type": "css"
+	},
+	"bingButton": {
+		"locator": "#bing input[type='button']",
+		"type": "css"
+	},
+	"bangText": {
+		"locator": "#bang input.texty",
+		"type": "css"
+	},
+	"bangButton": {
+		"locator": "#bang input[type='button']",
+		"type": "css"
+	},
+	"outBox": {
+		"locator": "outy",
+		"type": "id"
+	}
+}
