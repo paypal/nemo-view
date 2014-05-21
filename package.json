@@ -16,16 +16,16 @@
     "grunt": "~0.4.1",
     "grunt-simple-mocha": "~0.4.0",
     "grunt-contrib-jshint": "^0.7.1",
-    "nemo-mocha-factory": "git+ssh://git@github.com:paypal/nemo-mocha-factory.git",
-    "nemo": "git+ssh://git@github.com:paypal/nemo.git",
-    "nemo-drivex": "git+ssh://git@github.com:paypal/nemo-drivex.git",
-    "nemo-locatex": "git+ssh://git@github.com:paypal/nemo-locatex.git",
+    "nemo-mocha-factory": "^0.1.0",
+    "nemo": "^0.1.0",
+    "nemo-drivex": "^0.1.0",
+    "nemo-locatex": "^0.1.0",
     "nconf": "*"
   },
   "peerDependencies": {
-    "nemo-drivex": "*",
-    "nemo-locatex": "*",
-    "nemo": "*"
+    "nemo-drivex": "^0.1.0",
+    "nemo-locatex": "^0.1.0",
+    "nemo": "^0.1.0"
   },
   "keywords": [
     "Nemo",
