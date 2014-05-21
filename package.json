@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/paypal/nemo-view.git"
   },
+  "dependencies": {
+    "async": "~0.2.8"
+  },
   "devDependencies": {
     "mocha": "~1.10.0",
     "chai": "~1.6.0",
