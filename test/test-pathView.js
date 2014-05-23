@@ -30,6 +30,7 @@ describe("nemo-view @pathViewSuite@active@", function () {
 	});
 	it("should use the form view to enter values and write to outy div @useView@", function (done) {
 		nemo.view.form.fooText().sendKeys("foo");
+		nemo.driver.sleep(300);
 		nemo.view.form.fooButton().click();
 		nemo.view.form.barText().sendKeys("bar");
 		nemo.view.form.barButton().click();
@@ -38,17 +39,16 @@ describe("nemo-view @pathViewSuite@active@", function () {
 		nemo.view.form.bangText().sendKeys("bang");
 		nemo.view.form.bangButton().click();
 		nemo.driver.sleep(3000);
-		nemo.view.form.outBox().getText().then(function (outText) {
+		nemo.view.form.outBox().getText().then(function(outText) {
 			console.log("outText", outText);
 			if (outText !== "foobarbingbang") {
 				done(new Error("didn't get what we shoulda"));
+			} else {
+				done();
 			}
-		}).then(function () {
-//				logs.get('client').then(function (types) {
-//					console.log(types);
-				done()
-//				});
-			});
+		}, function(err) {
+			done(err);
+		});
 	});
 
 });

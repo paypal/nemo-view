@@ -27,6 +27,7 @@ describe("nemo-view @listViewSuite@active@", function () {
 
 			elts.forEach(function(elt) {
 				elt.text().sendKeys("abcd");
+				nemo.driver.sleep(300);
 				elt.button().click();
 			});
 			nemo.view.formElementList.outBox().getText().then(function(outText) {

@@ -1,7 +1,7 @@
 before(function(done) {
 	process.env.nemoData = JSON.stringify({
 		"targetBaseUrl": "http://warm-river-3624.herokuapp.com/",
-		"targetBrowser": "firefox",
+		"targetBrowser": "chrome",
 		"autoBaseDir": process.cwd() + "/test",
 		"serverProps": {
 			"port": 4444
