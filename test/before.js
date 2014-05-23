@@ -6,7 +6,7 @@ before(function(done) {
 		"serverProps": {
 			"port": 4444
 		},
-		"targetServer": "http://bluefinlvs24.qa.paypal.com:4444/wd/hub",
+		"targetServer": "localhost",
 		"seleniumJar": "/usr/local/bin/selenium-server-standalone.jar"
 	});
 	done();

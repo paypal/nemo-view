@@ -1,5 +1,6 @@
 var should = require('chai').should(),
 	nemoFactory = require('nemo-mocha-factory'),
+	loginView = require('nemo-shared-objects/flow/login'),
 	plugins = require('./plugins'),
 	nemo = {},
 	logs,
@@ -7,12 +8,12 @@ var should = require('chai').should(),
 		"view": [
 			{
 				"name": "login",
-				"locator": "module:nemo-paypal-locators/login"
+				"locator": require("nemo-shared-objects/login")
 			}
 		]
 	};
 
-describe("nemo-view @moduleViewSuite@", function () {
+describe("nemo-view @moduleViewSuite@active@", function () {
 	nemoFactory({"context": nemo, "plugins": plugins, "setup": setup});
 	beforeEach(function (done) {
 		//can we access driver logs?
@@ -42,5 +43,12 @@ describe("nemo-view @moduleViewSuite@", function () {
 				done(err);
 			})
 	});
+	it("should try to @loginWithLoginView@", function (done) {
+		loginView(nemo).login({'emailAddress': 'zuQ@alm.com', 'password': '1234abce'}, false).then(function() {
+			done();
+		}, function(err) {
+			done(err);
+		});
+	})
 
 });

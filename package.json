@@ -23,7 +23,8 @@
     "nemo": "^0.1.0",
     "nemo-drivex": "^0.1.0",
     "nemo-locatex": "^0.1.0",
-    "nconf": "*"
+    "nconf": "*",
+    "nemo-shared-objects": "*"
   },
   "peerDependencies": {
     "nemo-drivex": "^0.1.0",
