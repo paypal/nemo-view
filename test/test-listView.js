@@ -24,7 +24,6 @@ describe("nemo-view @listViewSuite@active@", function () {
 	});
 	it("should use the form list view to enter values and write to outy div @useView@", function(done) {
 		nemo.view.formElementList.inputGroup().then(function(elts) {
-
 			elts.forEach(function(elt) {
 				elt.text().sendKeys("abcd");
 				nemo.driver.sleep(300);

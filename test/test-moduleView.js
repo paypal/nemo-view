@@ -1,6 +1,6 @@
 var should = require('chai').should(),
 	nemoFactory = require('nemo-mocha-factory'),
-	loginFlow = require('nemo-shared-objects/flow/login'),
+	loginFlow = require('nemo-shared-objects').loginFlow,
 	plugins = require('./plugins'),
 	nemo = {},
 	logs,
