@@ -235,5 +235,17 @@ Please see these sections in the nemo-locatex README:
 * https://github.paypal.com/NodeTestTools/nemo-locatex#changing-your-locator-files
 * https://github.paypal.com/NodeTestTools/nemo-locatex#setting-locale
 
+##### [locatorName]OptionText
+
+* arguments
+  * text: the text in the option you wish to select
+* returns: Promise which resolves to true when option is selected
+
+##### [locatorName]OptionValue
+
+* arguments
+  * value: the value attribute of the option you wish to select
+* returns: Promise which resolves to true when option is selected
+Any method in the view object's prototype will also be available for use
 Other than that, the nemo-view uses nemo-locatex internally, so if you change your locator files and set LOCALE, nemo-view will handle the rest!
 
