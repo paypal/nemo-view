@@ -15,7 +15,8 @@ describe("nemo-view @pathViewSuite@active@", function () {
 		//can we access driver logs?
 		//logs = new nemo.wd.WebDriver.Logs(nemo.driver);
 
-		nemo.driver.get(nemo.props.targetBaseUrl).then(function () {
+		nemo.driver.get(nemo.props.targetBaseUrl);
+		nemo.driver.sleep(2000).then(function () {
 			done()
 		}, function (err) {
 			done(err);
@@ -29,6 +30,7 @@ describe("nemo-view @pathViewSuite@active@", function () {
 		})
 	});
 	it("should use the form view to enter values and write to outy div @useView@", function (done) {
+		nemo.driver.sleep(300);
 		nemo.view.form.fooText().sendKeys("foo");
 		nemo.driver.sleep(300);
 		nemo.view.form.fooButton().click();

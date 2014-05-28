@@ -18,7 +18,8 @@ describe("nemo-view @simpleViewSuite@active@", function() {
 		//can we access driver logs?
 		//logs = new nemo.wd.WebDriver.Logs(nemo.driver);
 
-		nemo.driver.get(nemo.props.targetBaseUrl).then(function() {
+		nemo.driver.get(nemo.props.targetBaseUrl);
+		nemo.driver.sleep(2000).then(function () {
 			done()
 		}, function(err) {
 			done(err);

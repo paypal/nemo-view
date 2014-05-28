@@ -9,7 +9,8 @@ var should = require('chai').should(),
 describe("nemo-view @listViewSuite@active@", function () {
 	nemoFactory({"context": nemo, "plugins": plugins, "setup": setup});
 	beforeEach(function(done) {
-		nemo.driver.get(nemo.props.targetBaseUrl).then(function() {
+		nemo.driver.get(nemo.props.targetBaseUrl);
+		nemo.driver.sleep(2000).then(function () {
 			done()
 		}, function(err) {
 			done(err);
@@ -25,6 +26,7 @@ describe("nemo-view @listViewSuite@active@", function () {
 	it("should use the form list view to enter values and write to outy div @useView@", function(done) {
 		nemo.view.formElementList.inputGroup().then(function(elts) {
 			elts.forEach(function(elt) {
+				nemo.driver.sleep(300);
 				elt.text().sendKeys("abcd");
 				nemo.driver.sleep(300);
 				elt.button().click();
