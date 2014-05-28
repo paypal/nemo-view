@@ -9,7 +9,7 @@ View Interface for nemo views
 
 ### Installation
 
-1. Add to package.json the appropriate versions of dependencies and nemo-view to package.json and install.
+1. Add dependencies to package.json and install.
 
 ```javascript
 	...
