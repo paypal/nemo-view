@@ -4,7 +4,7 @@
   "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
   "main": "index.js",
   "scripts": {
-    "test": "grunt"
+    "test": "grunt --grep @travis@"
   },
   "repository": {
     "type": "git",

@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 				globals: ['should'],
 				timeout: 30000,
 				ignoreLeaks: false,
-				grep: grunt.option('grep') || '@active@',
+				grep: grunt.option('grep') || 0,
 				ui: 'bdd',
 				reporter: 'spec'
 			},

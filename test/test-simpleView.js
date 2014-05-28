@@ -7,7 +7,7 @@ var should = require('chai').should(),
 		"view": ["form"]
 	};
 
-describe("nemo-view @simpleViewSuite@active@", function() {
+describe("nemo-view @simpleViewSuite@travis@", function() {
 	nemoFactory({
 		"context": nemo,
 		"plugins": plugins,

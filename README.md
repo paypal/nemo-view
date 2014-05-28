@@ -2,6 +2,8 @@
 
 View Interface for nemo views
 
+[![Build Status](https://magnum.travis-ci.com/paypal/nemo-view.svg?token=wkfLgEAgy8eZBxUbnTsB&branch=master)](https://magnum.travis-ci.com/paypal/nemo-view)
+
 ### Peer Dependencies
 
 * nemo-locatex

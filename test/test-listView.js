@@ -6,7 +6,7 @@ var should = require('chai').should(),
 		"view": ["formElementList"]
 	};
 
-describe("nemo-view @listViewSuite@active@", function () {
+describe("nemo-view @listViewSuite@travis@", function () {
 	nemoFactory({"context": nemo, "plugins": plugins, "setup": setup});
 	beforeEach(function(done) {
 		nemo.driver.get(nemo.props.targetBaseUrl);

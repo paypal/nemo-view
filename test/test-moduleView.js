@@ -13,7 +13,7 @@ var should = require('chai').should(),
 		]
 	};
 
-describe("nemo-view @moduleViewSuite@active@", function () {
+describe("nemo-view @moduleViewSuite@", function () {
 	nemoFactory({"context": nemo, "plugins": plugins, "setup": setup});
 	beforeEach(function (done) {
 		//can we access driver logs?
