@@ -2,7 +2,7 @@
 
 View Interface for nemo views
 
-[![Build Status](https://magnum.travis-ci.com/paypal/nemo-view.svg?token=wkfLgEAgy8eZBxUbnTsB&branch=master)](https://magnum.travis-ci.com/paypal/nemo-view)
+[![Build Status](https://travis-ci.org/paypal/nemo-view.svg?branch=master)](https://travis-ci.org/paypal/nemo-view)
 
 ### Peer Dependencies
 
