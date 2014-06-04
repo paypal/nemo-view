@@ -3,6 +3,7 @@
   "version": "0.1.5",
   "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
   "main": "index.js",
+  "registerAs": "view",
   "scripts": {
     "test": "grunt --grep @travis@"
   },
