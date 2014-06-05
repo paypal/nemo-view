@@ -15,10 +15,10 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "git://github.paypal.com/NodeTestTools/nemo.git#v0.6-beta",
-    "nemo-view": "git://github.paypal.com/NodeTestTools/nemo-view.git#v0.3-beta",
+    "nemo": "^0.1.0",
+    "nemo-view": "^0.1.0",
     "nemo-drivex": "^0.1.0",
-    "nemo-locatex": "^0.3.0-beta",
+    "nemo-locatex": "^0.1.0",
 	...
 ```
 
@@ -248,6 +248,6 @@ Other than that, the nemo-view uses nemo-locatex internally, so if you change yo
 ### Using LOCALE specific locators
 
 Please see these sections in the nemo-locatex README:
-* https://github.paypal.com/NodeTestTools/nemo-locatex#changing-your-locator-files
-* https://github.paypal.com/NodeTestTools/nemo-locatex#setting-locale
+* https://github.com/paypal/nemo-locatex#changing-your-locator-files
+* https://github.com/paypal/nemo-locatex#setting-locale
 
