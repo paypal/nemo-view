@@ -14,11 +14,17 @@
 \*───────────────────────────────────────────────────────────────────────────*/
 /* global require: true, module: true */
 "use strict";
-var NemoView = require("./lib/view");
+var view = require("./lib/view");
 module.exports = {
 	"addView": function (config, nemo) {
-		//console.log("config", config);
-		var _view = (new NemoView());
+		//dedupe
+		var viewName = view.resolveViewName(config);
+		if (nemo.view && nemo.view[viewName]) {
+			return;
+		}
+
+		console.log('haoo');
+		var _view = (new view.View());
 		_view.config = config;
 		_view.init(_view, nemo);
 		return _view;
