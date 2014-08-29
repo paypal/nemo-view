@@ -17,7 +17,7 @@
 var NemoView = require("./lib/view");
 module.exports = {
 	"addView": function (config, nemo) {
-
+		//console.log("config", config);
 		var _view = (new NemoView());
 		_view.config = config;
 		_view.init(_view, nemo);
