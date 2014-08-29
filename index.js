@@ -27,9 +27,11 @@ function addView(nemo) {
 		var _view = (new view.View());
 		_view.config = config;
 		_view.init(_view, nemo);
+		//funky to set here and return below as we are double-setting during Nemo.setup
+		nemo.view[viewName] = _view
 		return _view;
-	}
-};
+	};
+}
 module.exports.setup = function(config, nemo, callback) {
 	//slap the addView method onto the view namespace
 	nemo.view.addView = addView(nemo);
