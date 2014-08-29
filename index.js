@@ -15,8 +15,9 @@
 /* global require: true, module: true */
 "use strict";
 var view = require("./lib/view");
-module.exports = {
-	"addView": function (config, nemo) {
+
+function addView(nemo) {
+	return function(config) {
 		//dedupe
 		var viewName = view.resolveViewName(config);
 		if (nemo.view && nemo.view[viewName]) {
@@ -28,4 +29,10 @@ module.exports = {
 		_view.init(_view, nemo);
 		return _view;
 	}
+};
+module.exports.setup = function(config, nemo, callback) {
+	//slap the addView method onto the view namespace
+	nemo.view.addView = addView(nemo);
+	//move along
+	callback(null, config, nemo);
 };
