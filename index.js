@@ -23,7 +23,6 @@ module.exports = {
 			return;
 		}
 
-		console.log('haoo');
 		var _view = (new view.View());
 		_view.config = config;
 		_view.init(_view, nemo);
