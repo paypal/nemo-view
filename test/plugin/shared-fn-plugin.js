@@ -36,7 +36,7 @@ module.exports = {
 			'locator': loginLocator,
 			'name': 'login'
 		};
-		login.view.login = nemo.view.addView(loginContext);
+		login.view.login = nemo.view.addView(loginContext, false);
 		login.login = function(email, password) {
 			var me = login.view.login;
 			nemo.driver.get('https://www.stage2pph20.stage.paypal.com');

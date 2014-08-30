@@ -17,18 +17,26 @@
 var view = require("./lib/view");
 
 function addView(nemo) {
-	return function(config) {
+	return function(config, hang) {
 		//dedupe
 		var viewName = view.resolveViewName(config);
+		//default hang to true
+		hang = (hang === undefined) ? true : hang;
 		if (nemo.view && nemo.view[viewName]) {
 			return;
+		}
+		//error
+		if (viewName === 'addView') {
+			throw new Error('nemo-view reserves "addView". Please rename your view.');
 		}
 
 		var _view = (new view.View());
 		_view.config = config;
 		_view.init(_view, nemo);
-		//funky to set here and return below as we are double-setting during Nemo.setup
-		nemo.view[viewName] = _view
+		
+		if (hang) {
+			nemo.view[viewName] = _view;
+		}
 		return _view;
 	};
 }
