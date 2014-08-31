@@ -22,7 +22,7 @@ function addView(nemo) {
 		var viewName = view.resolveViewName(config);
 		//default hang to true
 		hang = (hang === undefined) ? true : hang;
-		if (nemo.view && nemo.view[viewName]) {
+		if (nemo.view && nemo.view[viewName] && hang === true) {
 			return;
 		}
 		//error

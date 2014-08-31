@@ -292,7 +292,7 @@ function addCard(nemo) {
 This module can in turn be included in a spec file as below:
 
 ```javascript
-"use strict";
+'use strict';
 var assert = require('assert'),
   nemoFactory = require('nemo-mocha-factory'),
   nemo = {},
@@ -315,6 +315,32 @@ describe('@p2@FRbank@migrate@', function() {
 Now any of the flow module methods can be used in the spec file, and the correct views will be available in the flow modules.
 
 ### View features
+
+#### addView method
+
+The addView method will be added to the nemo.view namespace with the following signature:
+`nemo.view.addView(viewSpec, addToNamespace);`
+
+__viewSpec__ {String|JSON} will be either a string, or a JSON object to define the view/locator.
+__addToNamespace__ {boolean} (optional, defaults to true) if `false` nemo-view will not attach the view to the `nemo.view` namespace
+
+Using the addView method, you can add a view at any time using the same formats and conventions as if you are adding them in the Nemo.setup() method. Examples:
+
+```javascript
+//add using a locator in the autoBaseDir/locator directory
+var myPage = nemo.view.addView('myPage');
+var login = nemo.view.addView({
+	"name": "login",
+	"locator": "path:locator/loggedOut/login"
+});
+var addCard = nemo.view.addView({
+	"name": "addCard",
+	"locator": "module:nemo-paypal-locators/addCard"
+});
+
+The addView method will return the view object. It will also dedupe to prevent extra cycles adding the same view multiple times, or overwriting of a view with another of the same name.
+
+```
 
 #### locator methods
 The view will create the following methods for each locator object:
