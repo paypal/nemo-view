@@ -8,7 +8,7 @@ var should = require('chai').should(),
 	setup = {
 		
 	};
-	plugins.plugins.yhooreg = {
+	plugins.plugins.login = {
 		"module": path.resolve(__dirname, 'plugin/shared-fn-plugin'),
 		"register": true
 	};

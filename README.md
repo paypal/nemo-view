@@ -100,7 +100,6 @@ In the common use case, make sure the view you request matches the name of the l
 /*global nemo:true, describe:true, it:true */
 var plugins = require("../config/nemo-plugins"),
 	nemoFactory = require("nemo-mocha-factory"),
-	homePage = require("../page/homePage"),
 	setup = {
 		"view": ["selectBox", "textBox"]
 	};
@@ -201,6 +200,119 @@ var plugins = require("../config/nemo-plugins"),
 			}]
 	};
 ```
+### Creating nemo plugins with self contained views and flows
+
+You may want to publish complete flows as a nemo plugin. That way you can import the functionality and access as a plugin. The following is an example of that.
+
+```javascript
+var path = require("path");
+module.exports = {
+	"setup": function(config, nemo, callback) {
+		var login = {
+			'view': {},
+			'locator': {}
+		};
+		var loginLocator = {
+			"email": {
+				"locator": "login_email",
+				"type": "id"
+			},
+			"password": {
+				"locator": "login_password",
+				"type": "id"
+			},
+			"showLogin": {
+				"locator": "login-button",
+				"type": "id"
+			},
+			"button": {
+				"locator": "input[type='submit'][name='submit']",
+				"type": "css"
+			},
+			"logoutLink": {
+				"locator": "li.logout a",
+				"type": "css"
+			},
+			"loggedOutLoginLink": {
+				"locator": "li.login a",
+				"type": "css"
+			}
+		};
+		var loginContext = {
+			'locator': loginLocator,
+			'name': 'login'
+		};
+		login.view.login = nemo.view.addView(loginContext, false);
+		login.login = function(email, password) {
+			var me = login.view.login;
+			nemo.driver.get('https://www.stage2pph20.stage.paypal.com');
+			me.showLoginVisible().then(function(isVisible) {
+				if (isVisible) {
+					return me.showLogin().click();
+				}
+				return;
+			});
+			me.email().clear();
+			me.email().sendKeys(email);
+			me.password().sendKeys(password);
+			me.button().click();
+			return me.logoutLinkWait(10000);
+		};
+		login.logout = function() {
+			var me = login.view.login;
+			me.logoutLink().click();
+			//nemo.driver.sleep(30000);
+			return me.loggedOutLoginLink(10000);
+		};
+		nemo.login = login;
+		callback(null, config, nemo);
+
+	}
+};
+```
+
+The above can be registered as a plugin during nemo setup, and accessed as `nemo.login` within a spec.
+
+### Using multiple views in modules external to spec files
+
+You will probably want to share functionality between spec files which encapsulate multiple views (called flow modules). And you may want to use multiple of these flow modules in a single spec. In this case, it makes more sense to allow the flow module to specify which view(s) to include instead of specifying the views at the spec level. Use the nemo-view `addView` method in the flow modules to accomplish this.
+
+Example of the top of a flow file `addCard.js`
+```javascript
+'use strict';
+
+function addCard(nemo) {
+	var CC = nemo.view.addView('CC');
+	var allSet = nemo.view.addView('allSet');
+	return {
+		addCC: function(cardNumber, date, csc) {
+			CC.CCTabLink().click();
+```
+
+This module can in turn be included in a spec file as below:
+
+```javascript
+"use strict";
+var assert = require('assert'),
+  nemoFactory = require('nemo-mocha-factory'),
+  nemo = {},
+  plugins = require('../config/nemo-plugins'),
+  addCard = require('../flow/addCard'),
+  addBank = require('../flow/addBank');
+
+describe('@p2@FRbank@migrate@', function() {
+  nemoFactory({
+    'plugins': plugins,
+    'context': nemo
+  });
+  before(function(done) {
+    addCard = addCard(nemo);
+    addBank = addBank(nemo);
+    done();
+  )};
+```
+
+Now any of the flow module methods can be used in the spec file, and the correct views will be available in the flow modules.
 
 ### View features
 
