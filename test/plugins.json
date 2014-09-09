@@ -9,7 +9,8 @@
 			"register": true
 		},
 		"view": {
-			"module": "../../index"
+			"module": "../../index",
+			"register": true
 		}
 	}
 }

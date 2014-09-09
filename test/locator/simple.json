@@ -2,5 +2,9 @@
 	"outBox": {
 		"locator": "outy",
 		"type": "id"
+	},
+	"googleSearchBox": {
+		"locator": "body",
+		"type": "css"
 	}
 }
