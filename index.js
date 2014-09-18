@@ -23,7 +23,7 @@ function addView(nemo) {
 		//default hang to true
 		hang = (hang === undefined) ? true : hang;
 		if (nemo.view && nemo.view[viewName] && hang === true) {
-			return;
+			return nemo.view[viewName];
 		}
 		//error
 		if (viewName === 'addView') {
