@@ -1,5 +1,5 @@
 var path = require("path");
-var nview = require(path.resolve(__dirname, '../../index'));
+//var nview = require(path.resolve(__dirname, '../../index'));
 module.exports = {
 	"setup": function(config, nemo, callback) {
 		var login = {
@@ -36,7 +36,7 @@ module.exports = {
 			'locator': loginLocator,
 			'name': 'login'
 		};
-		login.view.login = nview.addView(loginContext, nemo);
+		login.view.login = nemo.view.addView(loginContext, false);
 		login.login = function(email, password) {
 			var me = login.view.login;
 			nemo.driver.get('https://www.stage2pph20.stage.paypal.com');

@@ -15,17 +15,34 @@
 /* global require: true, module: true */
 "use strict";
 var view = require("./lib/view");
-module.exports = {
-	"addView": function (config, nemo) {
+
+function addView(nemo) {
+	return function(config, hang) {
 		//dedupe
 		var viewName = view.resolveViewName(config);
-		if (nemo.view && nemo.view[viewName]) {
-			return;
+		//default hang to true
+		hang = (hang === undefined) ? true : hang;
+		if (nemo.view && nemo.view[viewName] && hang === true) {
+			return nemo.view[viewName];
+		}
+		//error
+		if (viewName === 'addView') {
+			throw new Error('nemo-view reserves "addView". Please rename your view.');
 		}
 
 		var _view = (new view.View());
 		_view.config = config;
 		_view.init(_view, nemo);
+		
+		if (hang) {
+			nemo.view[viewName] = _view;
+		}
 		return _view;
-	}
+	};
+}
+module.exports.setup = function(config, nemo, callback) {
+	//slap the addView method onto the view namespace
+	nemo.view.addView = addView(nemo);
+	//move along
+	callback(null, config, nemo);
 };
