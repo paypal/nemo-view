@@ -1,6 +1,6 @@
 {
   "name": "nemo-view",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
   "main": "index.js",
   "registerAs": "view",
@@ -38,8 +38,10 @@
     "interface"
   ],
   "author": "Matt Edelman",
-  "licenses": [{
-    "type": "Apache 2.0",
-    "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-  }]
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ]
 }
