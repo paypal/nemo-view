@@ -369,6 +369,13 @@ The view will create the following methods for each locator object:
 
 Any method in the view object's prototype will also be available for use
 
+##### [locatorName]WaitVisible
+
+* arguments
+  * timeout {Number} time to wait in milliseconds
+  * msg {String} optional. Message to accompany error in failure case
+* returns: Promise which resolves to true or false
+
 ##### [locatorName]OptionText
 
 * arguments
