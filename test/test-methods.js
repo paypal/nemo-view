@@ -24,6 +24,14 @@ describe('nemo-view @methods@travis@', function() {
 			done(err);
 		})
 	});
+	it('should return a @locatorObject@', function(done) {
+		var locator = nemo.view.simple.outBoxBy();
+		if (locator.using && locator.value) {
+			done();
+		} else {
+			done(new Error('didnt get back a locator object'));
+		}
+	});
 	it('should appropriately use a timeout argument to the @Wait@ method in a failure scenario', function(done) {
 		var start = Date.now();
 		nemo.view.simple.outBoxWait(13000, 'didnt find outbox').then(function(find) {
