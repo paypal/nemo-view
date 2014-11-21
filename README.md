@@ -350,6 +350,11 @@ The view will create the following methods for each locator object:
 * arguments: none
 * returns: Promise which resolves to WebElement or rejected
 
+##### [locatorName]By
+
+* arguments: none
+* returns: JSON locator object. You can use this, for example, to pass to selenium-webdriver until statements
+
 ##### [locatorName]Present
 
 * arguments: none
