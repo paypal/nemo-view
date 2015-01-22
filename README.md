@@ -367,7 +367,7 @@ The view will create the following methods for each locator object:
   * msg {String} optional. Message to accompany error in failure case
 * returns: Promise which resolves to true or false
 
-##### [locatorName]WaitAndClick
+##### [locatorName]WaitForVisibleAndClick
 
 * arguments
   * timeout {Number} time to wait in milliseconds
