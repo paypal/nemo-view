@@ -15,8 +15,8 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "^0.1.0",
-    "nemo-view": "^0.1.0",
+    "nemo": "^0.2.0",
+    "nemo-view": "^0.2.0",
     "nemo-drivex": "^0.1.0",
     "nemo-locatex": "^0.1.0",
 	...
