@@ -34,5 +34,9 @@
     "outBox": {
     	"locator": "outy",
     	"type": "id"
+    },
+    "notThere" : {
+        "locator" : "notpresent",
+        "type" : "id"
     }
 }
