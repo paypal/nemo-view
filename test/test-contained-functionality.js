@@ -13,13 +13,13 @@ var should = require('chai').should(),
 		"register": true
 	};
 
-describe("nemo-view @containedFunctionality@", function () {
+describe("nemo-view @containedFunctionality@travis@", function () {
 	nemoFactory({"context": nemo, "plugins": plugins, "setup": setup});
 	beforeEach(function (done) {
 		//can we access driver logs?
 		//logs = new nemo.wd.WebDriver.Logs(nemo.driver);
 
-		nemo.driver.get("https://www.paypal.com").then(function () {
+		nemo.driver.get(nemo.props.targetBaseUrl + '/login').then(function () {
 			done()
 		}, function (err) {
 			done(err);
@@ -28,7 +28,6 @@ describe("nemo-view @containedFunctionality@", function () {
 
 	it("should complete the shared functionality", function (done) {
 		nemo.login.login('medelman-buyer@paypal.com', '11111111');
-		//nemo.driver.sleep(15000);
 		nemo.login.logout().then(function() {
 			done();
 		}, function(err) {

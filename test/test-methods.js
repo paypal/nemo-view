@@ -32,35 +32,37 @@ describe('nemo-view @methods@travis@', function() {
 			done(new Error('didnt get back a locator object'));
 		}
 	});
-	it('should appropriately use a timeout argument to the @Wait@ method in a failure scenario', function(done) {
+	it('should appropriately use a timeout argument to the @Wait@CustomTimeout@ method in a failure scenario', function(done) {
 		var start = Date.now();
-		nemo.view.simple.outBoxWait(13000, 'didnt find outbox').then(function(find) {
-			var found = Date.now() - start;
-			console.log('timeout in ', found);
-			if (find === true) {
-				done(new Error('found outBox but should not have'));
-			} else if (find === false && (found > 13800 || found < 12500)) {
-				done(new Error('found false but in the wrong period of time'));
-			} else if (find === false) {
-				done();
-			}
-		});
+    nemo.view.simple.outBoxWait(13000, 'didnt find outbox').then(function(find) {
+      done(new Error('found outBox but should not have'));
+    }, function(err) {
+      var found = Date.now() - start;
+      console.log('timeout in ', found);
+      if (found > 13800 || found < 12500) {
+        done(new Error('error thrown but in the wrong period of time, '));
+      } else {
+        done();
+      }
+    });
+
 	});
 	it('should appropriately use a DIFFERENT timeout argument to the @Wait@ method in a failure scenario', function(done) {
 		var start = Date.now();
 		nemo.view.simple.outBoxWait(3000, 'didnt find outbox').then(function(find) {
-			var found = Date.now() - start;
-			console.log('timeout in ', found);
-			if (find === true) {
-				done(new Error('found outBox but should not have'));
-			} else if (find === false && (found > 3800 || found < 2500)) {
-				done(new Error('found false but in the wrong period of time, ', found));
-			} else if (find === false) {
-				done();
-			}
-		});
+			done(new Error('found outBox but should not have'));
+		}, function(err) {
+      var found = Date.now() - start;
+      console.log('timeout in ', found);
+      if (found > 3800 || found < 2500) {
+        done(new Error('error thrown but in the wrong period of time, '));
+      } else {
+        done();
+      }
+   });
 	});
-	it('should find an existing element using the @Wait@ method', function(done) {
+	it('should find an existing element using the @Wait@ElementExists@ method', function(done) {
+    console.log(nemo.wd.By.css('body'));
 		nemo.driver.sleep(2000);
 		nemo.view.simple.googleSearchBoxWait(3000, 'didn\t find search box').then(function(found) {
 			console.log('found is', found);

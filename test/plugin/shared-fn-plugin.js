@@ -8,55 +8,44 @@ module.exports = {
 		};
 		var loginLocator = {
 			"email": {
-				"locator": "login_email",
+				"locator": "email",
 				"type": "id"
 			},
 			"password": {
-				"locator": "login_password",
+				"locator": "password",
 				"type": "id"
 			},
-			"showLogin": {
-				"locator": "login-button",
-				"type": "id"
-			},
-			"button": {
-				"locator": "input[type='submit'][name='submit']",
+			"loginButton": {
+				"locator": "input[type='button'][class='login']",
 				"type": "css"
 			},
-			"logoutLink": {
-				"locator": "li.logout a",
-				"type": "css"
-			},
-			"loggedOutLoginLink": {
-				"locator": "li.login a",
-				"type": "css"
-			}
+      "logoutButton": {
+        "locator": "input[type='button'][class='logout']",
+        "type": "css"
+      }
+
 		};
 		var loginContext = {
 			'locator': loginLocator,
 			'name': 'login'
 		};
+
+    //setting the second param to "false" means this view won't impose on whatever is already attached to nemo.view
 		login.view.login = nemo.view.addView(loginContext, false);
 		login.login = function(email, password) {
 			var me = login.view.login;
-			nemo.driver.get('https://www.stage2pph20.stage.paypal.com');
-			me.showLoginVisible().then(function(isVisible) {
-				if (isVisible) {
-					return me.showLogin().click();
-				}
-				return;
-			});
+			nemo.driver.get(nemo.props.targetBaseUrl + '/login');
 			me.email().clear();
 			me.email().sendKeys(email);
 			me.password().sendKeys(password);
-			me.button().click();
-			return me.logoutLinkWait(10000);
+			me.loginButton().click();
+			return me.logoutButtonWait(10000);
 		};
 		login.logout = function() {
 			var me = login.view.login;
-			me.logoutLink().click();
+			me.logoutButton().click();
 			//nemo.driver.sleep(30000);
-			return me.loggedOutLoginLink(10000);
+			return me.emailWait(10000);
 		};
 		nemo.login = login;
 		callback(null, config, nemo);
