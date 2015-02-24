@@ -64,10 +64,10 @@ describe("nemo-view @simpleViewSuite@travis@", function () {
             done(err);
         });
     });
-    it('should not find element and wait should timeout',function(done){
-        nemo.view.form.notThereWaitVisible(1000).then(function(element){
+    it('should not find element and wait should timeout', function (done) {
+        nemo.view.form.notThereWaitVisible(1000).then(function (element) {
             done(new Error('Found element that is not there'));
-        },function(err){
+        }, function (err) {
             done();
         });
     });
