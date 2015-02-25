@@ -365,14 +365,14 @@ The view will create the following methods for each locator object:
 * arguments
   * timeout {Number} time to wait in milliseconds
   * msg {String} optional. Message to accompany error in failure case
-* returns: Promise which resolves to true or false
+* returns: Promise which resolves to true when element is present, or reject
 
 ##### [locatorName]WaitVisible
 
 * arguments
   * timeout {Number} time to wait in milliseconds
   * msg {String} optional. Message to accompany error in failure case
-* returns: A promise that will be resolved when element is found.
+* returns: A promise that will resolve true when element is both found and visible, or reject
 
 ##### [locatorName]Visible
 

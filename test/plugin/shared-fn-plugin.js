@@ -25,13 +25,13 @@ module.exports = {
       }
 
 		};
-		var loginContext = {
+		var loginViewDefinition = {
 			'locator': loginLocator,
 			'name': 'login'
 		};
 
     //setting the second param to "false" means this view won't impose on whatever is already attached to nemo.view
-		login.view.login = nemo.view.addView(loginContext, false);
+		login.view.login = nemo.view.addView(loginViewDefinition, false);
 		login.login = function(email, password) {
 			var me = login.view.login;
 			nemo.driver.get(nemo.props.targetBaseUrl + '/login');

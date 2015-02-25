@@ -1,10 +1,8 @@
 var should = require('chai').should(),
 	nemoFactory = require('nemo-mocha-factory'),
-	loginFlow = require('nemo-shared-objects/flow/login'),
 	plugins = require('./plugins'),
 	path = require('path'),
 	nemo = {},
-	logs,
 	setup = {
 		
 	};
@@ -13,12 +11,9 @@ var should = require('chai').should(),
 		"register": true
 	};
 
-describe("nemo-view @containedFunctionality@travis@", function () {
+describe("nemo-view @pluginContainedFunctionality@travis@", function () {
 	nemoFactory({"context": nemo, "plugins": plugins, "setup": setup});
 	beforeEach(function (done) {
-		//can we access driver logs?
-		//logs = new nemo.wd.WebDriver.Logs(nemo.driver);
-
 		nemo.driver.get(nemo.props.targetBaseUrl + '/login').then(function () {
 			done()
 		}, function (err) {
