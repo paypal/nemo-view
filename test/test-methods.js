@@ -59,18 +59,17 @@ describe('nemo-view @methods@', function () {
       }
     });
   });
-  it('should use @WaitVisible@ method', function (done) {
+  it('should use @WaitVisible@positive@ method', function (done) {
     nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
     util.waitForJSReady(nemo);
     nemo.view.simple.waitButton().click();
-    nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').then(function (find) {
-      assert.equal(find, true);
-      done();
-    }, function (err) {
-      done(err);
-    });
+    nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function(tn) {
+      console.log('tn', tn);
+        assert.equal(tn.toLowerCase(), 'div');
+        done();
+      }, util.doneError(done));
   });
-  it('should use @WaitVisible@ method in negative scenario', function (done) {
+  it('should use @WaitVisible@negative@ method in negative scenario', function (done) {
 
     var start;
     nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
