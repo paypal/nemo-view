@@ -27,7 +27,7 @@ function addView(nemo) {
 		}
 		//error
 		if (viewName === 'addView') {
-			throw new Error('nemo-view reserves "addView". Please rename your view.');
+			throw new Error('[nemo-view] reserves "addView". Please rename your view.');
 		}
 
 		var _view = (new view.View());

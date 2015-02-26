@@ -21,17 +21,14 @@ module.exports = function(grunt) {
 			}
 		},
 		jshint: {
-			files: ['index.js', 'Gruntfile.js', 'lib/*.js'],
+			files: ['index.js', 'Gruntfile.js', 'lib/*.js', 'test/*.js'],
 			options: {
 				jshintrc: true
 			}
 		}
 	});
 
-	// For this to work, you need to have run `npm install grunt-simple-mocha`
 	grunt.loadNpmTasks('grunt-simple-mocha');
-	// grunt.loadNpmTasks('grunt-loop-mocha');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	// Add a default task. This is optional, of course :)
 	grunt.registerTask('default', ['simplemocha', 'jshint']);
 };
