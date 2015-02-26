@@ -5,7 +5,7 @@
   "main": "index.js",
   "registerAs": "view",
   "scripts": {
-    "test": "grunt --grep @travis@"
+    "test": "grunt"
   },
   "repository": {
     "type": "git",
