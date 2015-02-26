@@ -9,7 +9,7 @@ module.exports.waitForJSReady = function waitForJSReady(nemo) {
         return false;
       });
     }
-    , 2000, 'JavaScript didn\'t load');
+    , 5000, 'JavaScript didn\'t load');
 };
 
 module.exports.doneSuccess = function (done) {

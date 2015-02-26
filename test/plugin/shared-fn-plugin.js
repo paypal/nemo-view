@@ -32,9 +32,12 @@ module.exports = {
 
     //setting the second param to "false" means this view won't impose on whatever is already attached to nemo.view
 		login.view.login = nemo.view.addView(loginViewDefinition, false);
+    login.getPage = function () {
+      return nemo.driver.get(nemo.props.targetBaseUrl + '/login');
+    };
 		login.login = function(email, password) {
 			var me = login.view.login;
-			nemo.driver.get(nemo.props.targetBaseUrl + '/login');
+
 			me.email().clear();
 			me.email().sendKeys(email);
 			me.password().sendKeys(password);
@@ -44,7 +47,6 @@ module.exports = {
 		login.logout = function() {
 			var me = login.view.login;
 			me.logoutButton().click();
-			//nemo.driver.sleep(30000);
 			return me.emailWait(10000);
 		};
 		nemo.login = login;

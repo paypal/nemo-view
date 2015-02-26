@@ -1,4 +1,4 @@
-/* global describe,beforeEach,it */
+/* global describe,it */
 
 'use strict';
 
@@ -15,12 +15,9 @@ plugins.plugins.login = {
 
 describe('nemo-view @pluginContainedFunctionality@', function () {
   nemoFactory({'context': nemo, 'plugins': plugins, 'setup': setup});
-  beforeEach(function (done) {
-    nemo.driver.get(nemo.props.targetBaseUrl + '/login');
-    util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
-  });
-
   it('should complete the shared functionality', function (done) {
+    nemo.login.getPage();
+    util.waitForJSReady(nemo);
     nemo.login.login('medelman-buyer@paypal.com', '11111111');
     nemo.login.logout().then(util.doneSuccess(done), util.doneError(done));
   });
