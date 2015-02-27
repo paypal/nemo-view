@@ -30,7 +30,16 @@ describe('nemo-view @methods@', function () {
       done(new Error('didnt get back a locator object'));
     }
   });
-  it('should appropriately use a timeout argument to the @Wait@CustomTimeout@ method in a failure scenario', function (done) {
+  it('should find an existing element using the @Wait@positive@ method', function (done) {
+    nemo.view.simple.bodyTagWait(3000, 'didn\t find body tag').getTagName().then(function(tn) {
+      if (tn.toLowerCase() === 'body') {
+        done();
+      } else {
+        done(new Error('something went wrong here'));
+      }
+    }, util.doneError(done));
+  });
+  it('should appropriately use a timeout argument to the @Wait@negative@CustomTimeout@ method in a failure scenario', function (done) {
     var start = Date.now();
     nemo.view.simple.notExistWait(13000, 'didnt find notExist').then(function (find) {
       done(new Error('found notExist but should not have'));
@@ -45,7 +54,7 @@ describe('nemo-view @methods@', function () {
     });
 
   });
-  it('should appropriately use a DIFFERENT timeout argument to the @Wait@CustomTimeout@ method in a failure scenario', function (done) {
+  it('should appropriately use a DIFFERENT timeout argument to the @Wait@negative@CustomTimeout@ method in a failure scenario', function (done) {
     var start = Date.now();
     nemo.view.simple.notExistWait(3000, 'didnt find notExist').then(function (find) {
       done(new Error('found notExist but should not have'));
@@ -86,14 +95,5 @@ describe('nemo-view @methods@', function () {
         done();
       }
     });
-  });
-  it('should find an existing element using the @Wait@ElementExists@ method', function (done) {
-    nemo.view.simple.bodyTagWait(3000, 'didn\t find body tag').then(function (found) {
-      if (found === true) {
-        done();
-      } else {
-        done(new Error('something went wrong here'));
-      }
-    }, util.doneError(done));
   });
 });
