@@ -64,7 +64,6 @@ describe('nemo-view @methods@', function () {
     util.waitForJSReady(nemo);
     nemo.view.simple.waitButton().click();
     nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function (tn) {
-      console.log('tn', tn);
       assert.equal(tn.toLowerCase(), 'div');
       done();
     }, util.doneError(done));
