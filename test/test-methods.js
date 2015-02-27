@@ -63,11 +63,11 @@ describe('nemo-view @methods@', function () {
     nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
     util.waitForJSReady(nemo);
     nemo.view.simple.waitButton().click();
-    nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function(tn) {
+    nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function (tn) {
       console.log('tn', tn);
-        assert.equal(tn.toLowerCase(), 'div');
-        done();
-      }, util.doneError(done));
+      assert.equal(tn.toLowerCase(), 'div');
+      done();
+    }, util.doneError(done));
   });
   it('should use @WaitVisible@negative@ method in negative scenario', function (done) {
 
