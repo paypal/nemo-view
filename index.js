@@ -30,10 +30,7 @@ function addView(nemo) {
 			throw new Error('[nemo-view] reserves "addView". Please rename your view.');
 		}
 
-		var _view = (new view.View());
-		_view.config = config;
-		_view.init(_view, nemo);
-		
+		var _view = view.View(config, nemo);
 		if (hang) {
 			nemo.view[viewName] = _view;
 		}
