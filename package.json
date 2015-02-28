@@ -12,7 +12,8 @@
     "url": "https://github.com/paypal/nemo-view.git"
   },
   "dependencies": {
-    "async": "~0.2.8"
+    "async": "~0.2.8",
+    "lodash": "^3.3.1"
   },
   "devDependencies": {
     "mocha": "~1.10.0",
