@@ -14,12 +14,13 @@
 \*───────────────────────────────────────────────────────────────────────────*/
 /* global require: true, module: true */
 "use strict";
-var view = require("./lib/view");
+var View = require('./lib/view');
+var resolve = require('./lib/resolve');
 
 function addView(nemo) {
 	return function(config, hang) {
 		//dedupe
-		var viewName = view.resolveViewName(config);
+		var viewName = resolve.viewName(config);
 		//default hang to true
 		hang = (hang === undefined) ? true : hang;
 		if (nemo.view && nemo.view[viewName] && hang === true) {
@@ -30,7 +31,7 @@ function addView(nemo) {
 			throw new Error('[nemo-view] reserves "addView". Please rename your view.');
 		}
 
-		var _view = view.View(config, nemo);
+		var _view = View(config, nemo);
 		if (hang) {
 			nemo.view[viewName] = _view;
 		}
