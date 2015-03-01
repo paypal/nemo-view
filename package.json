@@ -1,6 +1,6 @@
 {
   "name": "nemo-view",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
   "main": "index.js",
   "registerAs": "view",
