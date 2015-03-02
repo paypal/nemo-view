@@ -2,121 +2,99 @@
 'use strict';
 
 var assert = require('assert'),
-    nemoFactory = require('nemo-mocha-factory'),
-    plugins = require('./plugins'),
-    nemo = {},
-    path = require('path'),
-    util = require(path.resolve(__dirname, 'util')),
-    setup = {
-        'view': ['simple']
-    };
+  nemoFactory = require('nemo-mocha-factory'),
+  plugins = require('./plugins'),
+  nemo = {},
+  path = require('path'),
+  util = require(path.resolve(__dirname, 'util')),
+  setup = {
+    'view': ['simple']
+  };
 
 describe('nemo-view @methods@', function () {
-    nemoFactory({
-        'context': nemo,
-        'plugins': plugins,
-        'setup': setup
+  nemoFactory({
+    'context': nemo,
+    'plugins': plugins,
+    'setup': setup
+  });
+
+  beforeEach(function (done) {
+    nemo.driver.get(nemo.props.targetBaseUrl);
+    util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
+  });
+  it('should return a @locatorObject@', function (done) {
+    var locator = nemo.view.simple.outBoxBy();
+    if (locator.using && locator.value) {
+      done();
+    } else {
+      done(new Error('didnt get back a locator object'));
+    }
+  });
+  it('should find an existing element using the @Wait@positive@ method', function (done) {
+    nemo.view.simple.bodyTagWait(3000, 'didn\t find body tag').getTagName().then(function(tn) {
+      if (tn.toLowerCase() === 'body') {
+        done();
+      } else {
+        done(new Error('something went wrong here'));
+      }
+    }, util.doneError(done));
+  });
+  it('should appropriately use a timeout argument to the @Wait@negative@CustomTimeout@ method in a failure scenario', function (done) {
+    var start = Date.now();
+    nemo.view.simple.notExistWait(13000, 'didnt find notExist').then(function (find) {
+      done(new Error('found notExist but should not have'));
+    }, function (err) {
+      var found = Date.now() - start;
+      console.log('timeout in ', found);
+      if (found > 13800 || found < 12500) {
+        done(new Error('error thrown but in the wrong period of time, '));
+      } else {
+        done();
+      }
     });
 
-    beforeEach(function (done) {
-        nemo.driver.get(nemo.props.targetBaseUrl);
-        util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
+  });
+  it('should appropriately use a DIFFERENT timeout argument to the @Wait@negative@CustomTimeout@ method in a failure scenario', function (done) {
+    var start = Date.now();
+    nemo.view.simple.notExistWait(3000, 'didnt find notExist').then(function (find) {
+      done(new Error('found notExist but should not have'));
+    }, function (err) {
+      var found = Date.now() - start;
+      console.log('timeout in ', found);
+      if (found > 3800 || found < 2500) {
+        done(new Error('error thrown but in the wrong period of time, '));
+      } else {
+        done();
+      }
     });
-    it('should return a @locatorObject@', function (done) {
-        var locator = nemo.view.simple.outBoxBy();
-        if (locator.using && locator.value) {
-            done();
-        } else {
-            done(new Error('didnt get back a locator object'));
-        }
-    });
-    it('should find an existing element using the @Wait@positive@ method', function (done) {
-        nemo.view.simple.bodyTagWait(3000, 'didn\t find body tag').getTagName().then(function (tn) {
-            if (tn.toLowerCase() === 'body') {
-                done();
-            } else {
-                done(new Error('something went wrong here'));
-            }
-        }, util.doneError(done));
-    });
-    it('should appropriately use a timeout argument to the @Wait@negative@CustomTimeout@ method in a failure scenario', function (done) {
-        var start = Date.now();
-        nemo.view.simple.notExistWait(13000, 'didnt find notExist').then(function (find) {
-            done(new Error('found notExist but should not have'));
-        }, function (err) {
-            var found = Date.now() - start;
-            console.log('timeout in ', found);
-            if (found > 13800 || found < 12500) {
-                done(new Error('error thrown but in the wrong period of time, '));
-            } else {
-                done();
-            }
-        });
+  });
+  it('should use @WaitVisible@positive@ method', function (done) {
+    nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
+    util.waitForJSReady(nemo);
+    nemo.view.simple.waitButton().click();
+    nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function (tn) {
+      assert.equal(tn.toLowerCase(), 'div');
+      done();
+    }, util.doneError(done));
+  });
+  it('should use @WaitVisible@negative@ method in negative scenario', function (done) {
 
+    var start;
+    nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
+    util.waitForJSReady(nemo).then(function () {
+      start = Date.now();
     });
-    it('should appropriately use a DIFFERENT timeout argument to the @Wait@negative@CustomTimeout@ method in a failure scenario', function (done) {
-        var start = Date.now();
-        nemo.view.simple.notExistWait(3000, 'didnt find notExist').then(function (find) {
-            done(new Error('found notExist but should not have'));
-        }, function (err) {
-            var found = Date.now() - start;
-            console.log('timeout in ', found);
-            if (found > 3800 || found < 2500) {
-                done(new Error('error thrown but in the wrong period of time, '));
-            } else {
-                done();
-            }
-        });
+    nemo.view.simple.outBoxWaitVisible(3000, 'didnt find outbox').then(function (find) {
+      done(new Error('shouldn\'t have found the element to be visible'));
+    }, function (err) {
+      var found = Date.now() - start;
+      console.log('timeout in ', found);
+      if (found > 3800 || found < 2500) {
+        done(new Error('error thrown but in the wrong period of time, '));
+      } else {
+        done();
+      }
     });
-    it('should use @WaitVisible@positive@ method', function (done) {
-        nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
-        util.waitForJSReady(nemo);
-        nemo.view.simple.waitButton().click();
-        nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function (tn) {
-            assert.equal(tn.toLowerCase(), 'div');
-            done();
-        }, util.doneError(done));
-    });
-    it('should use @WaitVisible@negative@ method in negative scenario', function (done) {
-
-        var start;
-        nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
-        util.waitForJSReady(nemo).then(function () {
-            start = Date.now();
-        });
-        nemo.view.simple.outBoxWaitVisible(3000, 'didnt find outbox').then(function (find) {
-            done(new Error('shouldn\'t have found the element to be visible'));
-        }, function (err) {
-            var found = Date.now() - start;
-            console.log('timeout in ', found);
-            if (found > 3800 || found < 2500) {
-                done(new Error('error thrown but in the wrong period of time, '));
-            } else {
-                done();
-            }
-        });
-    });
-    it('should return true using @Present@Positive@ method', function (done) {
-        nemo.view.simple.outBoxPresent().then(function (present) {
-            console.log(present);
-            if (present) {
-                done();
-            } else {
-                done(new Error('Element should have been present'));
-            }
-        }, function (err) {
-            done(new Error(err));
-        });
-    });
-    it('should return false using @Present@negative@ method', function (done) {
-        nemo.view.simple.notExistPresent().then(function (present) {
-            if (!present) {
-                done();
-            } else {
-                done(new Error('Element should have been present'));
-            }
-        }, function (err) {
-            done(new Error(err));
-        });
-    });
+  });
+>>>>>>> 276e2b0b828ae3b466bb5fec8ed2f9c6a49d1df0
 });
