@@ -1,0 +1,20 @@
+{
+	"inputGroup": {
+		"locator": "div.fielder",
+		"type": "css",
+		"Elements": {
+			"text": {
+				"locator": "input.texty",
+				"type": "css"
+			},
+			"button": {
+				"locator": "input[type='button']",
+				"type": "css"
+			}
+		}
+	},
+	"outBox": {
+		"locator": "outy",
+		"type": "id"
+	}
+}

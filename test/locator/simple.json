@@ -1,0 +1,22 @@
+{
+  "outBox": {
+    "locator": "outy",
+    "type": "id"
+  },
+  "notExist": {
+    "locator": ".foo.bar.boing.baz.blerg",
+    "type": "css"
+  },
+  "waitButton": {
+    "locator": "input[type=button][class=wait]",
+    "type": "css"
+  },
+  "latentText": {
+    "locator": "outy",
+    "type": "id"
+  },
+  "bodyTag": {
+    "locator": "body",
+    "type": "css"
+  }
+}

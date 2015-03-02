@@ -1,0 +1,45 @@
+/* global describe,beforeEach,it */
+'use strict';
+
+var nemoFactory = require('nemo-mocha-factory'),
+  plugins = require('./plugins'),
+  nemo = {},
+  path = require('path'),
+  util = require(path.resolve(__dirname, 'util')),
+  setup = {
+    'view': ['form']
+  };
+
+describe('nemo-view @simpleViewSuite@', function () {
+  nemoFactory({
+    'context': nemo,
+    'plugins': plugins,
+    'setup': setup
+  });
+
+  beforeEach(function (done) {
+
+    nemo.driver.get(nemo.props.targetBaseUrl);
+    util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
+  });
+  it('should use the form view to enter values and write to outy div @useView@', function (done) {
+    nemo.view.form.fooText().sendKeys('foo');
+    nemo.driver.sleep(300);
+    nemo.view.form.fooButton().click();
+    nemo.view.form.barText().sendKeys('bar');
+    nemo.view.form.barButton().click();
+    nemo.view.form.bingText().sendKeys('bing');
+    nemo.view.form.bingButton().click();
+    nemo.view.form.bangText().sendKeys('bang');
+    nemo.view.form.bangButton().click();
+    nemo.driver.sleep(3000);
+    nemo.view.form.outBox().getText().then(function (outText) {
+      if (outText !== 'foobarbingbang') {
+        done(new Error('didnt get what we shoulda'));
+      } else {
+        done();
+      }
+    }, util.doneError(done));
+  });
+
+});

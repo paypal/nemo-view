@@ -1,0 +1,47 @@
+{
+  "name": "nemo-view",
+  "version": "0.4.0",
+  "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
+  "main": "index.js",
+  "registerAs": "view",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paypal/nemo-view.git"
+  },
+  "dependencies": {
+    "async": "~0.2.8",
+    "lodash": "^3.3.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.10.0",
+    "grunt": "~0.4.1",
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-contrib-jshint": "^0.7.1",
+    "nemo-mocha-factory": "^0.3.0",
+    "nemo": "^0.3.0",
+    "nemo-drivex": "^0.4.0",
+    "nemo-locatex": "^0.4.0",
+    "nconf": "*",
+    "nemo-shared-objects": "^0.2.0"
+  },
+  "peerDependencies": {
+    "nemo-drivex": "^0.4.0",
+    "nemo-locatex": "^0.4.0",
+    "nemo": "^0.3.0"
+  },
+  "keywords": [
+    "Nemo",
+    "view",
+    "interface"
+  ],
+  "author": "Matt Edelman",
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ]
+}
