@@ -5,6 +5,7 @@ var nemoFactory = require('nemo-mocha-factory'),
   plugins = require('./plugins'),
   nemo = {},
   path = require('path'),
+  assert = require('assert'),
   util = require(path.resolve(__dirname, 'util')),
   setup = {
     'view': ['form']
@@ -34,11 +35,9 @@ describe('nemo-view @simpleViewSuite@', function () {
     nemo.view.form.bangButton().click();
     nemo.driver.sleep(3000);
     nemo.view.form.outBox().getText().then(function (outText) {
-      if (outText !== 'foobarbingbang') {
-        done(new Error('didnt get what we shoulda'));
-      } else {
-        done();
-      }
+      assert.equal(outText, 'foobarbingbang');
+      done();
+
     }, util.doneError(done));
   });
 

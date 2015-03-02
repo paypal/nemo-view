@@ -31,7 +31,7 @@ describe('nemo-view @methods@', function () {
     }
   });
   it('should find an existing element using the @Wait@positive@ method', function (done) {
-    nemo.view.simple.bodyTagWait(3000, 'didn\t find body tag').getTagName().then(function(tn) {
+    nemo.view.simple.bodyTagWait(3000, 'didn\t find body tag').getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
         done();
       } else {
@@ -96,27 +96,16 @@ describe('nemo-view @methods@', function () {
       }
     });
   });
-    it('should return true using @Present@Positive@ method', function (done) {
-        nemo.view.simple.outBoxPresent().then(function (present) {
-            console.log(present);
-            if (present) {
-                done();
-            } else {
-                done(new Error('Element should have been present'));
-            }
-        }, function (err) {
-            done(new Error(err));
-        });
-    });
-    it('should return false using @Present@negative@ method', function (done) {
-        nemo.view.simple.notExistPresent().then(function (present) {
-            if (!present) {
-                done();
-            } else {
-                done(new Error('Element should have been present'));
-            }
-        }, function (err) {
-            done(new Error(err));
-        });
-    });
+  it('should return true using @Present@Positive@ method', function (done) {
+    nemo.view.simple.outBoxPresent().then(function (present) {
+      assert.equal(present, true);
+      done();
+    }, util.doneError(done));
+  });
+  it('should return false using @Present@negative@ method', function (done) {
+    nemo.view.simple.notExistPresent().then(function (present) {
+      assert.equal(present, false);
+      done();
+    }, util.doneError(done));
+  });
 });
