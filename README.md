@@ -15,10 +15,10 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "^0.3.0",
-    "nemo-view": "^0.3.0",
-    "nemo-drivex": "^0.1.0",
-    "nemo-locatex": "^0.1.0",
+    "nemo": "^0.4.0",
+    "nemo-view": "^0.4.0",
+    "nemo-drivex": "^0.4.0",
+    "nemo-locatex": "^0.4.0",
 	...
 ```
 

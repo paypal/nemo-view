@@ -8,7 +8,7 @@ var nemoFactory = require('nemo-mocha-factory'),
   assert = require('assert'),
   util = require(path.resolve(__dirname, 'util')),
   setup = {
-    'view': ['selectView']
+    'view': ['select']
   };
 
 describe('nemo-view @select@', function () {
@@ -23,28 +23,28 @@ describe('nemo-view @select@', function () {
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
   it('should select option by @OptionValue@positive@ method', function (done) {
-    nemo.view.selectView.selectOptionValue('2');
-    nemo.view.selectView.select().getAttribute('value').then(function (value) {
+    nemo.view.select.selectOptionValue('2');
+    nemo.view.select.select().getAttribute('value').then(function (value) {
       assert.equal(value,'2');
       done();
     });
   });
   it('should NOT select option by @OptionValue@negative@ method', function (done) {
-    nemo.view.selectView.selectOptionValue('does not exist').then(function () {
+    nemo.view.select.selectOptionValue('does not exist').then(function () {
       done(new Error('Correct option was not selected'));
     }, function (err) {
       done();
     });
   });
   it('should select option by @OptionText@positive@ method', function (done) {
-    nemo.view.selectView.selectOptionText('Value of 2');
-    nemo.view.selectView.select().getAttribute('value').then(function (value) {
+    nemo.view.select.selectOptionText('Value of 2');
+    nemo.view.select.select().getAttribute('value').then(function (value) {
       assert.equal(value,'2');
       done();
     });
   });
   it('should NOT select option by @OptionText@negative@ method', function (done) {
-    nemo.view.selectView.selectOptionText('does not exist').then(function () {
+    nemo.view.select.selectOptionText('does not exist').then(function () {
       done(new Error('Correct option was not selected'));
     }, function (err) {
       done();
