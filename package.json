@@ -16,15 +16,16 @@
     "lodash": "^3.3.1"
   },
   "devDependencies": {
-    "mocha": "~1.10.0",
     "grunt": "~0.4.1",
-    "grunt-simple-mocha": "~0.4.0",
     "grunt-contrib-jshint": "^0.7.1",
-    "nemo-mocha-factory": "^0.3.0",
+    "grunt-simple-mocha": "~0.4.0",
+    "mocha": "~1.10.0",
+    "nconf": "*",
     "nemo": "^0.4.0",
     "nemo-drivex": "^0.4.0",
     "nemo-locatex": "^0.4.0",
-    "nconf": "*"
+    "nemo-mocha-factory": "^0.3.0",
+    "nemo-shared-objects": "^0.2.2"
   },
   "peerDependencies": {
     "nemo-drivex": "^0.4.0",
