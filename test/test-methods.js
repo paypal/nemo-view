@@ -96,5 +96,27 @@ describe('nemo-view @methods@', function () {
       }
     });
   });
->>>>>>> 276e2b0b828ae3b466bb5fec8ed2f9c6a49d1df0
+    it('should return true using @Present@Positive@ method', function (done) {
+        nemo.view.simple.outBoxPresent().then(function (present) {
+            console.log(present);
+            if (present) {
+                done();
+            } else {
+                done(new Error('Element should have been present'));
+            }
+        }, function (err) {
+            done(new Error(err));
+        });
+    });
+    it('should return false using @Present@negative@ method', function (done) {
+        nemo.view.simple.notExistPresent().then(function (present) {
+            if (!present) {
+                done();
+            } else {
+                done(new Error('Element should have been present'));
+            }
+        }, function (err) {
+            done(new Error(err));
+        });
+    });
 });
