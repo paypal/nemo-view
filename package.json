@@ -1,6 +1,6 @@
 {
   "name": "nemo-view",
-  "version": "0.4.2",
+  "version": "1.0.0-alpha.1",
   "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
   "main": "index.js",
   "registerAs": "view",
@@ -21,16 +21,10 @@
     "grunt-simple-mocha": "~0.4.0",
     "mocha": "~1.10.0",
     "nconf": "*",
-    "nemo": "^0.4.0",
-    "nemo-drivex": "^0.4.0",
-    "nemo-locatex": "^0.4.0",
+    "nemo": "git://github.com/grawk/nemo.git#1.0-develop",
+    "selenium-drivex": "^1.0.0",
     "nemo-mocha-factory": "^0.3.0",
     "nemo-shared-objects": "^0.2.2"
-  },
-  "peerDependencies": {
-    "nemo-drivex": "^0.4.0",
-    "nemo-locatex": "^0.4.0",
-    "nemo": "^0.4.0"
   },
   "keywords": [
     "Nemo",
