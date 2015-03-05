@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "async": "~0.2.8",
+    "selenium-drivex": "^1.0.0",
     "lodash": "^3.3.1"
   },
   "devDependencies": {
@@ -22,7 +23,6 @@
     "mocha": "~1.10.0",
     "nconf": "*",
     "nemo": "git://github.com/grawk/nemo.git#1.0-develop",
-    "selenium-drivex": "^1.0.0",
     "nemo-mocha-factory": "^0.3.0",
     "nemo-shared-objects": "^0.2.2"
   },
