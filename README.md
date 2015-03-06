@@ -15,10 +15,10 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "^0.3.0",
-    "nemo-view": "^0.3.0",
-    "nemo-drivex": "^0.1.0",
-    "nemo-locatex": "^0.1.0",
+    "nemo": "^0.4.0",
+    "nemo-view": "^0.4.0",
+    "nemo-drivex": "^0.4.0",
+    "nemo-locatex": "^0.4.0",
 	...
 ```
 
@@ -365,14 +365,14 @@ The view will create the following methods for each locator object:
 * arguments
   * timeout {Number} time to wait in milliseconds
   * msg {String} optional. Message to accompany error in failure case
-* returns: Promise which resolves to true or false
+* returns: Promise which resolves to WebElement when element is present, or reject
 
 ##### [locatorName]WaitVisible
 
 * arguments
   * timeout {Number} time to wait in milliseconds
   * msg {String} optional. Message to accompany error in failure case
-* returns: A promise that will be resolved when element is found.
+* returns: A promise which resolves to WebElement when element is both found and visible, or reject
 
 ##### [locatorName]Visible
 
