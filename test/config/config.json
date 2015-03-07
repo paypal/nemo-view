@@ -1,0 +1,21 @@
+{
+  "plugins": {
+    "view": {
+      "module": "/Users/medelman/src/n/o/nemo-view/",
+      "arguments": [{
+        "strategy": "simple",
+        "view": ["simple"]
+      }]
+    }
+  },
+  "driver": {
+    "browser": "phantomjs",
+    "local": true,
+    "jar": "/usr/local/bin/selenium-server-standalone.jar"
+  },
+  "data": {
+    "targetBaseUrl": "http://warm-river-3624.herokuapp.com",
+    "passThroughFromJson": true,
+    "baseDirectory": "envo:nemoBaseDir"
+  }
+}
