@@ -18,6 +18,7 @@ var View = require('./lib/view');
 var resolve = require('./lib/resolve');
 
 function addView(nemo) {
+  //console.log('hi', nemo)
 	return function(config, hang) {
 		//dedupe
 		var viewName = resolve.viewName(config);
@@ -32,15 +33,27 @@ function addView(nemo) {
 		}
 
 		var _view = View(config, nemo);
+    //console.log('ho')
 		if (hang) {
 			nemo.view[viewName] = _view;
 		}
+    console.log('hao')
 		return _view;
 	};
 }
-module.exports.setup = function(config, nemo, callback) {
+module.exports.setup = function(args, nemo, callback) {
 	//slap the addView method onto the view namespace
+  //console.log('args', arguments);
+  //console.log('nemo is', nemo);
+  nemo.view = {};
 	nemo.view.addView = addView(nemo);
+  if (args.view) {
+    args.view.forEach(function(view) {
+
+      nemo.view.addView(view);
+    })
+  }
 	//move along
-	callback(null, config, nemo);
+  console.log('hi');
+	callback(null, nemo);
 };

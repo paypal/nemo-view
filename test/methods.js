@@ -3,23 +3,28 @@
 
 var assert = require('assert'),
   nemoFactory = require('nemo-mocha-factory'),
-  plugins = require('./plugins'),
+  Nemo = require('nemo'),
   nemo = {},
   path = require('path'),
-  util = require(path.resolve(__dirname, 'util')),
-  setup = {
-    'view': ['simple']
-  };
+  util = require(path.resolve(__dirname, 'util'));
 
+function _nemoFactory(obj) {
+  return before(function(done) {
+    nemo = Nemo(function() {
+      console.log('fooey', nemo);
+       done();
+    });
+  });
+}
+process.env.nemoBaseDir='/Users/medelman/src/n/o/nemo-view/test';
 describe('nemo-view @methods@', function () {
-  nemoFactory({
-    'context': nemo,
-    'plugins': plugins,
-    'setup': setup
+  _nemoFactory({
+    'context': nemo
   });
 
   beforeEach(function (done) {
-    nemo.driver.get(nemo.props.targetBaseUrl);
+    console.log('hi hereeeee');
+    nemo.driver.get(nemo.data.targetBaseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
   it('should return a @locatorObject@', function (done) {

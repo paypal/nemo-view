@@ -13,11 +13,11 @@ module.exports = function(grunt) {
 				ignoreLeaks: false,
 				grep: grunt.option('grep') || 0,
 				ui: 'bdd',
-				reporter: 'spec'
+				reporter: 'nyan'
 			},
 
 			all: {
-				src: ['test/*.js']
+				src: ['test/methods.js']
 			}
 		},
 		jshint: {
