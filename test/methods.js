@@ -11,7 +11,6 @@ var assert = require('assert'),
 function _nemoFactory(obj) {
   return before(function(done) {
     nemo = Nemo(function() {
-      console.log('fooey', nemo);
        done();
     });
   });
@@ -23,7 +22,6 @@ describe('nemo-view @methods@', function () {
   });
 
   beforeEach(function (done) {
-    console.log('hi hereeeee');
     nemo.driver.get(nemo.data.targetBaseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
@@ -36,7 +34,7 @@ describe('nemo-view @methods@', function () {
     }
   });
   it('should find an existing element using the @Wait@positive@ method', function (done) {
-    nemo.view.simple.bodyTagWait(3000, 'didn\t find body tag').getTagName().then(function (tn) {
+    nemo.view.simple.bodyTagWait(3000, 'didnt find body tag').getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
         done();
       } else {
@@ -74,7 +72,7 @@ describe('nemo-view @methods@', function () {
     });
   });
   it('should use @WaitVisible@positive@ method', function (done) {
-    nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
+    nemo.driver.get(nemo.data.targetBaseUrl + '/waits');
     util.waitForJSReady(nemo);
     nemo.view.simple.waitButton().click();
     nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function (tn) {
@@ -85,7 +83,7 @@ describe('nemo-view @methods@', function () {
   it('should use @WaitVisible@negative@ method in negative scenario', function (done) {
 
     var start;
-    nemo.driver.get(nemo.props.targetBaseUrl + '/waits');
+    nemo.driver.get(nemo.data.targetBaseUrl + '/waits');
     util.waitForJSReady(nemo).then(function () {
       start = Date.now();
     });
