@@ -1,36 +1,36 @@
 {
   "name": "nemo-view",
-  "version": "0.3.2",
+  "version": "0.4.2",
   "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
   "main": "index.js",
   "registerAs": "view",
   "scripts": {
-    "test": "grunt --grep @travis@"
+    "test": "grunt"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/paypal/nemo-view.git"
   },
   "dependencies": {
-    "async": "~0.2.8"
+    "async": "~0.2.8",
+    "lodash": "^3.3.1"
   },
   "devDependencies": {
-    "mocha": "~1.10.0",
-    "chai": "~1.6.0",
     "grunt": "~0.4.1",
-    "grunt-simple-mocha": "~0.4.0",
     "grunt-contrib-jshint": "^0.7.1",
-    "nemo-mocha-factory": "^0.3.0",
-    "nemo": "^0.3.0",
-    "nemo-drivex": "^0.1.0",
-    "nemo-locatex": "^0.1.0",
+    "grunt-simple-mocha": "~0.4.0",
+    "mocha": "~1.10.0",
     "nconf": "*",
-    "nemo-shared-objects": "^0.2.0"
+    "nemo": "^0.4.0",
+    "nemo-drivex": "^0.4.0",
+    "nemo-locatex": "^0.4.0",
+    "nemo-mocha-factory": "^0.3.0",
+    "nemo-shared-objects": "^0.2.2"
   },
   "peerDependencies": {
-    "nemo-drivex": "^0.1.0",
-    "nemo-locatex": "^0.1.0",
-    "nemo": "^0.3.0"
+    "nemo-drivex": "^0.4.0",
+    "nemo-locatex": "^0.4.0",
+    "nemo": "^0.4.0"
   },
   "keywords": [
     "Nemo",
