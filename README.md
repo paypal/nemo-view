@@ -22,23 +22,21 @@ View Interface for nemo views
 	...
 ```
 
-2. Add plugins to your nemo plugins JSON object
+2. Add plugins to your nemo config JSON object
 
 ```javascript
 {
-	"plugins": {
-		"drivex": {
-			"module": "nemo-drivex",
-			"register": true
-		},
-		"locatex": {
-			"module": "nemo-locatex",
-			"register": true
-		},
-		"view": {
-			"module": "nemo-view"
-		}
-	}
+  "plugins": {
+    "view": {
+      "module": "nemo-view",
+      "arguments": [TBD]
+    }
+  },
+  "data": {
+    "targetBaseUrl": "http://warm-river-3624.herokuapp.com",
+    "passThroughFromJson": true,
+    "baseDirectory": "env:nemoBaseDir"
+  }
 }
 ```
 

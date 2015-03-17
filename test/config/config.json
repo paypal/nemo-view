@@ -1,11 +1,7 @@
 {
   "plugins": {
     "view": {
-      "module": "/Users/medelman/src/n/o/nemo-view/",
-      "arguments": [{
-        "strategy": "simple",
-        "view": ["simple"]
-      }]
+      "module": "/Users/medelman/src/n/o/nemo-view/"
     }
   },
   "driver": {
@@ -16,6 +12,6 @@
   "data": {
     "targetBaseUrl": "http://warm-river-3624.herokuapp.com",
     "passThroughFromJson": true,
-    "baseDirectory": "envo:nemoBaseDir"
+    "baseDirectory": "env:nemoBaseDir"
   }
 }
