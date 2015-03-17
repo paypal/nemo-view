@@ -16,6 +16,8 @@
 "use strict";
 var View = require('./lib/view');
 var resolve = require('./lib/resolve');
+var glob = require("glob");
+var path = require('path');
 
 function addView(nemo) {
 	return function(config, hang) {
@@ -38,16 +40,30 @@ function addView(nemo) {
 		return _view;
 	};
 }
-module.exports.setup = function(args, nemo, callback) {
+module.exports.setup = function(nemo, callback) {
 	//slap the addView method onto the view namespace
   nemo.view = {};
 	nemo.view.addView = addView(nemo);
-  if (args.view) {
-    args.view.forEach(function(view) {
 
-      nemo.view.addView(view);
-    })
-  }
+  //get all files in the locator directory and sub-directories
+  glob("**/*.json", {cwd: path.resolve(nemo.data.baseDirectory, 'locator')}, function (err, files) {
+    files.map()
+    callback(null, nemo);
+  });
+  //fs.readdir(path.resolve(nemo.data.baseDirectory, 'locator'),function(err,files){
+  //  if(err) throw err;
+  //  files.forEach(function(file){
+  //    console.log('yo ', file);
+  //    // do something with each file HERE!
+  //  });
+  //  callback();
+  //});
+  //if (args.view) {
+  //  args.view.forEach(function(view) {
+  //
+  //    nemo.view.addView(view);
+  //  })
+  //}
 	//move along
-	callback(null, nemo);
+	//callback(null, nemo);
 };
