@@ -14,7 +14,6 @@ describe('nemo-view @simpleViewSuite@', function () {
   after(function(done) {
     nemo.driver.quit().then(done);
   });
-
   beforeEach(function (done) {
 
     nemo.driver.get(nemo.data.baseUrl);
@@ -34,8 +33,6 @@ describe('nemo-view @simpleViewSuite@', function () {
     nemo.view.form.outBox().getText().then(function (outText) {
       assert.equal(outText, 'foobarbingbang');
       done();
-
     }, util.doneError(done));
   });
-
 });

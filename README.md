@@ -4,10 +4,6 @@ View Interface for nemo views
 
 [![Build Status](https://travis-ci.org/paypal/nemo-view.svg?branch=master)](https://travis-ci.org/paypal/nemo-view)
 
-### Peer Dependencies
-
-* nemo-locatex
-* nemo-drivex
 
 ### Installation
 
@@ -15,10 +11,8 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "^0.4.0",
-    "nemo-view": "^0.4.0",
-    "nemo-drivex": "^0.4.0",
-    "nemo-locatex": "^0.4.0",
+    "nemo": "git://github.com/grawk/nemo#1.0-develop",
+    "nemo-view": "git://github.com/grawk/nemo-view#1.0-develop",
 	...
 ```
 
@@ -26,16 +20,17 @@ View Interface for nemo views
 
 ```javascript
 {
+  "driver": {
+    ...
+  },
   "plugins": {
     "view": {
       "module": "nemo-view",
-      "arguments": [TBD]
+      "arguments": ["path:locator"]
     }
   },
   "data": {
-    "targetBaseUrl": "http://warm-river-3624.herokuapp.com",
-    "passThroughFromJson": true,
-    "baseDirectory": "env:nemoBaseDir"
+    ...
   }
 }
 ```
@@ -43,7 +38,7 @@ View Interface for nemo views
 ### Writing a locator file
 
 The locator JSON file describes elements and the locator strategy used for each one. The most common use case is to store
-all your locator files in the `nemo.props.autoBaseDir` + /locator directory
+all your locator files in the `nemoBaseDir` + /locator directory
 
 #### textBox.json
 
@@ -88,233 +83,147 @@ all your locator files in the `nemo.props.autoBaseDir` + /locator directory
 }
 ```
 
-### Using views in spec files
+### Using views
 
-Just specify one or more view by name in the "view" namespace of the configuration object (named setup below). Note below we are calling in two view objects, selectBox and textBox.
+_Note: code snippets are minus the require blocks for the sake of brevity. Please see unit tests for full files_
 
-In the common use case, make sure the view you request matches the name of the locator file in the `nemo.props.autoBaseDir` + /locator directory.
+#### Without locator files
 
-```javascript
-/*global nemo:true, describe:true, it:true */
-var plugins = require("../config/nemo-plugins"),
-	nemoFactory = require("nemo-mocha-factory"),
-	setup = {
-		"view": ["selectBox", "textBox"]
-	};
-describe('this is a @nemoSuite@', function() {
-	nemoFactory({"plugins": plugins, "setup": setup});
-    it('should open a URL', function(done) {
-        nemo.driver.get(nemo.props.targetBaseUrl).then(function() {
-			done()
-		}, function(err) {
-			done(err);
-		});
+If you don't have any locator files, or don't configure nemo-view to find locator files, you will still get back convenience methods on the nemo object:
+
+```
+nemo.view._find
+nemo.view._finds
+nemo.view._present
+nemo.view._visible
+nemo.view._wait
+```
+
+Which can be used as follows:
+
+```
+describe('nemo-view @verySimple@', function () {
+  before(function (done) {
+    nemo = Nemo(done);
+  });
+  after(function (done) {
+    nemo.driver.quit().then(done);
+  });
+
+  beforeEach(function (done) {
+    nemo.driver.get(nemo.data.baseUrl);
+    util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
+  });
+  it('should use the form view to enter values and write to outy div @useView@', function (done) {
+    nemo.view._find('css:#outy').getTagName().then(function (tn) {
+      assert.equal(tn.toLowerCase(), 'div');
     });
-	it('should @useNemoViewMethods@', function(done) {
-		nemo.driver.get(nemo.props.targetBaseUrl);
-		nemo.view.textBox.fooText().sendKeys("foo");
-		nemo.view.textBox.fooButton().click();
-		nemo.view.textBox.barText().sendKeys("bar");
-		nemo.view.textBox.barButton().click();
-		nemo.view.textBox.bingText().sendKeys("bing");
-		nemo.view.textBox.bingButton().click();
-		nemo.view.textBox.bangText().sendKeys("bang");
-		nemo.view.textBox.bangButton().click();
-		nemo.view.selectBox.abcOption().click();
-		return nemo.view.textBox.outBox().getText().then(function (outText) {
-			if (outText === "foobarbingbangabc") {
-				done()
-			} else {
-				done(new Error("Didn't get an OK"))
-			}
-			}, function(err) {
-				done(err)
-			});
-	});
+    nemo.view._finds('body').then(function (bodyArray) {
+      return bodyArray[0].getTagName();
+    }).then(function (tn) {
+      assert.equal(tn.toLowerCase(), 'body');
+    }).then(done, util.doneError(done));
+  });
 });
-
-```
-The view will automatically require its locator (looking in nemo.props.autoBaseDir/locator). The locator is required and there will be an error unless a locator file of the same name is provided.
-
-#### Putting locators into other directories
-
-If you want to create a sub-directory structure for locators. E.g. instead of all your locator files under `nemo.props.autoBaseDir` + /locator, you
-prefer to add directory structure under that:
-
-```
-<autoBaseDir>
-  |-locator/
-    |-loggedOut/
-    |   login.json
-    |   signup.json
-    |-loggedIn/
-    |   profile.json
 ```
 
-In this case, you need to specify your views in the nemo setup config a little differently:
+These generic - or "underbar" - methods are defined below.
+
+#### With locator files
+
+If you've configured nemo-view properly, and have the following locator files:
+
+```
+<nemoBaseDir>
+   |- locator
+      |- form.json
+      |- formElementList.json
+      |- select.json
+      |- simple.json
+      |- sub
+         |- form.json
+```
+
+You will get back the following views on the nemo object:
+
+```
+nemo.view.form
+nemo.view.formElementList
+nemo.view.select
+nemo.view.simple
+nemo.view.sub.form
+```
+
+Each including a set of helper methods for each locator as documented below. And usable as follows:
 
 ```javascript
-/*global nemo:true, describe:true, it:true */
-var plugins = require("../config/nemo-plugins"),
-	nemoFactory = require("nemo-mocha-factory"),
-	homePage = require("../page/homePage"),
-	setup = {
-		"view": [{
-				"name": "login",
-				"locator": "path:locator/loggedOut/login"
-			}, {
-				"name": "profile",
-                "locator": "path:locator/loggedIn/profile"
-			}]
-	};
+describe('nemo-view @simpleViewSuite@', function () {
+  before(function(done) {
+    nemo = Nemo(done);
+  });
+  after(function(done) {
+    nemo.driver.quit().then(done);
+  });
+  beforeEach(function (done) {
+
+    nemo.driver.get(nemo.data.baseUrl);
+    util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
+  });
+  it('should use the form view to enter values and write to outy div @useView@', function (done) {
+    nemo.view.form.fooText().sendKeys('foo');
+    nemo.driver.sleep(300);
+    nemo.view.form.fooButton().click();
+    nemo.view.form.barText().sendKeys('bar');
+    nemo.view.form.barButton().click();
+    nemo.view.form.bingText().sendKeys('bing');
+    nemo.view.form.bingButton().click();
+    nemo.view.form.bangText().sendKeys('bang');
+    nemo.view.form.bangButton().click();
+    nemo.driver.sleep(3000);
+    nemo.view.form.outBox().getText().then(function (outText) {
+      assert.equal(outText, 'foobarbingbang');
+      done();
+    }, util.doneError(done));
+  });
+});
 ```
 
-#### Putting locators into other commonjs modules
-
-You may want to use a locator file that someone else created and published as a commonjs module. Using the nemo-paypal-locators module:
-
-Add it to package.json:
-```javascript
-"devDependencies": {
-	...
-	"nemo-paypal-locators": "*",
-	...
-}
-```
-
-`npm install`
-
-Specify the view in the nemo setup config
-
-```javascript
-/*global nemo:true, describe:true, it:true */
-var plugins = require("../config/nemo-plugins"),
-	nemoFactory = require("nemo-mocha-factory"),
-	homePage = require("../page/homePage"),
-	setup = {
-		"view": [{
-				"name": "login",
-				"locator": "module:nemo-paypal-locators/login"
-			}]
-	};
-```
 ### Creating nemo plugins with self contained views and flows
 
 You may want to publish complete flows as a nemo plugin. That way you can import the functionality and access as a plugin. The following is an example of that.
 
-```javascript
-var path = require("path");
-module.exports = {
-	"setup": function(config, nemo, callback) {
-		var login = {
-			'view': {},
-			'locator': {}
-		};
-		var loginLocator = {
-			"email": {
-				"locator": "login_email",
-				"type": "id"
-			},
-			"password": {
-				"locator": "login_password",
-				"type": "id"
-			},
-			"showLogin": {
-				"locator": "login-button",
-				"type": "id"
-			},
-			"button": {
-				"locator": "input[type='submit'][name='submit']",
-				"type": "css"
-			},
-			"logoutLink": {
-				"locator": "li.logout a",
-				"type": "css"
-			},
-			"loggedOutLoginLink": {
-				"locator": "li.login a",
-				"type": "css"
-			}
-		};
-		var loginContext = {
-			'locator': loginLocator,
-			'name': 'login'
-		};
-		login.view.login = nemo.view.addView(loginContext, false);
-		login.login = function(email, password) {
-			var me = login.view.login;
-			nemo.driver.get('https://www.stage2pph20.stage.paypal.com');
-			me.showLoginVisible().then(function(isVisible) {
-				if (isVisible) {
-					return me.showLogin().click();
-				}
-				return;
-			});
-			me.email().clear();
-			me.email().sendKeys(email);
-			me.password().sendKeys(password);
-			me.button().click();
-			return me.logoutLinkWait(10000);
-		};
-		login.logout = function() {
-			var me = login.view.login;
-			me.logoutLink().click();
-			//nemo.driver.sleep(30000);
-			return me.loggedOutLoginLink(10000);
-		};
-		nemo.login = login;
-		callback(null, config, nemo);
+Please see the `test/contained-functionality.js` test file and `test/plugin/shared-fn-plugin.js` plugin file for an example of this.
 
-	}
-};
-```
 
-The above can be registered as a plugin during nemo setup, and accessed as `nemo.login` within a spec.
 
-### Using multiple views in modules external to spec files
 
-You will probably want to share functionality between spec files which encapsulate multiple views (called flow modules). And you may want to use multiple of these flow modules in a single spec. In this case, it makes more sense to allow the flow module to specify which view(s) to include instead of specifying the views at the spec level. Use the nemo-view `addView` method in the flow modules to accomplish this.
+## View features
 
-Example of the top of a flow file `addCard.js`
-```javascript
-'use strict';
+### Generic/underbar methods
 
-function addCard(nemo) {
-	var CC = nemo.view.addView('CC');
-	var allSet = nemo.view.addView('allSet');
-	return {
-		addCC: function(cardNumber, date, csc) {
-			CC.CCTabLink().click();
-```
+The following generic methods are added to `nemo.view`
 
-This module can in turn be included in a spec file as below:
+#### _find
 
-```javascript
-'use strict';
-var assert = require('assert'),
-  nemoFactory = require('nemo-mocha-factory'),
-  nemo = {},
-  plugins = require('../config/nemo-plugins'),
-  addCard = require('../flow/addCard'),
-  addBank = require('../flow/addBank');
+_doc TBD_
 
-describe('@p2@FRbank@migrate@', function() {
-  nemoFactory({
-    'plugins': plugins,
-    'context': nemo
-  });
-  before(function(done) {
-    addCard = addCard(nemo);
-    addBank = addBank(nemo);
-    done();
-  )};
-```
+#### _finds
 
-Now any of the flow module methods can be used in the spec file, and the correct views will be available in the flow modules.
+_doc TBD_
 
-### View features
+#### _present
 
-#### addView method
+_doc TBD_
+
+#### _visible
+
+_doc TBD_
+
+#### _wait
+
+_doc TBD_
+
+### addView method
 
 The addView method will be added to the nemo.view namespace with the following signature:
 `nemo.view.addView(viewSpec, addToNamespace);`
@@ -340,52 +249,52 @@ The addView method will return the view object. It will also dedupe to prevent e
 
 ```
 
-#### locator methods
+### locator methods
 The view will create the following methods for each locator object:
 
-##### [locatorName]
+#### [locatorName]
 
 * arguments: none
 * returns: Promise which resolves to WebElement or rejected
 
-##### [locatorName]By
+#### [locatorName]By
 
 * arguments: none
 * returns: JSON locator object. You can use this, for example, to pass to selenium-webdriver until statements
 
-##### [locatorName]Present
+#### [locatorName]Present
 
 * arguments: none
 * returns: Promise which resolves to true or false
 
-##### [locatorName]Wait
+#### [locatorName]Wait
 
 * arguments
   * timeout {Number} time to wait in milliseconds
   * msg {String} optional. Message to accompany error in failure case
 * returns: Promise which resolves to WebElement when element is present, or reject
 
-##### [locatorName]WaitVisible
+#### [locatorName]WaitVisible
 
 * arguments
   * timeout {Number} time to wait in milliseconds
   * msg {String} optional. Message to accompany error in failure case
 * returns: A promise which resolves to WebElement when element is both found and visible, or reject
 
-##### [locatorName]Visible
+#### [locatorName]Visible
 
 * arguments: none
 * returns: Promise which resolves to true or false
 
 Any method in the view object's prototype will also be available for use
 
-##### [locatorName]OptionText
+#### [locatorName]OptionText
 
 * arguments
   * text: the text in the option you wish to select
 * returns: Promise which resolves to true when option is selected
 
-##### [locatorName]OptionValue
+#### [locatorName]OptionValue
 
 * arguments
   * value: the value attribute of the option you wish to select
@@ -393,7 +302,7 @@ Any method in the view object's prototype will also be available for use
 Any method in the view object's prototype will also be available for use
 Other than that, the nemo-view uses nemo-locatex internally, so if you change your locator files and set LOCALE, nemo-view will handle the rest!
 
-### Using LOCALE specific locators
+## Using LOCALE specific locators
 
 Please see these sections in the nemo-locatex README:
 * https://github.com/paypal/nemo-locatex#changing-your-locator-files
