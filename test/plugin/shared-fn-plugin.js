@@ -1,7 +1,6 @@
 var path = require("path");
-//var nview = require(path.resolve(__dirname, '../../index'));
 module.exports = {
-	"setup": function(config, nemo, callback) {
+	"setup": function(whoami, nemo, callback) {
 		var login = {
 			'view': {},
 			'locator': {}
@@ -25,15 +24,12 @@ module.exports = {
       }
 
 		};
-		var loginViewDefinition = {
-			'locator': loginLocator,
-			'name': 'login'
-		};
+
 
     //setting the second param to "false" means this view won't impose on whatever is already attached to nemo.view
-		login.view.login = nemo.view.addView(loginViewDefinition, false);
+		login.view.login = nemo.view.addView(loginLocator, ['doesntmatter'], false);
     login.getPage = function () {
-      return nemo.driver.get(nemo.props.targetBaseUrl + '/login');
+      return nemo.driver.get(nemo.data.baseUrl + '/login');
     };
 		login.login = function(email, password) {
 			var me = login.view.login;
@@ -49,8 +45,8 @@ module.exports = {
 			me.logoutButton().click();
 			return me.emailWait(10000);
 		};
-		nemo.login = login;
-		callback(null, config, nemo);
+		nemo[whoami] = login;
+		callback(null);
 
 	}
 };

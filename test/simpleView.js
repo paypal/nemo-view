@@ -7,15 +7,12 @@ var Nemo = require('nemo'),
   assert = require('assert'),
   util = require(path.resolve(__dirname, 'util'));
 
-describe('nemo-view @simpleViewSuite@whitelist@', function () {
-  process.env.nemoBaseDir='/Users/medelman/src/n/o/nemo-view/test';
+describe('nemo-view @simpleViewSuite@', function () {
   before(function(done) {
     nemo = Nemo(done);
   });
   after(function(done) {
-    nemo.driver.quit().then(function() {
-      done();
-    });
+    nemo.driver.quit().then(done);
   });
 
   beforeEach(function (done) {

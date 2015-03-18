@@ -15,11 +15,17 @@
 /* global require: true, module: true */
 "use strict";
 var View = require('./lib/view');
+var locreator = require('./lib/locreator');
+var debug = require('debug');
+var log = debug('nemo-view:log');
+var error = debug('nemo-view:error');
 var glob = require("glob");
 var path = require('path');
 
 function addView(nemo) {
+
 	return function(json, viewNSArray, hang) {
+    log('add view', viewNSArray);
     var viewNS = (hang !== undefined && hang === false) ? {} : nemo.view;
     //error
     if (viewNSArray[0] === 'addView') {
@@ -33,6 +39,7 @@ function addView(nemo) {
       viewNS = viewNS[viewNSArray[i]];
     }
 		if (viewNS[viewNSArray[viewNSArray.length - 1]] !== undefined) {
+      error('[nemo-view] There is already a view registered in that namespace');
       throw new Error('[nemo-view] There is already a view registered in that namespace');
     }
 		//default hang to true
@@ -44,21 +51,51 @@ function addView(nemo) {
     return _view;
 	};
 }
-module.exports.setup = function(locatorDirectory, nemo, callback) {
-	//slap the addView method onto the view namespace
-  nemo.view = {};
-	nemo.view.addView = addView(nemo);
-
+module.exports.setup = function(_locatorDirectory, _nemo, __callback) {
+  log('plugin setup is called');
+  var nemo = _nemo;
+  var locatorDirectory = _locatorDirectory;
+  var _callback = __callback
+  if (arguments.length === 2) {
+    locatorDirectory = null;
+    nemo = arguments[0];
+    _callback = arguments[1];
+  }
+  function once(fn) {
+    var called = false;
+    return function (err) {
+      if (!!called) {
+        return undefined;
+      }
+      called = true;
+      return fn(err);
+    }
+  }
+  var callback = once(_callback);
+	nemo.view = {};
+  locreator.addGenericMethods(nemo);
+  nemo.view.addView = addView(nemo);
   //get all files in the locator directory and sub-directories
-  glob("**/*.json", {cwd: locatorDirectory}, function (err, files) {
-    files.forEach(function(file) {
-      var addViewArray = [require(path.resolve(locatorDirectory, file))];
-      var viewPathArray = file.split('/');
-      viewPathArray[viewPathArray.length - 1] = viewPathArray[viewPathArray.length - 1].split('.json')[0];
-      addViewArray.push(viewPathArray);
-      nemo.view.addView.apply(this, addViewArray);
+  if (locatorDirectory !== null) {
+    glob("**/*.json", {cwd: locatorDirectory}, function (err, files) {
+      log('going to process the following json into views', files);
+      files.forEach(function(file) {
+        var addViewArray = [require(path.resolve(locatorDirectory, file))];
+        var viewPathArray = file.split('/');
+        viewPathArray[viewPathArray.length - 1] = viewPathArray[viewPathArray.length - 1].split('.json')[0];
+        addViewArray.push(viewPathArray);
+        try {
+          nemo.view.addView.apply(this, addViewArray);
+        } catch (err) {
+          error(err);
+          callback(err);
+        }
+      });
+      callback(null);
     });
+  }  else {
     callback(null);
-  });
+  }
+
 
 };

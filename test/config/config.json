@@ -1,8 +1,12 @@
 {
   "plugins": {
     "view": {
-      "module": "/Users/medelman/src/n/o/nemo-view/",
+      "module": "path:../",
       "arguments": ["path:locator"]
+    },
+    "login": {
+      "module": "path:plugin/shared-fn-plugin",
+      "arguments": ["login"]
     }
   },
   "driver": {

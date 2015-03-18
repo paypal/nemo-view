@@ -5,15 +5,15 @@
 var Nemo = require('nemo'),
   path = require('path'),
   util = require(path.resolve(__dirname, 'util')),
-  nemo = {},
-  setup = {};
-//plugins.plugins.login = {
-//  'module': path.resolve(__dirname, 'plugin/shared-fn-plugin'),
-//  'register': true
-//};
+  nemo = {};
 
 describe('nemo-view @pluginContainedFunctionality@', function () {
-  //nemoFactory({'context': nemo, 'plugins': plugins, 'setup': setup});
+  before(function(done) {
+    nemo = Nemo(done);
+  });
+  after(function(done) {
+    nemo.driver.quit().then(done);
+  });
   it('should complete the shared functionality', function (done) {
     nemo.login.getPage();
     util.waitForJSReady(nemo);
