@@ -203,25 +203,35 @@ Please see the `test/contained-functionality.js` test file and `test/plugin/shar
 
 The following generic methods are added to `nemo.view`
 
-#### _find
+#### _find(locatorString)
 
-_doc TBD_
+`@argument locatorString {String}` - String of the form `<strategy>:<locator>`or `<locator>` (where `<strategy>` will be assumed as css)
+* `<strategy>` can be any of the valid selenium-webdriver strategies (except JS, not tested): http://seleniumhq.github.io/selenium/docs/api/javascript/namespace_webdriver_By.html
+* `<locator>` a valid locator string matching the chosen `<strategy>`
 
-#### _finds
+`@returns {Promise}` resolves to a WebElement or rejected
 
-_doc TBD_
+#### _finds(locatorString)
 
-#### _present
+`@argument locatorString {String}` - see above
+`@returns {Promise}` resolves to an array of WebElements or rejected
 
-_doc TBD_
 
-#### _visible
+#### _present(locatorString)
 
-_doc TBD_
+`@argument locatorString {String}` - see above
+`@returns {Promise}` resolves to true or rejected
 
-#### _wait
+#### _visible(locatorString)
 
-_doc TBD_
+`@argument locatorString {String}` - see above
+`@returns {Promise}` resolves to true or rejected
+
+#### _wait(locatorString[, timeout])
+
+`@argument locatorString {String}` - see above
+`@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+`@returns {Promise}` resolves to true or rejected
 
 ### addView method
 
