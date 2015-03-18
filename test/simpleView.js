@@ -1,26 +1,26 @@
 /* global describe,beforeEach,it */
 'use strict';
 
-var nemoFactory = require('nemo-mocha-factory'),
-  plugins = require('./plugins'),
+var Nemo = require('nemo'),
   nemo = {},
   path = require('path'),
   assert = require('assert'),
-  util = require(path.resolve(__dirname, 'util')),
-  setup = {
-    'view': ['form']
-  };
+  util = require(path.resolve(__dirname, 'util'));
 
-describe('nemo-view @simpleViewSuite@', function () {
-  nemoFactory({
-    'context': nemo,
-    'plugins': plugins,
-    'setup': setup
+describe('nemo-view @simpleViewSuite@whitelist@', function () {
+  process.env.nemoBaseDir='/Users/medelman/src/n/o/nemo-view/test';
+  before(function(done) {
+    nemo = Nemo(done);
+  });
+  after(function(done) {
+    nemo.driver.quit().then(function() {
+      done();
+    });
   });
 
   beforeEach(function (done) {
 
-    nemo.driver.get(nemo.props.targetBaseUrl);
+    nemo.driver.get(nemo.data.baseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
   it('should use the form view to enter values and write to outy div @useView@', function (done) {

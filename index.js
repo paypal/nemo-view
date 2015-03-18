@@ -15,55 +15,50 @@
 /* global require: true, module: true */
 "use strict";
 var View = require('./lib/view');
-var resolve = require('./lib/resolve');
 var glob = require("glob");
 var path = require('path');
 
 function addView(nemo) {
-	return function(config, hang) {
-		//dedupe
-		var viewName = resolve.viewName(config);
+	return function(json, viewNSArray, hang) {
+    var viewNS = (hang !== undefined && hang === false) ? {} : nemo.view;
+    //error
+    if (viewNSArray[0] === 'addView') {
+      throw new Error('[nemo-view] reserves "addView". Please rename your view.');
+    }
+    if (viewNSArray[0].indexOf('_') === 0) {
+      throw new Error('[nemo-view] reserves any name starting with _. Please rename your view.');
+    }
+    for (var i = 0; i < viewNSArray.length - 1; i++) {
+      viewNS[viewNSArray[i]] = (viewNS[viewNSArray[i]]) ? viewNS[viewNSArray[i]] : {};
+      viewNS = viewNS[viewNSArray[i]];
+    }
+		if (viewNS[viewNSArray[viewNSArray.length - 1]] !== undefined) {
+      throw new Error('[nemo-view] There is already a view registered in that namespace');
+    }
 		//default hang to true
-		hang = (hang === undefined) ? true : hang;
-		if (nemo.view && nemo.view[viewName] && hang === true) {
-			return nemo.view[viewName];
-		}
-		//error
-		if (viewName === 'addView') {
-			throw new Error('[nemo-view] reserves "addView". Please rename your view.');
-		}
 
-		var _view = View(config, nemo);
-		if (hang) {
-			nemo.view[viewName] = _view;
-		}
-		return _view;
+
+		var _view = View(nemo, json);
+
+    viewNS[viewNSArray[viewNSArray.length - 1]] = _view;
+    return _view;
 	};
 }
-module.exports.setup = function(nemo, callback) {
+module.exports.setup = function(locatorDirectory, nemo, callback) {
 	//slap the addView method onto the view namespace
   nemo.view = {};
 	nemo.view.addView = addView(nemo);
 
   //get all files in the locator directory and sub-directories
-  glob("**/*.json", {cwd: path.resolve(nemo.data.baseDirectory, 'locator')}, function (err, files) {
-    files.map()
-    callback(null, nemo);
+  glob("**/*.json", {cwd: locatorDirectory}, function (err, files) {
+    files.forEach(function(file) {
+      var addViewArray = [require(path.resolve(locatorDirectory, file))];
+      var viewPathArray = file.split('/');
+      viewPathArray[viewPathArray.length - 1] = viewPathArray[viewPathArray.length - 1].split('.json')[0];
+      addViewArray.push(viewPathArray);
+      nemo.view.addView.apply(this, addViewArray);
+    });
+    callback(null);
   });
-  //fs.readdir(path.resolve(nemo.data.baseDirectory, 'locator'),function(err,files){
-  //  if(err) throw err;
-  //  files.forEach(function(file){
-  //    console.log('yo ', file);
-  //    // do something with each file HERE!
-  //  });
-  //  callback();
-  //});
-  //if (args.view) {
-  //  args.view.forEach(function(view) {
-  //
-  //    nemo.view.addView(view);
-  //  })
-  //}
-	//move along
-	//callback(null, nemo);
+
 };
