@@ -214,23 +214,28 @@ The following generic methods are added to `nemo.view`
 #### _finds(locatorString)
 
 `@argument locatorString {String}` - see above
+
 `@returns {Promise}` resolves to an array of WebElements or rejected
 
 
 #### _present(locatorString)
 
 `@argument locatorString {String}` - see above
+
 `@returns {Promise}` resolves to true or rejected
 
 #### _visible(locatorString)
 
 `@argument locatorString {String}` - see above
+
 `@returns {Promise}` resolves to true or rejected
 
 #### _wait(locatorString[, timeout])
 
 `@argument locatorString {String}` - see above
+
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
 `@returns {Promise}` resolves to true or rejected
 
 ### addView method
