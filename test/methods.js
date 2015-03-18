@@ -8,37 +8,28 @@ var assert = require('assert'),
   path = require('path'),
   util = require(path.resolve(__dirname, 'util'));
 
-function _nemoFactory() {
-  var _nemo = {};
+describe('nemo-view @methods@whitelist@', function () {
+  process.env.nemoBaseDir='/Users/medelman/src/n/o/nemo-view/test';
   before(function(done) {
-    var _n = Nemo(function() {
-      _.merge(_nemo, _n);
+    nemo = Nemo(done);
+  });
+  after(function(done) {
+    nemo.driver.quit().then(function() {
       done();
     });
   });
-  after(function(done) {
-    _nemo.driver.quit();
-    done();
-  });
-  return _nemo;
-}
-process.env.nemoBaseDir='/Users/medelman/src/n/o/nemo-view/test';
-describe('nemo-view @methods@', function () {
-  nemo = _nemoFactory();
-
   beforeEach(function (done) {
-    //console.log('nemo', nemo);
-    nemo.driver.get(nemo.data.targetBaseUrl);
+    nemo.driver.get(nemo.data.baseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
   it('should return a @locatorObject@', function (done) {
-    //var locator = nemo.view.simple.outBoxBy();
-    //if (locator.using && locator.value) {
-    //  done();
-    //} else {
-    //  done(new Error('didnt get back a locator object'));
-    //}
-    done();
+    var locator = nemo.view.simple.outBoxBy();
+    if (locator.using && locator.value) {
+      done();
+    } else {
+      done(new Error('didnt get back a locator object'));
+    }
+
   });
   it('should find an existing element using the @Wait@positive@ method', function (done) {
     nemo.view.simple.bodyTagWait(3000, 'didnt find body tag').getTagName().then(function (tn) {
@@ -79,7 +70,7 @@ describe('nemo-view @methods@', function () {
     });
   });
   it('should use @WaitVisible@positive@ method', function (done) {
-    nemo.driver.get(nemo.data.targetBaseUrl + '/waits');
+    nemo.driver.get(nemo.data.baseUrl + '/waits');
     util.waitForJSReady(nemo);
     nemo.view.simple.waitButton().click();
     nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function (tn) {
@@ -90,7 +81,7 @@ describe('nemo-view @methods@', function () {
   it('should use @WaitVisible@negative@ method in negative scenario', function (done) {
 
     var start;
-    nemo.driver.get(nemo.data.targetBaseUrl + '/waits');
+    nemo.driver.get(nemo.data.baseUrl + '/waits');
     util.waitForJSReady(nemo).then(function () {
       start = Date.now();
     });

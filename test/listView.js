@@ -2,19 +2,23 @@
 
 'use strict';
 
-var nemoFactory = require('nemo-mocha-factory'),
-  plugins = require('./plugins'),
-  path = require('path'),
+var path = require('path'),
   util = require(path.resolve(__dirname, 'util')),
-  nemo = {},
-  setup = {
-    'view': ['formElementList']
-  };
+  Nemo = require('nemo'),
+  nemo = {};
 
-describe('nemo-view @listViewSuite@', function () {
-  nemoFactory({'context': nemo, 'plugins': plugins, 'setup': setup});
+describe('nemo-view @listViewSuite@whitelist@', function () {
+  process.env.nemoBaseDir='/Users/medelman/src/n/o/nemo-view/test';
+  before(function(done) {
+    nemo = Nemo(done);
+  });
+  after(function(done) {
+    nemo.driver.quit().then(function() {
+      done();
+    });
+  });
   beforeEach(function (done) {
-    nemo.driver.get(nemo.props.targetBaseUrl);
+    nemo.driver.get(nemo.data.baseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
   it('should use the form list view to enter values and write to outy div @useListView@', function (done) {
