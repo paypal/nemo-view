@@ -15,7 +15,6 @@ describe('nemo-view @simpleViewSuite@', function () {
     nemo.driver.quit().then(done);
   });
   beforeEach(function (done) {
-
     nemo.driver.get(nemo.data.baseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });

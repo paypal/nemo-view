@@ -97,6 +97,7 @@ nemo.view._finds
 nemo.view._present
 nemo.view._visible
 nemo.view._wait
+nemo.view._waitVisible
 ```
 
 Which can be used as follows:
@@ -231,6 +232,14 @@ The following generic methods are added to `nemo.view`
 `@returns {Promise}` resolves to true or rejected
 
 #### _wait(locatorString[, timeout])
+
+`@argument locatorString {String}` - see above
+
+`@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
+`@returns {Promise}` resolves to true or rejected
+
+#### _waitVisible(locatorString[, timeout])
 
 `@argument locatorString {String}` - see above
 
