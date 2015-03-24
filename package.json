@@ -24,9 +24,10 @@
     "grunt-simple-mocha": "~0.4.0",
     "mocha": "~1.10.0",
     "nconf": "*",
-    "nemo": "git://github.com/grawk/nemo.git#1.0-develop",
-    "nemo-mocha-factory": "^0.3.0",
-    "nemo-shared-objects": "^0.2.2"
+    "nemo": "1.0.0-alpha.1"
+  },
+  "peerDependencies": {
+    "nemo": "1.0.0-alpha.1"
   },
   "keywords": [
     "Nemo",
