@@ -1,4 +1,4 @@
-/* global describe,beforeEach,it */
+/* global before,after,describe,beforeEach,it */
 'use strict';
 
 var Nemo = require('nemo'),
