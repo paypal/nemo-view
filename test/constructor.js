@@ -1,9 +1,7 @@
-/* global describe,beforeEach,it */
+/* global describe,it */
 'use strict';
 
 var Nemo = require('nemo'),
-  path = require('path'),
-  util = require(path.resolve(__dirname, 'util')),
   assert = require('assert'),
   nemo = {};
 

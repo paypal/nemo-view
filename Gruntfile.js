@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 			},
 
 			all: {
-				src: ['test/methods.js']
+				src: ['test/*.js']
 			}
 		},
 		jshint: {
