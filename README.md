@@ -98,6 +98,8 @@ nemo.view._present
 nemo.view._visible
 nemo.view._wait
 nemo.view._waitVisible
+nemo.view._firstVisible
+
 ```
 
 Which can be used as follows:
@@ -246,6 +248,21 @@ The following generic methods are added to `nemo.view`
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
 
 `@returns {Promise}` resolves to true or rejected
+
+#### _firstVisible(locatorObject[, timeout])
+
+`@argument locatorObject {Object}` - Object of key/value pairs where the key describes the element to find and the
+value is a `locatorString` (see above). Example would be:
+```javascript
+{
+  'loginerror': '.notification.notification-critical',
+  'profile': '#contents[role=main]'
+ }
+```
+
+`@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
+`@returns {Promise}` resolves to the found key (e.g. 'loginerror' or 'profile' from above example) or rejected
 
 ### addView method
 
