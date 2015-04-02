@@ -211,4 +211,40 @@ describe('nemo-view @methods@', function () {
       }
     });
   });
+  it('should use @_firstVisible@positive@ method to find an element which isnt initially visible', function (done) {
+    nemo.driver.get(nemo.data.baseUrl + '/waits');
+    util.waitForJSReady(nemo);
+    nemo.view.simple.waitButton().click();
+    nemo.view._firstVisible({
+      'idontexist': '#idontexist',
+      'outy': '#outy',
+      'noexisty': '#noexisty',
+      'alsonoexisty': '#alsonoexisty'
+    }, 6000).then(function (foundElement) {
+      assert.equal(foundElement, 'outy');
+      done();
+    }, util.doneError(done));
+  });
+  it('should use @_firstVisible@negative@ method to throw error when no elements found', function (done) {
+    var start;
+    nemo.driver.get(nemo.data.baseUrl + '/waits');
+    util.waitForJSReady(nemo).then(function () {
+      start = Date.now();
+    });
+    nemo.view._firstVisible({
+      'idontexist': '#idontexist',
+      'noexisty': '#noexisty',
+      'alsonoexisty': '#alsonoexisty'
+    }, 3000).then(function (foundElement) {
+      done(new Error('shouldnt have found an element'));
+    }, function (err) {
+      var found = Date.now() - start;
+      console.log('timeout in ', found);
+      if (found > 3800 || found < 2500) {
+        done(new Error('error thrown but in the wrong period of time, '));
+      } else {
+        done();
+      }
+    });
+  });
 });
