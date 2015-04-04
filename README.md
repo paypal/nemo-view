@@ -11,8 +11,8 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "git://github.com/paypal/nemo#1.0-develop",
-    "nemo-view": "git://github.com/paypal/nemo-view#1.0-develop",
+    "nemo": "^1.0.0",
+    "nemo-view": "^1.0.0",
 	...
 ```
 
