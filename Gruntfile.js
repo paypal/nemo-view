@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 				ignoreLeaks: false,
 				grep: grunt.option('grep') || 0,
 				ui: 'bdd',
-				reporter: 'nyan'
+				reporter: 'spec'
 			},
 
 			all: {
