@@ -3,11 +3,8 @@
 
 var path = require('path');
 before(function(done) {
-	process.env.nemoData = JSON.stringify({
-		'targetBaseUrl': 'http://warm-river-3624.herokuapp.com',
-		'targetBrowser': 'phantomjs',
-		'autoBaseDir': path.resolve(__dirname)
-	});
+  process.setMaxListeners(20);
+  process.env.nemoBaseDir = path.join(process.cwd(), 'test');
 	done();
 });
 	
