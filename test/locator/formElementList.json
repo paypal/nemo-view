@@ -3,10 +3,7 @@
 		"locator": "div.fielder",
 		"type": "css",
 		"Elements": {
-			"text": {
-				"locator": "input.texty",
-				"type": "css"
-			},
+			"text": "input.texty",
 			"button": {
 				"locator": "input[type='button']",
 				"type": "css"

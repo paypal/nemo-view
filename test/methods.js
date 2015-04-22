@@ -126,6 +126,20 @@ describe('nemo-view @methods@', function () {
   });
 
   //GENERIC methods
+  it('should find an existing element using the @_find@positive@ method', function (done) {
+    nemo.view._find('body').getTagName().then(function (tn) {
+      if (tn.toLowerCase() === 'body') {
+        done();
+      } else {
+        done(new Error('something went wrong here'));
+      }
+    }, util.doneError(done));
+  });
+  it('should throw error for non-present element with @_find@negative@ method', function (done) {
+    nemo.view._find('booody').then(function () {
+      done(new Error('should not have found an element'));
+    }, util.doneSuccess(done));
+  });
   it('should find an existing element using the @_wait@positive@ method', function (done) {
     nemo.view._wait('body', 3000).getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
