@@ -15,6 +15,7 @@
 /* global require: true, module: true */
 "use strict";
 var View = require('./lib/view');
+var util = require('./util');
 var Locreator = require('./lib/locreator');
 var debug = require('debug');
 var log = debug('nemo-view:log');
@@ -53,6 +54,8 @@ function addView(nemo, locreator) {
 }
 module.exports.setup = function (_locatorDirectory, _nemo, __callback) {
   log('plugin setup is called');
+
+  //normalize arguments
   var nemo = _nemo;
   var locatorDirectory = _locatorDirectory;
   var _callback = __callback;
@@ -61,22 +64,18 @@ module.exports.setup = function (_locatorDirectory, _nemo, __callback) {
     nemo = arguments[0];
     _callback = arguments[1];
   }
-  var locreator = new Locreator(nemo);
-  function once(fn) {
-    var called = false;
-    return function (err) {
-      if (!!called) {
-        return undefined;
-      }
-      called = true;
-      return fn(err);
-    };
-  }
+  var callback = util.once(_callback);
 
-  var callback = once(_callback);
+  //add view namespace
   nemo.view = {};
+
+  //instantiate locreator
+  var locreator = new Locreator(nemo);
+
+  //get on with it
   locreator.addGenericMethods(nemo);
   nemo.view.addView = addView(nemo, locreator);
+
   //get all files in the locator directory and sub-directories
   if (locatorDirectory !== null) {
     glob("**/*.json", {cwd: locatorDirectory}, function (err, files) {
