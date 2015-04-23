@@ -15,14 +15,14 @@
 /* global require: true, module: true */
 "use strict";
 var View = require('./lib/view');
-var locreator = require('./lib/locreator');
+var Locreator = require('./lib/locreator');
 var debug = require('debug');
 var log = debug('nemo-view:log');
 var error = debug('nemo-view:error');
 var glob = require("glob");
 var path = require('path');
 
-function addView(nemo) {
+function addView(nemo, locreator) {
 
   return function (json, viewNSArray, hang) {
     log('add view', viewNSArray);
@@ -45,7 +45,7 @@ function addView(nemo) {
     //default hang to true
 
 
-    var _view = View(nemo, json);
+    var _view = View(nemo, locreator, json);
 
     viewNS[viewNSArray[viewNSArray.length - 1]] = _view;
     return _view;
@@ -61,6 +61,7 @@ module.exports.setup = function (_locatorDirectory, _nemo, __callback) {
     nemo = arguments[0];
     _callback = arguments[1];
   }
+  var locreator = new Locreator(nemo);
   function once(fn) {
     var called = false;
     return function (err) {
@@ -75,7 +76,7 @@ module.exports.setup = function (_locatorDirectory, _nemo, __callback) {
   var callback = once(_callback);
   nemo.view = {};
   locreator.addGenericMethods(nemo);
-  nemo.view.addView = addView(nemo);
+  nemo.view.addView = addView(nemo, locreator);
   //get all files in the locator directory and sub-directories
   if (locatorDirectory !== null) {
     glob("**/*.json", {cwd: locatorDirectory}, function (err, files) {
