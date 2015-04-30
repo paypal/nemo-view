@@ -1,25 +1,22 @@
-/* global describe,beforeEach,it */
+/* global before,after,describe,beforeEach,it */
 'use strict';
 
-var nemoFactory = require('nemo-mocha-factory'),
-  plugins = require('./plugins'),
+var Nemo = require('nemo'),
   nemo = {},
   path = require('path'),
   assert = require('assert'),
-  util = require(path.resolve(__dirname, 'util')),
-  setup = {
-    'view': ['select']
-  };
+  util = require(path.resolve(__dirname, 'util'));
 
 describe('nemo-view @select@', function () {
-  nemoFactory({
-    'context': nemo,
-    'plugins': plugins,
-    'setup': setup
+  before(function(done) {
+    nemo = Nemo(done);
+  });
+  after(function(done) {
+    nemo.driver.quit().then(done);
   });
 
   beforeEach(function (done) {
-    nemo.driver.get(nemo.props.targetBaseUrl + '/selects');
+    nemo.driver.get(nemo.data.baseUrl + '/selects');
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
   it('should select option by @OptionValue@positive@ method', function (done) {
