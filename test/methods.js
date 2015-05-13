@@ -140,6 +140,23 @@ describe('nemo-view @methods@', function () {
       done(new Error('should not have found an element'));
     }, util.doneSuccess(done));
   });
+  it('should find an array of elements using the @_finds@positive@ method', function (done) {
+    nemo.view._finds('input[type=text]').then(function (inputs) {
+      var promises = [];
+      inputs.forEach(function (input, idx) {
+        var inputAndCheck = input.sendKeys('input', idx).then(function () {
+          return input.getAttribute('value');
+        }).then(function (value) {
+          return value;
+        });
+        promises.push(inputAndCheck);
+      });
+      return nemo.wd.promise.all(promises);
+    }).then(function (returned) {
+      assert.deepEqual(['input0', 'input1', 'input2', 'input3'], returned);
+      done();
+    }, util.doneError(done));
+  });
   it('should find an existing element using the @_wait@positive@ method', function (done) {
     nemo.view._wait('body', 3000).getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
