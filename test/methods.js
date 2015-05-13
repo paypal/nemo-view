@@ -108,4 +108,16 @@ describe('nemo-view @methods@', function () {
       done();
     }, util.doneError(done));
   });
+  it('should return true using @GetText@Positive@ method', function (done) {
+    nemo.view.simple.pageHeaderGetText().then(function (actual) {
+      assert.equal(actual, 'Sample form stuff');
+      done();
+    }, util.doneError(done));
+  });
+  it('should return false using @GetText@negative@ method', function (done) {
+    nemo.view.simple.buttonLabelGetText().then(function (actual) {
+      assert.equal(actual, '');
+      done();
+    }, util.doneError(done));
+  });
 });
