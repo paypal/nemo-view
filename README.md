@@ -283,6 +283,14 @@ value is a `locatorDefinition` (see above). Example would be:
 
 `@returns {Promise}` resolves to the found key (e.g. 'loginerror' or 'profile' from above example) or rejected
 
+
+#### _scroll(x, y)
+
+`@argument x, y {Integer, Integer}` - pass x, y coordinates to scroll the browser window
+
+`@returns {Promise}` resolves to true or rejected
+
+
 ### addView method
 
 The addView method will be added to the nemo.view namespace with the following signature:
