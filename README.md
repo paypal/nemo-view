@@ -35,10 +35,31 @@ View Interface for nemo views
 }
 ```
 
+### locatorDefinition
+
+The `locatorDefinition` can either be a JSON object like this:
+
+```
+{
+  "locator": ".myClass",
+  "type": "css"
+}
+```
+
+Where `type` is any of the locator strategies here: http://seleniumhq.github.io/selenium/docs/api/javascript/namespace
+
+Or can be a string like this:
+
+```
+"css:.myClass"
+```
+String of the form `<type>:<locator>`or `<locator>` (where `<type>` will be assumed as css)
+
+
 ### Writing a locator file
 
 The locator JSON file describes elements and the locator strategy used for each one. The most common use case is to store
-all your locator files in the `nemoBaseDir` + /locator directory
+all your locator files in the `nemoBaseDir` + /locator directory. The below example uses the JSON style `locatorDefinition`.
 
 #### textBox.json
 
@@ -208,34 +229,32 @@ The following generic methods are added to `nemo.view`
 
 #### _find(locatorString)
 
-`@argument locatorString {String}` - String of the form `<strategy>:<locator>`or `<locator>` (where `<strategy>` will be assumed as css)
-* `<strategy>` can be any of the valid selenium-webdriver strategies (except JS, not tested): http://seleniumhq.github.io/selenium/docs/api/javascript/namespace_webdriver_By.html
-* `<locator>` a valid locator string matching the chosen `<strategy>`
+`@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@returns {Promise}` resolves to a WebElement or rejected
 
 #### _finds(locatorString)
 
-`@argument locatorString {String}` - see above
+`@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@returns {Promise}` resolves to an array of WebElements or rejected
 
 
 #### _present(locatorString)
 
-`@argument locatorString {String}` - see above
+`@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@returns {Promise}` resolves to true or rejected
 
 #### _visible(locatorString)
 
-`@argument locatorString {String}` - see above
+`@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@returns {Promise}` resolves to true or rejected
 
 #### _wait(locatorString[, timeout])
 
-`@argument locatorString {String}` - see above
+`@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
 
@@ -243,7 +262,7 @@ The following generic methods are added to `nemo.view`
 
 #### _waitVisible(locatorString[, timeout])
 
-`@argument locatorString {String}` - see above
+`@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
 
@@ -252,7 +271,7 @@ The following generic methods are added to `nemo.view`
 #### _firstVisible(locatorObject[, timeout])
 
 `@argument locatorObject {Object}` - Object of key/value pairs where the key describes the element to find and the
-value is a `locatorString` (see above). Example would be:
+value is a `locatorDefinition` (see above). Example would be:
 ```javascript
 {
   'loginerror': '.notification.notification-critical',
