@@ -108,15 +108,15 @@ describe('nemo-view @methods@', function () {
       done();
     }, util.doneError(done));
   });
-  it('should return true using @GetText@Positive@ method', function (done) {
-    nemo.view.simple.pageHeaderGetText().then(function (actual) {
-      assert.equal(actual, 'Sample form stuff');
+  it('should return true using @ValidateText@Positive@ method', function (done) {
+    nemo.view.simple.pageHeaderValidateText('Sample form stuff').then(function (boolean) {
+      assert.equal(boolean,true);
       done();
     }, util.doneError(done));
   });
   it('should return false using @GetText@negative@ method', function (done) {
-    nemo.view.simple.buttonLabelGetText().then(function (actual) {
-      assert.equal(actual, '');
+    nemo.view.simple.pageHeaderValidateText('form stuff').then(function (boolean) {
+      assert.equal(boolean, false);
       done();
     }, util.doneError(done));
   });
