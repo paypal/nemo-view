@@ -395,10 +395,10 @@ Any method in the view object's prototype will also be available for use
 Any method in the view object's prototype will also be available for use
 Other than that, the nemo-view uses nemo-locatex internally, so if you change your locator files and set LOCALE, nemo-view will handle the rest!
 
-##### [locatorName]GetText
+##### [locatorName]ValidateText
 
-* arguments:none
-* returns: Returns text value of the given element
+* arguments:Expected Text
+* returns: Promise which resolves to true when the expected text matches the actual text
 
 ### Using LOCALE specific locators
 
