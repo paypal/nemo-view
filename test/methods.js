@@ -28,7 +28,6 @@ describe('nemo-view @methods@', function () {
 
   });
   it('should find an existing element using the @Wait@positive@ method', function (done) {
-
     nemo.view.simple.bodyTagWait(3000, 'didnt find body tag').getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
         done();
