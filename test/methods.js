@@ -28,6 +28,7 @@ describe('nemo-view @methods@', function () {
 
   });
   it('should find an existing element using the @Wait@positive@ method', function (done) {
+
     nemo.view.simple.bodyTagWait(3000, 'didnt find body tag').getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
         done();
@@ -127,7 +128,7 @@ describe('nemo-view @methods@', function () {
 
   //GENERIC methods
   it('should find an existing element using the @_wait@positive@ method', function (done) {
-    nemo.view._wait('body', 3000).getTagName().then(function (tn) {
+    nemo.view._wait('body', 3000, 'Element did not load for specified timeout').getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
         done();
       } else {
@@ -137,7 +138,7 @@ describe('nemo-view @methods@', function () {
   });
   it('should appropriately use a timeout argument to the @_wait@negative@CustomTimeout@ method in a failure scenario', function (done) {
     var start = Date.now();
-    nemo.view._wait('bordy.foo.blarg', 13000).then(function (find) {
+    nemo.view._wait('bordy.foo.blarg', 13000, 'Element did not load for specified timeout').then(function (find) {
       done(new Error('found notExist but should not have'));
     }, function (err) {
       var found = Date.now() - start;
@@ -152,7 +153,7 @@ describe('nemo-view @methods@', function () {
   });
   it('should appropriately use a DIFFERENT timeout argument to the @_wait@negative@CustomTimeout@ method in a failure scenario', function (done) {
     var start = Date.now();
-    nemo.view._wait('bordy.foo.blarg', 3000).then(function (find) {
+    nemo.view._wait('bordy.foo.blarg', 3000, 'Element did not load for specified timeout').then(function (find) {
       done(new Error('found notExist but should not have'));
     }, function (err) {
       var found = Date.now() - start;
@@ -168,7 +169,7 @@ describe('nemo-view @methods@', function () {
     nemo.driver.get(nemo.data.baseUrl + '/waits');
     util.waitForJSReady(nemo);
     nemo.view.simple.waitButton().click();
-    nemo.view._waitVisible('#outy', 6000).getTagName().then(function (tn) {
+    nemo.view._waitVisible('#outy', 6000, 'Element did not load for specified timeout').getTagName().then(function (tn) {
       assert.equal(tn.toLowerCase(), 'div');
       done();
     }, util.doneError(done));
@@ -180,7 +181,7 @@ describe('nemo-view @methods@', function () {
     util.waitForJSReady(nemo).then(function () {
       start = Date.now();
     });
-    nemo.view._waitVisible('#outy', 3000).then(function (find) {
+    nemo.view._waitVisible('#outy', 3000, 'Element did not load for specified timeout').then(function (find) {
       done(new Error('shouldn\'t have found the element to be visible'));
     }, function (err) {
       var found = Date.now() - start;
@@ -199,7 +200,7 @@ describe('nemo-view @methods@', function () {
     util.waitForJSReady(nemo).then(function () {
       start = Date.now();
     });
-    nemo.view._waitVisible('#foo.bar.brrao', 3000).then(function (find) {
+    nemo.view._waitVisible('#foo.bar.brrao', 3000, 'Element did not load for specified timeout').then(function (find) {
       done(new Error('shouldn\'t have found the element to be visible'));
     }, function (err) {
       var found = Date.now() - start;
