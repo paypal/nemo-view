@@ -124,7 +124,32 @@ describe('nemo-view @methods@', function () {
       done();
     }, util.doneError(done));
   });
-
+  it('should return true using @ValidateText@Positive@ method', function (done) {
+    nemo.view.simple.pageHeaderValidateText('Sample form stuff').then(function (actual) {
+      assert.equal(actual, true);
+      done();
+    }, util.doneError(done));
+  });
+  it('should return false using @ValidateText@negative@ method', function (done) {
+    nemo.view.simple.pageHeaderValidateText('form stuff').then(function () {
+      done(new Error('couldn\'t find text: form stuff'));
+    }, function (err) {
+      done();
+    });
+  });
+  it('should return true using @AttributeValue@Positive@ method', function (done) {
+    nemo.view.simple.buttonLabelValidateAttributeValue('value','Go foo').then(function (actual) {
+      assert.equal(actual, true);
+      done();
+    }, util.doneError(done));
+  });
+  it('should return false using @AttributeValue@negative@ method', function (done) {
+    nemo.view.simple.buttonLabelValidateAttributeValue('value','foo').then(function () {
+      done(new Error('couldn\'t find text: foo'));
+    }, function (err) {
+      done();
+    });
+  });
   //GENERIC methods
   it('should find an existing element using the @_find@positive@ method', function (done) {
     nemo.view._find('body').getTagName().then(function (tn) {
