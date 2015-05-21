@@ -124,28 +124,28 @@ describe('nemo-view @methods@', function () {
       done();
     }, util.doneError(done));
   });
-  it('should return true using @ValidateText@Positive@ method', function (done) {
-    nemo.view.simple.pageHeaderValidateText('Sample form stuff').then(function (actual) {
-      assert.equal(actual, true);
+  it('should return true using @TextEquals@Positive@ method', function (done) {
+    nemo.view.simple.pageHeaderTextEquals('Sample form stuff').then(function (isEqual) {
+      assert.equal(isEqual, true);
       done();
     }, util.doneError(done));
   });
-  it('should return false using @ValidateText@negative@ method', function (done) {
-    nemo.view.simple.pageHeaderValidateText('form stuff').then(function () {
-      done(new Error('couldn\'t find text: form stuff'));
+  it('should return false using @TextEquals@negative@ method', function (done) {
+    nemo.view.simple.pageHeaderTextEquals('form stuff').then(function () {
+      done(new Error('this promise should have been rejected'));
     }, function (err) {
       done();
     });
   });
-  it('should return true using @AttributeValue@Positive@ method', function (done) {
-    nemo.view.simple.buttonLabelValidateAttributeValue('value','Go foo').then(function (actual) {
-      assert.equal(actual, true);
+  it('should return true using @AttrEquals@Positive@ method', function (done) {
+    nemo.view.simple.buttonLabelAttrEquals('value', 'Go foo').then(function (isEqual) {
+      assert.equal(isEqual, true);
       done();
     }, util.doneError(done));
   });
-  it('should return false using @AttributeValue@negative@ method', function (done) {
-    nemo.view.simple.buttonLabelValidateAttributeValue('value','foo').then(function () {
-      done(new Error('couldn\'t find text: foo'));
+  it('should return false using @AttrEquals@negative@ method', function (done) {
+    nemo.view.simple.buttonLabelAttrEquals('value', 'foo').then(function () {
+      done(new Error('this promise should have been rejected'));
     }, function (err) {
       done();
     });
