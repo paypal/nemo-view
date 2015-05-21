@@ -1,26 +1,21 @@
-/* global describe,beforeEach,it */
+/* global describe,before,after,beforeEach,it */
 'use strict';
 
-var nemoFactory = require('nemo-mocha-factory'),
-  plugins = require('./plugins'),
+var Nemo = require('nemo'),
   nemo = {},
   path = require('path'),
   assert = require('assert'),
-  util = require(path.resolve(__dirname, 'util')),
-  setup = {
-    'view': ['form']
-  };
+  util = require(path.resolve(__dirname, 'util'));
 
 describe('nemo-view @simpleViewSuite@', function () {
-  nemoFactory({
-    'context': nemo,
-    'plugins': plugins,
-    'setup': setup
+  before(function(done) {
+    nemo = Nemo(done);
   });
-
+  after(function(done) {
+    nemo.driver.quit().then(done);
+  });
   beforeEach(function (done) {
-
-    nemo.driver.get(nemo.props.targetBaseUrl);
+    nemo.driver.get(nemo.data.baseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
   it('should use the form view to enter values and write to outy div @useView@', function (done) {
@@ -37,8 +32,6 @@ describe('nemo-view @simpleViewSuite@', function () {
     nemo.view.form.outBox().getText().then(function (outText) {
       assert.equal(outText, 'foobarbingbang');
       done();
-
     }, util.doneError(done));
   });
-
 });
