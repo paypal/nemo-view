@@ -252,19 +252,23 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _wait(locatorString[, timeout])
+#### _wait(locatorString[, timeout, msg])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
+`@argument msg {String} optional. Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _waitVisible(locatorString[, timeout])
+#### _waitVisible(locatorString[, timeout, msg])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
+`@argument msg {String} optional. Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
 
