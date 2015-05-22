@@ -365,14 +365,14 @@ Other than that, the nemo-view uses nemo-locatex internally, so if you change yo
 #### [locatorName]TextEquals
 
 * arguments
-  * text: the expected text on the element
+  * value: the expected value for the element
 * returns: Promise which resolves to true when the expected text matches
 
 #### [locatorName]AttrEquals
 
 * arguments
-  * text: attribute value to check
-  * text: the expected text on the element
+  * attribute: attribute value to check
+  * value: the expected value for the element
 * returns: Promise which resolves to true when the expected text matches
 
 ## Using LOCALE specific locators
