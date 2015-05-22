@@ -18,5 +18,13 @@
   "bodyTag": {
     "locator": "body",
     "type": "css"
-  }
+  },
+  "pageHeader": {
+    "locator": "#wrapper > h1",
+    "type": "css"
+  },
+  "buttonLabel": {
+    "locator": "#foo :nth-child(3)",
+    "type": "css"
+    }
 }
