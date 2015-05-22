@@ -252,7 +252,7 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _wait(locatorString[, timeout, [, msg]])
+#### _wait(locatorString[, timeout [, msg]])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
@@ -262,7 +262,7 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _waitVisible(locatorString[, timeout, [, msg]])
+#### _waitVisible(locatorString[, timeout [, msg]])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
