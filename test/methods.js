@@ -114,6 +114,32 @@ describe('nemo-view @methods@', function () {
       done();
     }, util.doneError(done));
   });
+  it('should return true using @TextEquals@Positive@ method', function (done) {
+    nemo.view.simple.pageHeaderTextEquals('Sample form stuff').then(function (isEqual) {
+      assert.equal(isEqual, true);
+      done();
+    }, util.doneError(done));
+  });
+  it('should return false using @TextEquals@negative@ method', function (done) {
+    nemo.view.simple.pageHeaderTextEquals('form stuff').then(function () {
+      done(new Error('this promise should have been rejected'));
+    }, function (err) {
+      done();
+    });
+  });
+  it('should return true using @AttrEquals@Positive@ method', function (done) {
+    nemo.view.simple.buttonLabelAttrEquals('value', 'Go foo').then(function (isEqual) {
+      assert.equal(isEqual, true);
+      done();
+    }, util.doneError(done));
+  });
+  it('should return false using @AttrEquals@negative@ method', function (done) {
+    nemo.view.simple.buttonLabelAttrEquals('value', 'foo').then(function () {
+      done(new Error('this promise should have been rejected'));
+    }, function (err) {
+      done();
+    });
+  });
   //GENERIC methods
   it('should find an existing element using the @_find@positive@ method', function (done) {
     nemo.view._find('body').getTagName().then(function (tn) {
