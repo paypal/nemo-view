@@ -258,7 +258,7 @@ The following generic methods are added to `nemo.view`
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
 
-`@argument msg {String} optional. Message to accompany error in failure case`
+`@argument msg {String} (optional)` - Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
 
@@ -268,7 +268,7 @@ The following generic methods are added to `nemo.view`
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
 
-`@argument msg {String} optional. Message to accompany error in failure case`
+`@argument msg {String} (optional)` - Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
 
