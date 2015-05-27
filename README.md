@@ -252,19 +252,23 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _wait(locatorString[, timeout])
+#### _wait(locatorString[, timeout [, msg]])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
+`@argument msg {String} (optional)` - Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _waitVisible(locatorString[, timeout])
+#### _waitVisible(locatorString[, timeout [, msg]])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
+`@argument msg {String} (optional)` - Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
 
@@ -361,6 +365,19 @@ Any method in the view object's prototype will also be available for use
 * returns: Promise which resolves to true when option is selected
 Any method in the view object's prototype will also be available for use
 Other than that, the nemo-view uses nemo-locatex internally, so if you change your locator files and set LOCALE, nemo-view will handle the rest!
+
+#### [locatorName]TextEquals
+
+* arguments
+  * value: the expected value for the element
+* returns: Promise which resolves to true when the expected text matches
+
+#### [locatorName]AttrEquals
+
+* arguments
+  * attribute: attribute value to check
+  * value: the expected value for the element
+* returns: Promise which resolves to true when the expected text matches
 
 ## Using LOCALE specific locators
 
