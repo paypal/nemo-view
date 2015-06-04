@@ -416,4 +416,4 @@ configuration file, or it can be set "on the fly" with the following command:
 nemo._config.set('data:locale', 'DE');
 ```
 
-You can also refer to the unit tests for the locale feature (found in `test/locale.js`) in this module.
+For a working example, refer to the unit tests for the locale feature (found in `test/locale.js`) in this module.
