@@ -381,7 +381,39 @@ Other than that, the nemo-view uses nemo-locatex internally, so if you change yo
 
 ## Using LOCALE specific locators
 
-Please see these sections in the nemo-locatex README:
-* https://github.com/paypal/nemo-locatex#changing-your-locator-files
-* https://github.com/paypal/nemo-locatex#setting-locale
+You can specify different locator strings/strategies based on locale. To do so, first modify the entry you wish to be locale-specific:
 
+```js
+{
+  "myLocator": {
+    "type": "css",
+    "locator": ".myLocator"
+  }
+}
+```
+
+changes to
+
+```js
+{
+  "myLocator": {
+    "default": {
+       "type": "css",
+       "locator": ".myLocator"
+     },
+    "DE": {
+      "type": "css",
+      "locator": ".meinLocator"
+    }
+  }
+}
+```
+
+In order to specify a locale, you need to set the `nemo.data.locale` property. This can either be done directly in the
+configuration file, or it can be set "on the fly" with the following command:
+
+```js
+nemo._config.set('data:locale', 'DE');
+```
+
+You can also refer to the unit tests for the locale feature (found in `test/locale.js`) in this module.
