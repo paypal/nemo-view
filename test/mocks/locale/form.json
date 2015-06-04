@@ -1,0 +1,38 @@
+{
+  "text": {
+    "default": {
+      "locator": "#foo input.texty",
+      "type": "css"
+    },
+    "DE": {
+      "locator": "#bar input.texty",
+      "type": "css"
+    }
+  },
+  "boxInnerLocale": {
+    "locator": "#foo",
+    "type": "css",
+    "Elements": {
+      "elt": {
+        "default": "input.texty",
+        "DE": "[type=button]"
+      }
+    }
+  },
+  "boxOuterLocale": {
+    "default": {
+      "locator": "#foo",
+      "type": "css",
+      "Elements": {
+        "elt": "input.texty"
+      }
+    },
+    "DE": {
+      "locator": "#bar",
+      "type": "css",
+      "Elements": {
+        "elt": "input.texty"
+      }
+    }
+  }
+}
