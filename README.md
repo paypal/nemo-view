@@ -348,9 +348,7 @@ The view will create the following methods for each locator object:
 #### [locatorName]Visible
 
 * arguments: none
-* returns: Promise which resolves to true or false
-
-Any method in the view object's prototype will also be available for use
+* returns: Promise which resolves to true or false when element is present, or rejected if element is not present
 
 #### [locatorName]OptionText
 
