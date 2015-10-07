@@ -252,19 +252,23 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _wait(locatorString[, timeout])
+#### _wait(locatorString[, timeout [, msg]])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
+`@argument msg {String} (optional)` - Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _waitVisible(locatorString[, timeout])
+#### _waitVisible(locatorString[, timeout [, msg]])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
 `@argument timeout {Integer} (optional, default 5000)` - ms to wait until rejecting
+
+`@argument msg {String} (optional)` - Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
 
@@ -344,9 +348,7 @@ The view will create the following methods for each locator object:
 #### [locatorName]Visible
 
 * arguments: none
-* returns: Promise which resolves to true or false
-
-Any method in the view object's prototype will also be available for use
+* returns: Promise which resolves to true or false when element is present, or rejected if element is not present
 
 #### [locatorName]OptionText
 
@@ -362,9 +364,59 @@ Any method in the view object's prototype will also be available for use
 Any method in the view object's prototype will also be available for use
 Other than that, the nemo-view uses nemo-locatex internally, so if you change your locator files and set LOCALE, nemo-view will handle the rest!
 
-## Using LOCALE specific locators
+#### [locatorName]TextEquals
 
-Please see these sections in the nemo-locatex README:
-* https://github.com/paypal/nemo-locatex#changing-your-locator-files
-* https://github.com/paypal/nemo-locatex#setting-locale
+* arguments
+  * value: the expected value for the element
+* returns: Promise which resolves to true when the expected text matches
 
+#### [locatorName]AttrEquals
+
+* arguments
+  * attribute: attribute value to check
+  * value: the expected value for the element
+* returns: Promise which resolves to true when the expected text matches
+
+## Using locator specialization
+
+You can specify different locator strings/strategies based on the `data.locale` configuration value.
+To do so, first modify the entry you wish to be specialized:
+
+```js
+{
+  "myLocator": {
+    "type": "css",
+    "locator": ".myLocator"
+  }
+}
+```
+
+changes to
+
+```js
+{
+  "myLocator": {
+    "default": {
+       "type": "css",
+       "locator": ".myLocator"
+     },
+    "DE": {
+      "type": "css",
+      "locator": ".meinLocator"
+    }
+  }
+}
+```
+
+You can set the `data.locale` property as follows:
+
+```js
+nemo._config.set('data:locale', 'DE');
+```
+
+For a working example, refer to the unit tests for the locale feature (found in `test/locale.js`) in this module.
+
+_NOTE: This feature is a carry-over from earlier versions of nemo-view. It is understood now that the above feature does
+not actually represent "locale" specificity as defined by bcp47 (https://tools.ietf.org/html/bcp47). See discussion
+[here](https://github.com/paypal/nemo-view/pull/32) and issue [here](https://github.com/paypal/nemo-view/issues/33).
+Follow along as we discuss a backwards compatible way to resolve this unfortunate nomenclature error.
