@@ -9,7 +9,8 @@
   },
   "waitButton": {
     "locator": "input[type=button][class=wait]",
-    "type": "css"
+    "type": ""
+    //empty type would be defaulted to css
   },
   "latentText": {
     "locator": "outy",
@@ -17,14 +18,16 @@
   },
   "bodyTag": {
     "locator": "body",
-    "type": "css"
+    "type": "   "
+    //blank type would be defaulted to css
   },
   "pageHeader": {
-    "locator": "#wrapper > h1",
-    "type": "css"
+    "locator": "#wrapper > h1"
+    //NO type will be defaulted to css
   },
   "buttonLabel": {
     "locator": "#foo :nth-child(3)",
-    "type": "css"
-    }
+    "type": "foo"
+    //NOT a valid locator type, will be defaulted to css
+  }
 }
