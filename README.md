@@ -46,7 +46,10 @@ The `locatorDefinition` can either be a JSON object like this:
 }
 ```
 
-Where `type` is any of the locator strategies here: http://seleniumhq.github.io/selenium/docs/api/javascript/namespace
+Where `type` is any of the locator strategies here: http://selenium.googlecode.com/git/docs/api/javascript/namespace_webdriver_By.html.
+When `type` is empty/blank/invalid/absent it is defaulted to `css` with debug warning
+
+When locator.locator is empty/blank/absent, just debug warning is presented to user which can be seen when running nemo tests using `DEBUG=nemo*`
 
 Or can be a string like this:
 
