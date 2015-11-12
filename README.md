@@ -214,6 +214,18 @@ describe('nemo-view @simpleViewSuite@', function () {
   });
 });
 ```
+### Combining methods from with and without locator files
+
+You can pass locators from `[locatorName]By` to underscore methods like `_find` or `_finds` etc. For example,
+
+```javascript
+nemo.view._finds(nemo.view.paypal.languageBy()).then(function(languages){
+    languages.forEach(function(language){
+        //do stuff
+    });
+ });
+```
+
 
 ### Creating nemo plugins with self contained views and flows
 
