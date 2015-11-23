@@ -27,7 +27,7 @@
     "nemo": "^2.0.0"
   },
   "peerDependencies": {
-    "nemo": "^1.0.0"
+    "nemo": "^2.0.0"
   },
   "keywords": [
     "Nemo",
