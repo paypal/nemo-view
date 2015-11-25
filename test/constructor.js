@@ -7,6 +7,23 @@ var Nemo = require('nemo'),
 
 describe('nemo-view @constructor@', function () {
 
+  it('should do ? with malformed JSON file(s)', function (done) {
+    nemo = Nemo({
+      'plugins': {
+        "view": {
+          "module": "path:../",
+          "arguments": ["path:mocks/badjson"]
+        }
+      }
+    }, function (err) {
+      if (err) {
+        done();
+      } else {
+        done(new Error('should have got an error in nemo callback'));
+      }
+    });
+  });
+
   it('should give back _ methods with empty locator directory', function (done) {
     nemo = Nemo({
       'plugins': {
