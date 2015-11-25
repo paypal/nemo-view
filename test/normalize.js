@@ -22,8 +22,12 @@ describe('nemo-view @normalize@ module', function () {
         type: 'xpath',
         locator: '/x/y/z:[abc]'
       },
-      'output': nemo.wd.By.xpath('/x/y/z:[abc]')
-    }, {
+      'output': {
+        type: 'xpath',
+        locator: '/x/y/z:[abc]'
+      }
+    },
+      {
       'input': 'xpath:/x/y/z:[abc]',
       'output': nemo.wd.By.xpath('/x/y/z:[abc]')
 
