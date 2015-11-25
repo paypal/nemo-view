@@ -1,5 +1,9 @@
 # nemo-view changelog
 
+## v2.0.0
+
+* add peerDependency to nemo v2.0
+
 ## v1.2.0
 
 * add realtime locale switching support (see https://github.com/paypal/nemo-view/issues/31)

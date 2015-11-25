@@ -1,6 +1,6 @@
 {
   "name": "nemo-view",
-  "version": "1.2.0",
+  "version": "2.0.1",
   "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
   "main": "index.js",
   "registerAs": "view",
@@ -25,10 +25,10 @@
     "grunt-simple-mocha": "~0.4.0",
     "mocha": "~1.10.0",
     "nconf": "*",
-    "nemo": "^1.0.0"
+    "nemo": "^2.0.0"
   },
   "peerDependencies": {
-    "nemo": "^1.0.0"
+    "nemo": "^2.0.0"
   },
   "keywords": [
     "Nemo",
