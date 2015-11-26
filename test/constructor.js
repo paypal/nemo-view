@@ -6,7 +6,6 @@ var Nemo = require('nemo'),
   nemo = {};
 
 describe('nemo-view @constructor@', function () {
-
   it('should do ? with malformed JSON file(s)', function (done) {
     nemo = Nemo({
       'plugins': {
@@ -23,7 +22,6 @@ describe('nemo-view @constructor@', function () {
       }
     });
   });
-
   it('should give back _ methods with empty locator directory', function (done) {
     nemo = Nemo({
       'plugins': {
