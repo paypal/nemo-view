@@ -47,11 +47,11 @@ The `locatorDefinition` can either be a JSON object like this:
 ```
 
 Where `type` is any of the locator strategies here: http://selenium.googlecode.com/git/docs/api/javascript/namespace_webdriver_By.html.
-When `type` is empty/blank/invalid/absent it is defaulted to `css` with debug warning
+A `locator` or `type` CANNOT be empty/blank/absent in JSON object representation of `locatorDefinition`. An error will be thrown during the setup of nemo-view
+If `type` under `locatorDefinition` is invalid (not amongst [allowed types](http://selenium.googlecode.com/git/docs/api/javascript/namespace_webdriver_By.html)) then an error is thrown as well.
 
-When locator.locator is empty/blank/absent, just debug warning is presented to user which can be seen when running nemo tests using `DEBUG=nemo*`
 
-Or can be a string like this:
+Or `locatorDefinition` can be a string like this:
 
 ```
 "css:.myClass"
@@ -106,6 +106,7 @@ all your locator files in the `nemoBaseDir` + /locator directory. The below exam
 	}
 }
 ```
+`nemo-view` supports for adding JavaScript-style comments in your json files as each file is processed by using [shush](https://github.com/krakenjs/shush)
 
 ### Using views
 

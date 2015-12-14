@@ -1,4 +1,5 @@
 {
+  //This comment is just fine and allowed in nemo-view
   "outBox": {
     "locator": "outy",
     "type": "id"
@@ -9,8 +10,7 @@
   },
   "waitButton": {
     "locator": "input[type=button][class=wait]",
-    "type": ""
-    //empty type would be defaulted to css
+    "type": "css"
   },
   "latentText": {
     "locator": "outy",
@@ -18,16 +18,14 @@
   },
   "bodyTag": {
     "locator": "body",
-    "type": "   "
-    //blank type would be defaulted to css
+    "type": "css"
   },
   "pageHeader": {
-    "locator": "#wrapper > h1"
-    //NO type will be defaulted to css
+    "locator": "#wrapper > h1",
+    "type": "css"
   },
   "buttonLabel": {
     "locator": "#foo :nth-child(3)",
-    "type": "foo"
-    //NOT a valid locator type, will be defaulted to css
+    "type": "css"
   }
 }
