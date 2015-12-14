@@ -55,7 +55,6 @@ describe('nemo-view @normalize@ module', function () {
       normalize(nemo, noType);
       done(new Error('Expected error for locator with no type'));
     } catch (e) {
-      console.log(e);
       done();
     }
   });
@@ -70,7 +69,6 @@ describe('nemo-view @normalize@ module', function () {
       normalize(nemo, emptyType);
       done(new Error('Expected error for locator with empty type'));
     } catch (e) {
-      console.log(e);
       done();
     }
   });
@@ -85,7 +83,6 @@ describe('nemo-view @normalize@ module', function () {
       normalize(nemo, blankType);
       done(new Error('Expected error for locator with blank type'));
     } catch (e) {
-      console.log(e);
       done();
     }
   });
@@ -100,7 +97,6 @@ describe('nemo-view @normalize@ module', function () {
       normalize(nemo, invalidType);
       done(new Error('Expected error for locator with invalid type'));
     } catch (e) {
-      console.log(e);
       done();
     }
   });
@@ -114,7 +110,6 @@ describe('nemo-view @normalize@ module', function () {
       normalize(nemo, noLocatorValidType);
       done(new Error('Expected error for no locator with valid type'));
     } catch (e) {
-      console.log(e);
       done();
     }
   });
@@ -128,7 +123,6 @@ describe('nemo-view @normalize@ module', function () {
       normalize(nemo, noLocatorInvalidType);
       done(new Error('Expected error for locator with invalid type'));
     } catch (e) {
-      console.log(e);
       done();
     }
   });
