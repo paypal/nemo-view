@@ -1,3 +1,4 @@
+'use strict';
 var async = require("async");
 module.exports = {
 	"setup": function(config, result, callback) {
@@ -10,8 +11,8 @@ module.exports = {
 				setTimeout(function() {
 					cbk(null, {
 						"fine": "good"
-					})
-				}, 2000)
+					});
+				}, 2000);
 			}
 		];
 

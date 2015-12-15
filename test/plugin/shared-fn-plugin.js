@@ -1,4 +1,4 @@
-var path = require("path");
+'use strict';
 module.exports = {
 	"setup": function(whoami, nemo, callback) {
 		var login = {

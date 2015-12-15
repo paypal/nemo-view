@@ -22,6 +22,7 @@ var log = debug('nemo-view:log');
 var error = debug('nemo-view:error');
 var glob = require("glob");
 var path = require('path');
+var shush = require('shush');
 
 function addView(nemo, locreator) {
 
@@ -81,7 +82,7 @@ module.exports.setup = function (_locatorDirectory, _nemo, __callback) {
     glob("**/*.json", {cwd: locatorDirectory}, function (err, files) {
       log('going to process the following json into views', files);
       files.forEach(function (file) {
-        var addViewArray = [require(path.resolve(locatorDirectory, file))];
+        var addViewArray = [shush(path.resolve(locatorDirectory, file))];
         var viewPathArray = file.split('/');
         viewPathArray[viewPathArray.length - 1] = viewPathArray[viewPathArray.length - 1].split('.json')[0];
         addViewArray.push(viewPathArray);
