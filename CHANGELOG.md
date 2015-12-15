@@ -1,5 +1,15 @@
 # nemo-view changelog
 
+## v2.1.0
+
+* Now using [shush](https://github.com/krakenjs/shush) so that users can add comments to their locator files. This way `nemo-view` is consistent with `nemo`
+* When `locator.type` is empty/blank/invalid/absent an error will be thrown during the setup
+* When `locator.locator` is empty/blank/absent, an error is thrown,
+* Fixed a bug for a case when `locatorBy()` is passed to underscore methods, for example  `nemo._find(locatorBy())`
+* Updated unit tests so that sample locator file reflects comments and different flavors of invalid types
+* Fixed JSHint errors
+* Updated README with content about invalid type/locator. Also fixed a selenium link for types. Previous link was responding with 404
+
 ## v2.0.0
 
 * add peerDependency to nemo v2.0
