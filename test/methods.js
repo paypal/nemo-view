@@ -102,6 +102,17 @@ describe('nemo-view @methods@', function () {
       }
     });
   });
+  it('should return true/false using @Visible@Positive@ method when element present', function (done) {
+    nemo.view.simple.outBoxVisible().then(function (visible) {
+      assert.equal(visible, false);
+    });
+    nemo.view.form.fooButtonVisible().then(function (visible) {
+      assert.equal(visible, true);
+    }).then(util.doneSuccess(done), util.doneError(done));
+  });
+  it('should throw error using @Visible@Negative@ method when element not present', function (done) {
+    nemo.view.simple.notExistVisible().then(util.doneError(done), util.doneSuccess(done));
+  });
   it('should return true using @Present@Positive@ method', function (done) {
     nemo.view.simple.outBoxPresent().then(function (present) {
       assert.equal(present, true);
