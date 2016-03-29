@@ -260,13 +260,13 @@ The following generic methods are added to `nemo.view`
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
-`@returns {Promise}` resolves to true or rejected
+`@returns {Promise}` resolves to true or false
 
 #### _visible(locatorString)
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
-`@returns {Promise}` resolves to true or rejected
+`@returns {Promise}` resolves to true or false.  Rejected if element is not found
 
 #### _wait(locatorString[, timeout [, msg]])
 

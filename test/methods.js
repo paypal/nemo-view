@@ -161,9 +161,27 @@ describe('nemo-view @methods@', function () {
       }
     }, util.doneError(done));
   });
-  it('should resolve false if element doesn\'t exists @_present@positive@ method', function (done) {
+  it('should resolve false if element doesn\'t exists @_present@negative@ method', function (done) {
     nemo.view._present('booody').then(function (found) {
       if (!found) {
+        done();
+      } else {
+        done(new Error('something went wrong here'));
+      }
+    }, util.doneError(done));
+  });
+  it('should resolve true if element visible @_visible@positive@ method', function (done) {
+    nemo.view._visible('body').then(function (visible) {
+      if (visible) {
+        done();
+      } else {
+        done(new Error('something went wrong here'));
+      }
+    }, util.doneError(done));
+  });
+  it('should resolve false if element not visible @_visible@negative@ method', function (done) {
+    nemo.view._visible('id:outy').then(function (visible) {
+      if (!visible) {
         done();
       } else {
         done(new Error('something went wrong here'));
