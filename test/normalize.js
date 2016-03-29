@@ -22,10 +22,7 @@ describe('nemo-view @normalize@ module', function () {
         type: 'xpath',
         locator: '/x/y/z:[abc]'
       },
-      'output': {
-        type: 'xpath',
-        locator: '/x/y/z:[abc]'
-      }
+      'output': { using: 'xpath', value: '/x/y/z:[abc]' }
     },
       {
       'input': 'xpath:/x/y/z:[abc]',
@@ -45,6 +42,14 @@ describe('nemo-view @normalize@ module', function () {
     });
     done();
   });
+
+  it('should return unmodified input object if it is already a locator', function (done) {
+    var inputLocator = nemo.wd.By.id('xyz');
+    var outputLocator = normalize(nemo, inputLocator);
+    assert(inputLocator === outputLocator, 'expected output locator to be the input object');
+    done();
+  });
+
   it('should correctly throw error @notype@', function (done) {
     var noType = {
       "noType": {
