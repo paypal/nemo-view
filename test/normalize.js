@@ -25,6 +25,13 @@ describe('nemo-view @normalize@ module', function () {
       'output': { using: 'xpath', value: '/x/y/z:[abc]' }
     },
       {
+        'input': {
+          using: 'id',
+          value: 'xyz'
+      },
+        'output': nemo.wd.By.id('xyz')
+    },
+      {
       'input': 'xpath:/x/y/z:[abc]',
       'output': nemo.wd.By.xpath('/x/y/z:[abc]')
 
