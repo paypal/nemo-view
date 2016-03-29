@@ -21,24 +21,20 @@ describe('nemo-view @normalize@ module', function () {
         Locator = nemo.wd.By.id('xyz').constructor,
         verifications = [
       {
-        by: 'xpath',
         input: {
           type: 'xpath',
           locator: '/x/y/z:[abc]'
         },
         output: { using: 'xpath', value: '/x/y/z:[abc]' }
       }, {
-        by: 'xpath',
         input: 'xpath:/x/y/z:[abc]',
         output: nemo.wd.By.xpath('/x/y/z:[abc]')
 
       }, {
-        by: 'css',
         input: 'a span[class=foo]:nth-child',
         output: nemo.wd.By.css('a span[class=foo]:nth-child')
 
       }, {
-        by: 'css',
         input: 'css:a span[class=foo]:nth-child',
         output: nemo.wd.By.css('a span[class=foo]:nth-child')
       }
