@@ -17,33 +17,35 @@ describe('nemo-view @normalize@ module', function () {
 
 
   it('should correctly convert strings and objects to selenium-webdriver locator functions', function (done) {
-    var verifications = [{
-      'input': {
-        type: 'xpath',
-        locator: '/x/y/z:[abc]'
+    var verifications = [
+      {
+        'input': {
+          type: 'xpath',
+          locator: '/x/y/z:[abc]'
+        },
+        'output': { using: 'xpath', value: '/x/y/z:[abc]' }
       },
-      'output': { using: 'xpath', value: '/x/y/z:[abc]' }
-    },
       {
         'input': {
           using: 'id',
           value: 'xyz'
-      },
+        },
         'output': nemo.wd.By.id('xyz')
-    },
+      },
       {
-      'input': 'xpath:/x/y/z:[abc]',
-      'output': nemo.wd.By.xpath('/x/y/z:[abc]')
+        'input': 'xpath:/x/y/z:[abc]',
+        'output': nemo.wd.By.xpath('/x/y/z:[abc]')
 
-    }, {
-      'input': 'a span[class=foo]:nth-child',
-      'output': nemo.wd.By.css('a span[class=foo]:nth-child')
+      }, {
+        'input': 'a span[class=foo]:nth-child',
+        'output': nemo.wd.By.css('a span[class=foo]:nth-child')
 
-    }, {
-      'input': 'css:a span[class=foo]:nth-child',
-      'output': nemo.wd.By.css('a span[class=foo]:nth-child')
+      }, {
+        'input': 'css:a span[class=foo]:nth-child',
+        'output': nemo.wd.By.css('a span[class=foo]:nth-child')
 
-    }];
+      }
+    ];
     verifications.forEach(function (verification) {
       assert.deepEqual(verification.output, normalize(nemo, verification.input));
     });
