@@ -36,6 +36,10 @@
     "interface"
   ],
   "author": "Matt Edelman",
+  "contributors": [
+    "Nilesh Kulkarni <nikulkarni@paypal.com>",
+    "Vidya Aravind <varavind@paypal.com>",
+    "Alex Feldman <afeldman@paypal.com>"],
   "licenses": [
     {
       "type": "Apache 2.0",
