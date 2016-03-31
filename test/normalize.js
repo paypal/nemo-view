@@ -17,34 +17,43 @@ describe('nemo-view @normalize@ module', function () {
 
 
   it('should correctly convert strings and objects to selenium-webdriver locator functions', function (done) {
-    var verifications = [{
-      'input': {
-        type: 'xpath',
-        locator: '/x/y/z:[abc]'
-      },
-      'output': {
-        type: 'xpath',
-        locator: '/x/y/z:[abc]'
-      }
-    },
+    var output,
+        Locator = nemo.wd.By.id('xyz').constructor,
+        verifications = [
       {
-      'input': 'xpath:/x/y/z:[abc]',
-      'output': nemo.wd.By.xpath('/x/y/z:[abc]')
+        input: {
+          type: 'xpath',
+          locator: '/x/y/z:[abc]'
+        },
+        output: { using: 'xpath', value: '/x/y/z:[abc]' }
+      }, {
+        input: 'xpath:/x/y/z:[abc]',
+        output: nemo.wd.By.xpath('/x/y/z:[abc]')
 
-    }, {
-      'input': 'a span[class=foo]:nth-child',
-      'output': nemo.wd.By.css('a span[class=foo]:nth-child')
+      }, {
+        input: 'a span[class=foo]:nth-child',
+        output: nemo.wd.By.css('a span[class=foo]:nth-child')
 
-    }, {
-      'input': 'css:a span[class=foo]:nth-child',
-      'output': nemo.wd.By.css('a span[class=foo]:nth-child')
-
-    }];
+      }, {
+        input: 'css:a span[class=foo]:nth-child',
+        output: nemo.wd.By.css('a span[class=foo]:nth-child')
+      }
+    ];
     verifications.forEach(function (verification) {
-      assert.deepEqual(verification.output, normalize(nemo, verification.input));
+      output = normalize(nemo, verification.input);
+      assert.deepEqual(verification.output, output);
+      assert(output instanceof Locator, 'Expected normalized locator to be an instance of Locator');
     });
     done();
   });
+
+  it('should return unmodified input object if it is already a locator', function (done) {
+    var inputLocator = nemo.wd.By.id('xyz');
+    var outputLocator = normalize(nemo, inputLocator);
+    assert(inputLocator === outputLocator, 'expected output locator to be the input object');
+    done();
+  });
+
   it('should correctly throw error @notype@', function (done) {
     var noType = {
       "noType": {
