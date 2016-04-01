@@ -1,7 +1,7 @@
 {
   "name": "nemo-view",
   "version": "2.1.1",
-  "description": "View Interface for nemo views (requires nemo-drivex and nemo-locatex plugins)",
+  "description": "selenium-webdriver abstractions and locator organization plugin for nemo",
   "main": "index.js",
   "registerAs": "view",
   "scripts": {
