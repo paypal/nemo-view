@@ -276,9 +276,9 @@ describe('nemo-view @methods@', function () {
   });
   it('should find elements using @_finds@withParent@ method', function (done) {
     nemo.view._finds('div.fielder', nemo.view.simple.form()).then(function (divs) {
-        if(divs.length === 4) {
-          done();
-        }
+      if (divs.length === 4) {
+        done();
+      }
     }, util.doneError(done));
   });
   it('should find an existing element using the @_wait@positive@ method', function (done) {
