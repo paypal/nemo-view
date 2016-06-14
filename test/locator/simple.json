@@ -27,5 +27,9 @@
   "buttonLabel": {
     "locator": "#foo :nth-child(3)",
     "type": "css"
+  },
+  "form" : {
+    "locator" : "div#wrapper form",
+    "type" : "css"
   }
 }

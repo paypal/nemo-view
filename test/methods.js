@@ -161,6 +161,17 @@ describe('nemo-view @methods@', function () {
       }
     }, util.doneError(done));
   });
+  it('should resolve true if element exists @_present@withParent@positive@ method', function (done) {
+    nemo.view._present('label[for="foo_text"]', nemo.view.simple.form()).then(function (found) {
+      if (found) {
+        done();
+      } else {
+        done(new Error('something went wrong here'));
+      }
+    }, util.doneError(done));
+  });
+
+
   it('should resolve false if element doesn\'t exists @_present@negative@ method', function (done) {
     nemo.view._present('booody').then(function (found) {
       if (!found) {
@@ -170,8 +181,26 @@ describe('nemo-view @methods@', function () {
       }
     }, util.doneError(done));
   });
+  it('should resolve false if element does not exists @_present@withParent@negative@ method', function (done) {
+    nemo.view._present('boooddy', nemo.view.simple.form()).then(function (found) {
+      if (found) {
+        done(new Error('something went wrong here'));
+      } else {
+        done();
+      }
+    }, util.doneError(done));
+  });
   it('should resolve true if element visible @_visible@positive@ method', function (done) {
     nemo.view._visible('body').then(function (visible) {
+      if (visible) {
+        done();
+      } else {
+        done(new Error('something went wrong here'));
+      }
+    }, util.doneError(done));
+  });
+  it('should resolve true if element visible @_visible@withParent@positive@ method', function (done) {
+    nemo.view._visible('label[for="foo_text"]', nemo.view.simple.form()).then(function (visible) {
       if (visible) {
         done();
       } else {
@@ -188,6 +217,15 @@ describe('nemo-view @methods@', function () {
       }
     }, util.doneError(done));
   });
+  it('should resolve false if element not visible @_visible@withParent@negative@ method', function (done) {
+    nemo.view._visible('id:outy', nemo.view.simple.form()).then(function (visible) {
+      if (!visible) {
+        done();
+      } else {
+        done(new Error('something went wrong here'));
+      }
+    }, util.doneError(done));
+  });
   it('should find an existing element using the @_find@positive@ method', function (done) {
     nemo.view._find('body').getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
@@ -197,6 +235,18 @@ describe('nemo-view @methods@', function () {
       }
     }, util.doneError(done));
   });
+  it('should find an existing element using the @_find@withparent@positive@ method', function (done) {
+    nemo.view._find('label[for="foo_text"]', nemo.view.simple.form()).then(function (element) {
+      element.getText().then(function(text){
+        if(text === 'foo Text:') {
+          done();
+        }
+      }, function(err){
+        done(new Error('something went wrong here ', err));
+      });
+    }, util.doneError(done));
+  });
+
   it('should throw error for non-present element with @_find@negative@ method', function (done) {
     nemo.view._find('booody').then(function () {
       done(new Error('should not have found an element'));
@@ -222,6 +272,13 @@ describe('nemo-view @methods@', function () {
         'input3'
       ], returned);
       done();
+    }, util.doneError(done));
+  });
+  it('should find elements using @_finds@withParent@ method', function (done) {
+    nemo.view._finds('div.fielder', nemo.view.simple.form()).then(function (divs) {
+        if(divs.length === 4) {
+          done();
+        }
     }, util.doneError(done));
   });
   it('should find an existing element using the @_wait@positive@ method', function (done) {
