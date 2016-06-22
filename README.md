@@ -227,6 +227,14 @@ nemo.view._finds(nemo.view.paypal.languageBy()).then(function(languages){
  });
 ```
 
+Finding elements under another element
+
+```javascript
+nemo.view._finds('div.fielder', nemo.view.simple.parentBanner()).then(function (divs) {
+      //do stuff
+});
+```
+
 
 ### Creating nemo plugins with self contained views and flows
 
@@ -243,28 +251,36 @@ Please see the `test/contained-functionality.js` test file and `test/plugin/shar
 
 The following generic methods are added to `nemo.view`
 
-#### _find(locatorString)
+#### _find(locatorString[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 `@returns {Promise}` resolves to a WebElement or rejected
 
-#### _finds(locatorString)
+#### _finds(locatorString[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 `@returns {Promise}` resolves to an array of WebElements or rejected
 
 
-#### _present(locatorString)
+#### _present(locatorString[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 `@returns {Promise}` resolves to true or false
 
-#### _visible(locatorString)
+#### _visible(locatorString[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 `@returns {Promise}` resolves to true or false.  Rejected if element is not found
 
