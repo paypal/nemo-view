@@ -455,14 +455,13 @@ Follow along as we discuss a backwards compatible way to resolve this unfortunat
 
 ## Unit Tests
 
-* Unit tests run by default using headless browser [PhantomJS](http://phantomjs.org/). To run unit tests out of box,
-You must be PhantomJS installed on your system and must be present in the path
+* Unit tests run by default using headless browser [PhantomJS](http://phantomjs.org/). To run unit tests out of box, You must be PhantomJS installed on your system and must be present in the path
     * Download PhantomJS from [here](http://phantomjs.org/download.html)
     * On OSX, you can optionally use `brew` to install PhantomJS like `brew install phantomjs`
     * PhantomJS installation detailed guide on Ubuntu can be found [here](https://gist.github.com/julionc/7476620)
 
 * If you want to run unit tests on your local browser, like lets say Firefox, you need to update browser in unit test
-configuration [here](https://github.com/paypal/nemo-view/blob/master/test/config/config.json#L14)
+configuration, for example the browser section under `test/config/config.json` like [here](https://github.com/paypal/nemo-view/blob/master/test/config/config.json#L14)
 
 * How to run unit tests?
   * `grunt simplemocha` will just run unit tests
