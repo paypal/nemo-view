@@ -455,7 +455,7 @@ Follow along as we discuss a backwards compatible way to resolve this unfortunat
 
 ## Unit Tests
 
-* Unit tests run by default using headless browser [PhantomJS](http://phantomjs.org/). To run unit tests out of box, You must be PhantomJS installed on your system and must be present in the path
+* Unit tests run by default using headless browser [PhantomJS](http://phantomjs.org/). To run unit tests out of box, You must have PhantomJS installed on your system and must be present in the path
     * Download PhantomJS from [here](http://phantomjs.org/download.html)
     * On OSX, you can optionally use `brew` to install PhantomJS like `brew install phantomjs`
     * PhantomJS installation detailed guide on Ubuntu can be found [here](https://gist.github.com/julionc/7476620)
@@ -465,7 +465,7 @@ configuration, for example the browser section under `test/config/config.json` l
 
 * How to run unit tests?
   * `grunt simplemocha` will just run unit tests
-  * `grunt` - default grunt task will run linting as well as tests
+  * `grunt` - default grunt task will run linting as well as unit tests
   * To run directly using mocha assuming its globally installed on your system `mocha -t 60s`
   * Or a specific test,  `mocha --grep @_visible@withParent@negative@ -t 60s`
   * Or post `npm install` on nemo-view module, you can run `node_modules/.bin/mocha --grep @_visible@withParent@negative@ -t 60s`
