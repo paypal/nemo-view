@@ -11,8 +11,8 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "^1.0.0",
-    "nemo-view": "^1.0.0",
+    "nemo": "^2.0.0",
+    "nemo-view": "^2.0.0",
 	...
 ```
 
