@@ -11,8 +11,8 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "^1.0.0",
-    "nemo-view": "^1.0.0",
+    "nemo": "^2.0.0",
+    "nemo-view": "^2.0.0",
 	...
 ```
 
@@ -469,3 +469,4 @@ configuration, for example the browser section under `test/config/config.json` l
   * To run directly using mocha assuming its globally installed on your system `mocha -t 60s`
   * Or a specific test,  `mocha --grep @_visible@withParent@negative@ -t 60s`
   * Or post `npm install` on nemo-view module, you can run `node_modules/.bin/mocha --grep @_visible@withParent@negative@ -t 60s`
+
