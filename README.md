@@ -129,7 +129,7 @@ nemo.view._firstVisible
 
 Which can be used as follows:
 
-```
+```javascript
 describe('nemo-view @verySimple@', function () {
   before(function (done) {
     nemo = Nemo(done);
