@@ -400,14 +400,14 @@ Other than that, the nemo-view uses nemo-locatex internally, so if you change yo
 
 * arguments
   * value: the expected value for the element
-* returns: Promise which resolves to true when the expected text matches
+* returns: Promise which resolves to true when the expected text matches, or rejects when it doesn't
 
 #### [locatorName]AttrEquals
 
 * arguments
   * attribute: attribute value to check
   * value: the expected value for the element
-* returns: Promise which resolves to true when the expected text matches
+* returns: Promise which resolves to true when the expected text matches, or rejects when it doesn't
 
 ## Using locator specialization
 
