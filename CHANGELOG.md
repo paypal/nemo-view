@@ -1,5 +1,9 @@
 # nemo-view changelog
 
+## v2.1.2
+
+* Improved error messaging for Wait and WaitVisible methods by using locatorId to identify the problematic locator
+
 ## v2.1.1
 
 - PR https://github.com/paypal/nemo-view/pull/46
