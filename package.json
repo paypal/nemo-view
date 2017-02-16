@@ -1,6 +1,6 @@
 {
   "name": "nemo-view",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "selenium-webdriver abstractions and locator organization plugin for nemo",
   "main": "index.js",
   "registerAs": "view",
