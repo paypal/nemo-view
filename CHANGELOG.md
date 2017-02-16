@@ -2,7 +2,8 @@
 
 ## v2.1.2
 
-* Improved error messaging for Wait and WaitVisible methods by using locatorId to identify the problematic locator
+* Adding ability to find elements under parent element using underscore methods (PR #52)
+* Improved error messaging for Wait and WaitVisible methods by using locatorId to identify the problematic locator (PR #61)
 
 ## v2.1.1
 
