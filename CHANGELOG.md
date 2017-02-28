@@ -1,5 +1,10 @@
 # nemo-view changelog
 
+## v2.1.2
+
+* Adding ability to find elements under parent element using underscore methods (PR #52)
+* Improved error messaging for Wait and WaitVisible methods by using locatorId to identify the problematic locator (PR #61)
+
 ## v2.1.1
 
 - PR https://github.com/paypal/nemo-view/pull/46

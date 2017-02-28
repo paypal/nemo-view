@@ -11,8 +11,8 @@ View Interface for nemo views
 
 ```javascript
 	...
-    "nemo": "^1.0.0",
-    "nemo-view": "^1.0.0",
+    "nemo": "^2.0.0",
+    "nemo-view": "^2.0.0",
 	...
 ```
 
@@ -129,7 +129,7 @@ nemo.view._firstVisible
 
 Which can be used as follows:
 
-```
+```javascript
 describe('nemo-view @verySimple@', function () {
   before(function (done) {
     nemo = Nemo(done);
@@ -227,6 +227,14 @@ nemo.view._finds(nemo.view.paypal.languageBy()).then(function(languages){
  });
 ```
 
+Finding elements under another element
+
+```javascript
+nemo.view._finds('div.fielder', nemo.view.simple.parentBanner()).then(function (divs) {
+      //do stuff
+});
+```
+
 
 ### Creating nemo plugins with self contained views and flows
 
@@ -243,28 +251,36 @@ Please see the `test/contained-functionality.js` test file and `test/plugin/shar
 
 The following generic methods are added to `nemo.view`
 
-#### _find(locatorString)
+#### _find(locatorString[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 `@returns {Promise}` resolves to a WebElement or rejected
 
-#### _finds(locatorString)
+#### _finds(locatorString[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 `@returns {Promise}` resolves to an array of WebElements or rejected
 
 
-#### _present(locatorString)
+#### _present(locatorString[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 `@returns {Promise}` resolves to true or false
 
-#### _visible(locatorString)
+#### _visible(locatorString[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 `@returns {Promise}` resolves to true or false.  Rejected if element is not found
 
@@ -384,14 +400,14 @@ Other than that, the nemo-view uses nemo-locatex internally, so if you change yo
 
 * arguments
   * value: the expected value for the element
-* returns: Promise which resolves to true when the expected text matches
+* returns: Promise which resolves to true when the expected text matches, or rejects when it doesn't
 
 #### [locatorName]AttrEquals
 
 * arguments
   * attribute: attribute value to check
   * value: the expected value for the element
-* returns: Promise which resolves to true when the expected text matches
+* returns: Promise which resolves to true when the expected text matches, or rejects when it doesn't
 
 ## Using locator specialization
 
@@ -436,3 +452,21 @@ _NOTE: This feature is a carry-over from earlier versions of nemo-view. It is un
 not actually represent "locale" specificity as defined by bcp47 (https://tools.ietf.org/html/bcp47). See discussion
 [here](https://github.com/paypal/nemo-view/pull/32) and issue [here](https://github.com/paypal/nemo-view/issues/33).
 Follow along as we discuss a backwards compatible way to resolve this unfortunate nomenclature error.
+
+## Unit Tests
+
+* Unit tests run by default using headless browser [PhantomJS](http://phantomjs.org/). To run unit tests out of box, You must have PhantomJS installed on your system and must be present in the path
+    * Download PhantomJS from [here](http://phantomjs.org/download.html)
+    * On OSX, you can optionally use `brew` to install PhantomJS like `brew install phantomjs`
+    * PhantomJS installation detailed guide on Ubuntu can be found [here](https://gist.github.com/julionc/7476620)
+
+* If you want to run unit tests on your local browser, like lets say Firefox, you need to update browser in unit test
+configuration, for example the browser section under `test/config/config.json` like [here](https://github.com/paypal/nemo-view/blob/master/test/config/config.json#L14)
+
+* How to run unit tests?
+  * `grunt simplemocha` will just run unit tests
+  * `grunt` - default grunt task will run linting as well as unit tests
+  * To run directly using mocha assuming its globally installed on your system `mocha -t 60s`
+  * Or a specific test,  `mocha --grep @_visible@withParent@negative@ -t 60s`
+  * Or post `npm install` on nemo-view module, you can run `node_modules/.bin/mocha --grep @_visible@withParent@negative@ -t 60s`
+
