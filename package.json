@@ -1,6 +1,6 @@
 {
   "name": "nemo-view",
-  "version": "2.2.2",
+  "version": "3.0.0-alpha.1",
   "description": "selenium-webdriver abstractions and locator organization plugin for nemo",
   "main": "index.js",
   "registerAs": "view",
@@ -16,7 +16,7 @@
     "debug": "^2.1.0",
     "glob": "^7.0.0",
     "lodash": "^4.0.0",
-    "selenium-drivex": "^1.0.11",
+    "selenium-drivex": "^2.0.0-alpha.1",
     "shush": "^1.0.0"
   },
   "devDependencies": {
@@ -26,10 +26,7 @@
     "grunt-simple-mocha": "~0.4.0",
     "mocha": "^2",
     "nconf": "*",
-    "nemo": "^2.0.0"
-  },
-  "peerDependencies": {
-    "nemo": "^2.0.0"
+    "nemo": "^3.0.0-alpha.1"
   },
   "keywords": [
     "Nemo",
