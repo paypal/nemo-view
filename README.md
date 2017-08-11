@@ -123,6 +123,8 @@ nemo.view._present
 nemo.view._visible
 nemo.view._wait
 nemo.view._waitVisible
+nemo.view._optionValue
+nemo.view._optionText
 nemo.view._firstVisible
 
 ```
@@ -142,6 +144,7 @@ describe('nemo-view @verySimple@', function () {
     nemo.driver.get(nemo.data.baseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
+
   it('should use the form view to enter values and write to outy div @useView@', function (done) {
     nemo.view._find('css:#outy').getTagName().then(function (tn) {
       assert.equal(tn.toLowerCase(), 'div');
@@ -189,14 +192,16 @@ describe('nemo-view @simpleViewSuite@', function () {
   before(function(done) {
     nemo = Nemo(done);
   });
+
   after(function(done) {
     nemo.driver.quit().then(done);
   });
-  beforeEach(function (done) {
 
+  beforeEach(function (done) {
     nemo.driver.get(nemo.data.baseUrl);
     util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
   });
+
   it('should use the form view to enter values and write to outy div @useView@', function (done) {
     nemo.view.form.fooText().sendKeys('foo');
     nemo.driver.sleep(300);
@@ -251,7 +256,7 @@ Please see the `test/contained-functionality.js` test file and `test/plugin/shar
 
 The following generic methods are added to `nemo.view`
 
-#### _find(locatorString[, parentWebElement])
+#### _find(locatorDefinition[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
@@ -259,7 +264,7 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to a WebElement or rejected
 
-#### _finds(locatorString[, parentWebElement])
+#### _finds(locatorDefinition[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
@@ -268,7 +273,7 @@ The following generic methods are added to `nemo.view`
 `@returns {Promise}` resolves to an array of WebElements or rejected
 
 
-#### _present(locatorString[, parentWebElement])
+#### _present(locatorDefinition[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
@@ -276,7 +281,7 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to true or false
 
-#### _visible(locatorString[, parentWebElement])
+#### _visible(locatorDefinition[, parentWebElement])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
@@ -284,7 +289,7 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to true or false.  Rejected if element is not found
 
-#### _wait(locatorString[, timeout [, msg]])
+#### _wait(locatorDefinition[, timeout [, msg]])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
@@ -294,7 +299,7 @@ The following generic methods are added to `nemo.view`
 
 `@returns {Promise}` resolves to true or rejected
 
-#### _waitVisible(locatorString[, timeout [, msg]])
+#### _waitVisible(locatorDefinition[, timeout [, msg]])
 
 `@argument locatorDefinition {String|Object}` - Please see `locatorDefinition` above
 
@@ -303,6 +308,22 @@ The following generic methods are added to `nemo.view`
 `@argument msg {String} (optional)` - Message to accompany error in failure case`
 
 `@returns {Promise}` resolves to true or rejected
+
+#### _optionValue(locatorDefinition, value [, parentWebElement])
+
+`@argument locatorDefinition {String|Object}}` - Please see `locatorDefinition` above
+
+`@argument value {String}`  - the value attribute of the option you wish to select
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
+
+#### _optionText(locatorDefinition, text [, parentWebElement])
+
+`@argument locatorDefinition {String|Object}}` - Please see `locatorDefinition` above
+
+`@argument text {String}`  - The text in the option you wish to select
+
+`@argument parentWebElement {WebElement} (optional, default driver)` - parent WebElement to search elements underneath
 
 #### _firstVisible(locatorObject[, timeout])
 
