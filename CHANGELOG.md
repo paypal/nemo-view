@@ -1,5 +1,8 @@
 # nemo-view changelog
 
+## Next
+* Adding the ability to select options by value and text as generic methods.
+
 ## v2.1.2
 
 * Adding ability to find elements under parent element using underscore methods (PR #52)
