@@ -1,6 +1,12 @@
 /* global describe,before,after,beforeEach,it */
 'use strict';
-var assert = require('assert'), nemo, Nemo = require('nemo'), path = require('path'), util = require(path.resolve(__dirname, 'util'));
+
+var assert = require('assert'),
+    nemo,
+    Nemo = require('nemo'),
+    path = require('path'),
+    util = require(path.resolve(__dirname, 'util'));
+
 describe('nemo-view @methods@', function () {
   before(function (done) {
     nemo = Nemo(done);
