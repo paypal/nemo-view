@@ -382,13 +382,13 @@ This is a special locator, which let's you find lists of related elements. For e
 ```json
 {
   "inputGroup": {
-		"locator": "div.fielder",
-		"type": "css",
-		"Elements": {
-			"text": "input.texty",
-			"button": "input[type='button']"
-		}
-	}
+    "locator": "div.fielder",
+    "type": "css",
+    "Elements": {
+      "text": "input.texty",
+      "button": "input[type='button']"
+    }
+  }
 }
 ```
 
