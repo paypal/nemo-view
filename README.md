@@ -1,13 +1,13 @@
 ## nemo-view
 
-View Interface for nemo views
+View Interface for nemo views.
 
 [![Build Status](https://travis-ci.org/paypal/nemo-view.svg?branch=master)](https://travis-ci.org/paypal/nemo-view)
 
 
 ### Installation
 
-1. Add dependencies to package.json and install.
+1. Add dependencies to your `package.json` file and install
 
 ```javascript
 	...
@@ -16,7 +16,7 @@ View Interface for nemo views
 	...
 ```
 
-2. Add plugins to your nemo config JSON object
+2. Add `nemo-view` to your plugins nemo config
 
 ```javascript
 {
@@ -46,9 +46,7 @@ The `locatorDefinition` can either be a JSON object like this:
 }
 ```
 
-Where `type` is any of the locator strategies here: http://selenium.googlecode.com/git/docs/api/javascript/namespace_webdriver_By.html.
-A `locator` or `type` CANNOT be empty/blank/absent in JSON object representation of `locatorDefinition`. An error will be thrown during the setup of nemo-view
-If `type` under `locatorDefinition` is invalid (not amongst [allowed types](http://selenium.googlecode.com/git/docs/api/javascript/namespace_webdriver_By.html)) then an error is thrown as well.
+Where `type` is any of the [selenium locator strategies](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/by_exports_By.html). A `locator` or `type` CANNOT be empty/blank/absent in JSON object representation of `locatorDefinition`. An error will be thrown during the setup of nemo-view. If `type` under `locatorDefinition` is invalid (not amongst [allowed types](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/by_exports_By.html)) then an error is thrown as well.
 
 
 Or `locatorDefinition` can be a string like this:
@@ -56,7 +54,7 @@ Or `locatorDefinition` can be a string like this:
 ```
 "css:.myClass"
 ```
-String of the form `<type>:<locator>`or `<locator>` (where `<type>` will be assumed as css)
+String of the form `<type>:<locator>` or `<locator>` (where `<type>` will be assumed as css)
 
 
 ### Writing a locator file
@@ -106,6 +104,7 @@ all your locator files in the `nemoBaseDir` + /locator directory. The below exam
 	}
 }
 ```
+
 `nemo-view` supports for adding JavaScript-style comments in your json files as each file is processed by using [shush](https://github.com/krakenjs/shush)
 
 ### Using views
@@ -136,6 +135,7 @@ describe('nemo-view @verySimple@', function () {
   before(function (done) {
     nemo = Nemo(done);
   });
+
   after(function (done) {
     nemo.driver.quit().then(done);
   });
@@ -220,6 +220,7 @@ describe('nemo-view @simpleViewSuite@', function () {
   });
 });
 ```
+
 ### Combining methods from with and without locator files
 
 You can pass locators from `[locatorName]By` to underscore methods like `_find` or `_finds` etc. For example,
@@ -329,6 +330,7 @@ The following generic methods are added to `nemo.view`
 
 `@argument locatorObject {Object}` - Object of key/value pairs where the key describes the element to find and the
 value is a `locatorDefinition` (see above). Example would be:
+
 ```javascript
 {
   'loginerror': '.notification.notification-critical',
@@ -372,7 +374,37 @@ The view will create the following methods for each locator object:
 #### [locatorName]
 
 * arguments: none
-* returns: Promise which resolves to WebElement or rejected
+* returns: Promise which resolves to a WebElement or to a list if a *list locator* is used. Rejects if an error occurs.
+
+##### The list locator
+This is a special locator, which let's you find lists of related elements. For example, given the locator file `formElementList.json`:
+
+```json
+{
+  "inputGroup": {
+    "locator": "div.fielder",
+    "type": "css",
+    "Elements": {
+      "text": "input.texty",
+      "button": "input[type='button']"
+    }
+  }
+}
+```
+
+You will get a list of items, each with two properties `text` and `button` which themselves return WebElements when called.
+
+
+```js
+  nemo.view.formElementList
+    .inputGroup()
+    .then((elements) => {
+      elements.forEach(function (el) {
+        el.text().sendKeys('abcd');
+        el.button().click();
+      })
+    });
+```
 
 #### [locatorName]By
 
@@ -485,9 +517,9 @@ Follow along as we discuss a backwards compatible way to resolve this unfortunat
 configuration, for example the browser section under `test/config/config.json` like [here](https://github.com/paypal/nemo-view/blob/master/test/config/config.json#L14)
 
 * How to run unit tests?
-  * `grunt simplemocha` will just run unit tests
-  * `grunt` - default grunt task will run linting as well as unit tests
+  * `npm run test:unit` will just run unit tests
+  * `npm test` - default grunt task will run linting as well as unit tests
   * To run directly using mocha assuming its globally installed on your system `mocha -t 60s`
-  * Or a specific test,  `mocha --grep @_visible@withParent@negative@ -t 60s`
+  * Run using mocha on a specific test,  `mocha --grep @_visible@withParent@negative@ -t 60s`
   * Or post `npm install` on nemo-view module, you can run `node_modules/.bin/mocha --grep @_visible@withParent@negative@ -t 60s`
 

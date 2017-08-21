@@ -2,6 +2,7 @@
 
 ## Next
 * Adding the ability to select options by value and text as generic methods.
+* Updated documentation to describe element list functionality.
 
 ## v2.1.2
 
