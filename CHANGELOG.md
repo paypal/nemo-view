@@ -1,6 +1,7 @@
 # nemo-view changelog
 
-## Next
+## v2.2.0
+ 
 * Adding the ability to select options by value and text as generic methods
 * Updated documentation to describe element list functionality
 * es6 changes
