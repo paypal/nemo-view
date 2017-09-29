@@ -1,5 +1,9 @@
 # nemo-view changelog
 
+## v2.2.1
+
+* remove package-lock.json
+
 ## v2.2.0
  
 * Adding the ability to select options by value and text as generic methods
