@@ -1,5 +1,9 @@
 # nemo-view changelog
 
+## v2.2.2
+
+* add back package-lock.json after reading docs https://docs.npmjs.com/files/package-lock.json (reading docs is good)
+
 ## v2.2.1
 
 * remove package-lock.json
