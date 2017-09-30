@@ -1,5 +1,9 @@
 # nemo-view changelog
 
+## v3.0.0
+
+* publish major version (tag=se3)
+
 ## v3.0.0-alpha
 
 * upgrade to selenium-drivex 2
