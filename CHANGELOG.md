@@ -1,5 +1,9 @@
 # nemo-view changelog
 
+## Unreleased
+
+* pin to selenium-drivex@2 in order to get bug fixes there
+
 ## v2.2.2
 
 * add back package-lock.json after reading docs https://docs.npmjs.com/files/package-lock.json (reading docs is good)
