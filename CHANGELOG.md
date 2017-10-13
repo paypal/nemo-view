@@ -1,6 +1,6 @@
 # nemo-view changelog
 
-## Unreleased
+## v2.2.3 
 
 * pin to selenium-drivex@2 in order to get bug fixes there
 
