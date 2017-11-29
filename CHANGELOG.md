@@ -1,6 +1,6 @@
 # nemo-view changelog
 
-## UNRELEASED
+## v3.1.0 
 
 * namespace view-specific methods under element name
   * should be useful in destructuring situations 
