@@ -406,42 +406,42 @@ You will get a list of items, each with two properties `text` and `button` which
     });
 ```
 
-#### [locatorName]By
+#### [locatorName]By or [locatorName].by
 
 * arguments: none
 * returns: JSON locator object. You can use this, for example, to pass to selenium-webdriver until statements
 
-#### [locatorName]Present
+#### [locatorName]Present or [locatorName].present
 
 * arguments: none
 * returns: Promise which resolves to true or false
 
-#### [locatorName]Wait
+#### [locatorName]Wait or [locatorName].wait
 
 * arguments
   * timeout {Number} time to wait in milliseconds
   * msg {String} optional. Message to accompany error in failure case
 * returns: Promise which resolves to WebElement when element is present, or reject
 
-#### [locatorName]WaitVisible
+#### [locatorName]WaitVisible or [locatorName].waitVisible
 
 * arguments
   * timeout {Number} time to wait in milliseconds
   * msg {String} optional. Message to accompany error in failure case
 * returns: A promise which resolves to WebElement when element is both found and visible, or reject
 
-#### [locatorName]Visible
+#### [locatorName]Visible or [locatorName].visible
 
 * arguments: none
 * returns: Promise which resolves to true or false when element is present, or rejected if element is not present
 
-#### [locatorName]OptionText
+#### [locatorName]OptionText or [locatorName].optionText
 
 * arguments
   * text: the text in the option you wish to select
 * returns: Promise which resolves to true when option is selected
 
-#### [locatorName]OptionValue
+#### [locatorName]OptionValue or [locatorName].optionValue
 
 * arguments
   * value: the value attribute of the option you wish to select
@@ -449,13 +449,13 @@ You will get a list of items, each with two properties `text` and `button` which
 Any method in the view object's prototype will also be available for use
 Other than that, the nemo-view uses nemo-locatex internally, so if you change your locator files and set LOCALE, nemo-view will handle the rest!
 
-#### [locatorName]TextEquals
+#### [locatorName]TextEquals or [locatorName].textEquals
 
 * arguments
   * value: the expected value for the element
 * returns: Promise which resolves to true when the expected text matches, or rejects when it doesn't
 
-#### [locatorName]AttrEquals
+#### [locatorName]AttrEquals or [locatorName].attrEquals
 
 * arguments
   * attribute: attribute value to check

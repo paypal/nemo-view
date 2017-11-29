@@ -27,6 +27,11 @@ describe('nemo-view @methods@', function () {
     }
   });
   it('should find an existing element using the @Wait@positive@ method', function (done) {
+    nemo.view.simple.bodyTag.wait(3000, 'didnt find body tag').getTagName().then(function (tn) {
+      if (tn.toLowerCase() !== 'body') {
+        done(new Error('something went wrong here'));
+      }
+    });
     nemo.view.simple.bodyTagWait(3000, 'didnt find body tag').getTagName().then(function (tn) {
       if (tn.toLowerCase() === 'body') {
         done();
@@ -67,6 +72,7 @@ describe('nemo-view @methods@', function () {
     nemo.driver.get(nemo.data.baseUrl + '/waits');
     util.waitForJSReady(nemo);
     nemo.view.simple.waitButton().click();
+    nemo.view.simple.outBox.waitVisible();
     nemo.view.simple.outBoxWaitVisible(6000, 'didnt find outbox').getTagName().then(function (tn) {
       assert.equal(tn.toLowerCase(), 'div');
       done();
@@ -112,6 +118,9 @@ describe('nemo-view @methods@', function () {
     nemo.view.simple.outBoxVisible().then(function (visible) {
       assert.equal(visible, false);
     });
+    nemo.view.simple.outBox.visible().then(function (visible) {
+      assert.equal(visible, false);
+    });
     nemo.view.form.fooButtonVisible().then(function (visible) {
       assert.equal(visible, true);
     }).then(util.doneSuccess(done), util.doneError(done));
@@ -120,6 +129,9 @@ describe('nemo-view @methods@', function () {
     nemo.view.simple.notExistVisible().then(util.doneError(done), util.doneSuccess(done));
   });
   it('should return true using @Present@Positive@ method', function (done) {
+    nemo.view.simple.outBox.present().then(function (present) {
+      assert.equal(present, true);
+    });
     nemo.view.simple.outBoxPresent().then(function (present) {
       assert.equal(present, true);
       done();
@@ -132,6 +144,9 @@ describe('nemo-view @methods@', function () {
     }, util.doneError(done));
   });
   it('should return true using @TextEquals@Positive@ method', function (done) {
+    nemo.view.simple.pageHeader.textEquals('Sample form stuff').then(function (isEqual) {
+      assert.equal(isEqual, true);
+    });
     nemo.view.simple.pageHeaderTextEquals('Sample form stuff').then(function (isEqual) {
       assert.equal(isEqual, true);
       done();
@@ -145,6 +160,9 @@ describe('nemo-view @methods@', function () {
     });
   });
   it('should return true using @AttrEquals@Positive@ method', function (done) {
+    nemo.view.simple.buttonLabel.attrEquals('value', 'Go foo').then(function (isEqual) {
+      assert.equal(isEqual, true);
+    });
     nemo.view.simple.buttonLabelAttrEquals('value', 'Go foo').then(function (isEqual) {
       assert.equal(isEqual, true);
       done();

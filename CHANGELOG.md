@@ -1,5 +1,10 @@
 # nemo-view changelog
 
+## UNRELEASED
+
+* namespace view-specific methods under element name
+  * should be useful in destructuring situations 
+
 ## v3.0.0
 
 * publish major version (tag=se3)
