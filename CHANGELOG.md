@@ -1,5 +1,18 @@
 # nemo-view changelog
 
+## v3.1.0 
+
+* namespace view-specific methods under element name
+  * should be useful in destructuring situations 
+
+## v3.0.0
+
+* publish major version (tag=se3)
+
+## v3.0.0-alpha
+
+* upgrade to selenium-drivex 2
+
 ## v2.2.2
 
 * add back package-lock.json after reading docs https://docs.npmjs.com/files/package-lock.json (reading docs is good)
