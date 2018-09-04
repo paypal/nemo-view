@@ -47,7 +47,7 @@ function addView(nemo, locreator) {
     //default hang to true
 
 
-    var _view = View(nemo, locreator, json);
+    var _view = View(nemo, locreator, json, viewNSArray);
 
     viewNS[viewNSArray[viewNSArray.length - 1]] = _view;
     return _view;
