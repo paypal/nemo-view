@@ -1,7 +1,7 @@
 /* global describe,it */
 'use strict';
 
-var Nemo = require('nemo'),
+var Nemo = require('nemo-core'),
   assert = require('assert'),
   nemo = {};
 

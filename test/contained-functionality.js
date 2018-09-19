@@ -2,7 +2,7 @@
 
 'use strict';
 
-var Nemo = require('nemo'),
+var Nemo = require('nemo-core'),
   path = require('path'),
   util = require(path.resolve(__dirname, 'util')),
   nemo = {};

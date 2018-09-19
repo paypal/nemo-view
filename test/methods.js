@@ -3,7 +3,7 @@
 
 var assert = require('assert'),
     nemo,
-    Nemo = require('nemo'),
+    Nemo = require('nemo-core'),
     path = require('path'),
     util = require(path.resolve(__dirname, 'util'));
 

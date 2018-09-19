@@ -1,7 +1,7 @@
 /* global describe,before,after,it */
 'use strict';
 
-var Nemo = require('nemo'),
+var Nemo = require('nemo-core'),
   path = require('path'),
   normalize = require(path.resolve(__dirname, '../lib/normalize')),
   assert = require('assert'),
