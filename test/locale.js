@@ -1,7 +1,7 @@
 /* global describe,before,after,beforeEach,it */
 'use strict';
 
-var Nemo = require('nemo'),
+var Nemo = require('nemo-core'),
   nemo = {},
   path = require('path'),
   assert = require('assert'),

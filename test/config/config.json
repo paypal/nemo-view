@@ -11,7 +11,17 @@
   },
   "driver": {
     "builders": {
-      "forBrowser": ["phantomjs"]
+      "withCapabilities": [
+        {
+          "browserName": "chrome",
+          "chromeOptions": {
+            "args": [
+              "headless",
+              "window-size=1200,800"
+            ]
+          }
+        }
+      ]
     }
   },
   "data": {

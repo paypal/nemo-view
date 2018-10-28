@@ -4,7 +4,7 @@
 
 var path = require('path'),
   util = require(path.resolve(__dirname, 'util')),
-  Nemo = require('nemo'),
+  Nemo = require('nemo-core'),
   nemo = {};
 
 describe('nemo-view @listViewSuite@', function () {
