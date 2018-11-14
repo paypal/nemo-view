@@ -53,22 +53,31 @@ function addView(nemo, locreator) {
     return _view;
   };
 }
-module.exports.setup = function (_locatorDirectory, _nemo, __callback) {
+module.exports.setup = function (_locatorDirectory, _defaultTimeout, _nemo, __callback) {
   log('plugin setup is called');
 
   //normalize arguments
   var nemo = _nemo;
   var locatorDirectory = _locatorDirectory;
+  var defaultTimeout = _defaultTimeout;
   var _callback = __callback;
+
   if (arguments.length === 2) {
     locatorDirectory = null;
+    defaultTimeout = 5000;
     nemo = arguments[0];
     _callback = arguments[1];
+  } else if (arguments.length === 3) {
+    defaultTimeout = 5000;
+    nemo = arguments[1];
+    _callback = arguments[2];
   }
+
   var callback = util.once(_callback);
 
   //add view namespace
   nemo.view = {};
+  nemo.view.defaultTimeout = defaultTimeout;
 
   //instantiate locreator
   var locreator = new Locreator(nemo);
