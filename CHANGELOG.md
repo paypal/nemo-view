@@ -1,6 +1,6 @@
 # nemo-view changelog
 
-## UNRELEASED
+## v1.1.1
 
 * fix npm audit warnings.
 * use chrome instead of phantomjs for travis
