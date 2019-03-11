@@ -1,9 +1,14 @@
 # nemo-view changelog
 
-## v3.1.0 
+## UNRELEASED
+
+* fix npm audit warnings.
+* use chrome instead of phantomjs for travis
+
+## v3.1.0
 
 * namespace view-specific methods under element name
-  * should be useful in destructuring situations 
+  * should be useful in destructuring situations
 
 ## v3.0.0
 
@@ -22,7 +27,7 @@
 * remove package-lock.json
 
 ## v2.2.0
- 
+
 * Adding the ability to select options by value and text as generic methods
 * Updated documentation to describe element list functionality
 * es6 changes
@@ -38,7 +43,7 @@
   - Fix: `lib/normalize` did not handle the case of attempting to normalize an already normalized locator
   - Fix: README doc for `_visible` and `_present` methods
   - New: unit tests for `_visible` and `_present` methods
-  
+
 ## v2.1.0
 
 * Now using [shush](https://github.com/krakenjs/shush) so that users can add comments to their locator files. This way `nemo-view` is consistent with `nemo`
