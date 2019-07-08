@@ -13,19 +13,19 @@
     "url": "https://github.com/paypal/nemo-view.git"
   },
   "dependencies": {
-    "debug": "^2.1.0",
+    "debug": "^4.1.1",
     "glob": "^7.1.3",
     "lodash": "^4.17.11",
     "selenium-drivex": "^2.0.0",
     "shush": "^1.0.0"
   },
   "devDependencies": {
-    "async": "^1.0.0",
-    "chromedriver": "^2.42.0",
+    "async": "^3.1.0",
+    "chromedriver": "^75.0.1",
     "grunt": "^1.0.3",
-    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-jshint": "^2.1.0",
     "grunt-simple-mocha": "~0.4.0",
-    "mocha": "^4",
+    "mocha": "^6.1.4",
     "nconf": "^0.10.0",
     "nemo-core": "^1.1.1"
   },
