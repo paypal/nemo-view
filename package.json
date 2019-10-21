@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "debug": "^4.1.1",
-    "glob": "^7.1.3",
+    "glob": "^7.1.5",
     "lodash": "^4.17.11",
     "selenium-drivex": "^2.0.0",
     "shush": "^1.0.0"
