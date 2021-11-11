@@ -1,8 +1,11 @@
 language: node_js
 
 node_js:
-  - "4"
+  - "12"
+  - "14"
 
 before_script:
   - npm install -g grunt-cli
 
+addons:
+  chrome: stable
