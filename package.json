@@ -28,7 +28,7 @@
     "grunt-simple-mocha": "~0.4.0",
     "mocha": "^6.1.4",
     "nconf": "^0.11.3",
-    "nemo-core": "^1.1.3"
+    "nemo-core": "git+https://github.com/zzhengjian/nemo-core.git"
   },
   "keywords": [
     "Nemo",
