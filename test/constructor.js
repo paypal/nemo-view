@@ -7,19 +7,22 @@ var Nemo = require('nemo-core'),
 
 describe('nemo-view @constructor@', function () {
   it('should do ? with malformed JSON file(s)', async function () {
-    nemo = await Nemo({
-      'plugins': {
-        "view": {
-          "module": "path:../",
-          "arguments": ["path:mocks/badjson"]
+    let err;
+    try {
+      nemo = await Nemo({
+        'plugins': {
+          "view": {
+            "module": "path:../",
+            "arguments": ["path:mocks/badjson"]
+          }
         }
-      }
-    }).then(() => {
-      throw new TypeError('should have got an error in nemo callback');
-    }).catch(err => {
-      if(err instanceof TypeError)
-        throw new Error('should have got an error in nemo callback');
-    });
+      })
+    } catch (error) {
+      err = error
+    } finally {
+      assert(err)
+    }
+
   });
   it('should give back _ methods with empty locator directory', async function () {
     nemo = await Nemo({
