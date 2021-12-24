@@ -115,10 +115,11 @@ describe('nemo-view @methods@', function () {
         if (found > 3800 || found < 2500) {
           assert.fail('error thrown but in the wrong period of time, ')
         }
+        else {
+          assert.fail('shouldn\'t have found the element to be visible')
+        }
       }
-      else {
-        assert.fail('shouldn\'t have found the element to be visible')
-      }
+      assert(err)
     });
   });
   it('should return true/false using @Visible@Positive@ method when element present', async function () {
@@ -133,7 +134,11 @@ describe('nemo-view @methods@', function () {
     });
   });
   it('should throw error using @Visible@Negative@ method when element not present', async function () {
-    await nemo.view.simple.notExistVisible();
+    let err;
+    await nemo.view.simple.notExistVisible().catch(function (error) {
+      err = error;
+    });
+    assert(err);
   });
   it('should return true using @Present@Positive@ method', async function () {
     await nemo.view.simple.outBox.present().then(function (present) {
@@ -205,7 +210,7 @@ describe('nemo-view @methods@', function () {
     
   });
   it('should find an existing element using the @_find@positive@ method', async function () {
-    let tn = nemo.view._find('body').getTagName();
+    let tn = await nemo.view._find('body').getTagName();
     assert.equal(tn.toLowerCase(), 'body', 'something went wrong here');
   });
   it('should find an existing element using the @_find@withparent@positive@ method', async function () {
