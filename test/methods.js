@@ -85,7 +85,7 @@ describe('nemo-view @methods@', function () {
     await util.waitForJSReady(nemo).then(function () {
       start = Date.now();
     });
-
+    let err;
     await nemo.view.simple.outBoxWaitVisible(3000, 'didnt find outbox')
     .catch(error => {err = error})
     .finally(() => {
@@ -94,9 +94,9 @@ describe('nemo-view @methods@', function () {
         if (found > 3800 || found < 2500) {
           assert.fail('error thrown but in the wrong period of time, ')
         }
-      }
-      else {
-        assert.fail('shouldn\'t have found the element to be visible')
+        else {
+          assert.fail('shouldn\'t have found the element to be visible')
+        }
       }
     })
   });
@@ -149,12 +149,8 @@ describe('nemo-view @methods@', function () {
     });
   });
   it('should return true using @TextEquals@Positive@ method', async function () {
-    await nemo.view.simple.pageHeader.textEquals('Sample form stuff').then(function (isEqual) {
-      assert.equal(isEqual, true);
-    });
-    await nemo.view.simple.pageHeaderTextEquals('Sample form stuff').then(function (isEqual) {
-      assert.equal(isEqual, true);
-    });
+    await nemo.view.simple.pageHeader.textEquals('Sample form stuff');
+    await nemo.view.simple.pageHeaderTextEquals('Sample form stuff');
   });
   it('should return false using @TextEquals@negative@ method', async function () {
     await nemo.view.simple.pageHeaderTextEquals('form stuff').catch(function (err) {
@@ -162,12 +158,8 @@ describe('nemo-view @methods@', function () {
     });
   });
   it('should return true using @AttrEquals@Positive@ method', async function () {
-    await nemo.view.simple.buttonLabel.attrEquals('value', 'Go foo').then(function (isEqual) {
-      assert.equal(isEqual, true);
-    });
-    await nemo.view.simple.buttonLabelAttrEquals('value', 'Go foo').then(function (isEqual) {
-      assert.equal(isEqual, true);
-    });
+    await nemo.view.simple.buttonLabel.attrEquals('value', 'Go foo');
+    await nemo.view.simple.buttonLabelAttrEquals('value', 'Go foo');
   });
   it('should return false using @AttrEquals@negative@ method', async function () {
     await nemo.view.simple.buttonLabelAttrEquals('value', 'foo').catch(function (err) {
@@ -306,7 +298,7 @@ describe('nemo-view @methods@', function () {
   });
   it('should use @_waitVisible@negative@ method for element present but not visible', async function () {
     var start, msg = 'Element did not load for specified timeout';
-    nemo.driver.get(nemo.data.baseUrl + '/waits');
+    await nemo.driver.get(nemo.data.baseUrl + '/waits');
     await util.waitForJSReady(nemo).then(function () {
       start = Date.now();
     });
