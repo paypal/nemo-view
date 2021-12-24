@@ -214,7 +214,7 @@ describe('nemo-view @methods@', function () {
     assert.equal(tn.toLowerCase(), 'body', 'something went wrong here');
   });
   it('should find an existing element using the @_find@withparent@positive@ method', async function () {
-    let text = await nemo.view._find('label[for="foo_text"]', await nemo.view.simple.form());
+    let text = await nemo.view._find('label[for="foo_text"]', await nemo.view.simple.form()).getText();
     assert.equal(text, 'foo Text:', 'something went wrong here');
   });
 
