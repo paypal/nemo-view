@@ -226,13 +226,13 @@ describe('nemo-view @methods@', function () {
   });
   it('should find an array of elements using the @_finds@positive@ method', async function () {
     await nemo.view._finds('input[type=text]').then(async function (inputs) {
-      var values = [];
-      inputs.forEach((input, idx) => {
-        var inputAndCheck = await input.sendKeys('input', idx).then(function () {
+      var values = [], id = 0;
+      for(let input of inputs){
+        var inputAndCheck = await input.sendKeys('input', id++).then(function () {
           return input.getAttribute('value');
         });
         values.push(inputAndCheck);
-      });
+      };
       return values;
     }).then(function (returned) {
       assert.deepEqual([
