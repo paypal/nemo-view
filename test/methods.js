@@ -94,10 +94,8 @@ describe('nemo-view @methods@', function () {
         if (found > 3800 || found < 2500) {
           assert.fail('error thrown but in the wrong period of time, ')
         }
-        else {
-          assert.fail('shouldn\'t have found the element to be visible')
-        }
       }
+      assert(err, 'shouldn\'t have found the element to be visible')
     })
   });
   it('should use @WaitVisible@negative@ method for element not present ', async function () {
@@ -115,11 +113,8 @@ describe('nemo-view @methods@', function () {
         if (found > 3800 || found < 2500) {
           assert.fail('error thrown but in the wrong period of time, ')
         }
-        else {
-          assert.fail('shouldn\'t have found the element to be visible')
-        }
       }
-      assert(err)
+      assert(err, 'shouldn\'t have found the element to be visible')
     });
   });
   it('should return true/false using @Visible@Positive@ method when element present', async function () {
