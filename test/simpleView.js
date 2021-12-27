@@ -12,7 +12,7 @@ describe('nemo-view @simpleViewSuite@', function () {
     nemo = await Nemo();
   });
   after(async function() {
-    await nemo.driver.quit().then(done);
+    await nemo.driver.quit();
   });
   beforeEach(async function() {
     await nemo.driver.get(nemo.data.baseUrl);
