@@ -9,21 +9,7 @@
       "arguments": ["login"]
     }
   },
-  "driver": {
-    "builders": {
-      "withCapabilities": [
-        {
-          "browserName": "chrome",
-          "chromeOptions": {
-            "args": [
-              "headless",
-              "window-size=1200,800"
-            ]
-          }
-        }
-      ]
-    }
-  },
+  "driver": "require:./config/driverconfig.chrome",
   "data": {
     "baseUrl": "http://warm-river-3624.herokuapp.com",
     "passThroughFromJson": true

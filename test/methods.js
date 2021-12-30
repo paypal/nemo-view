@@ -227,7 +227,7 @@ describe('nemo-view @methods@', function () {
           return input.getAttribute('value');
         });
         values.push(inputAndCheck);
-      };
+      }
       return values;
     }).then(function (returned) {
       assert.deepEqual([

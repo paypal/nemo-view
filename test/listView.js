@@ -29,7 +29,7 @@ describe('nemo-view @listViewSuite@', function () {
       for(let elt of elts) {
         await elt.text().sendKeys('abcd');
         await elt.button().click();
-      };
+      }
       await nemo.view.formElementList.outBox().getText().then(function (outText) {
         assert(outText, 'abcdabcdabcdabcd', 'didnt get what we shoulda')
       });

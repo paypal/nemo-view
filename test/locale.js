@@ -8,15 +8,15 @@ var Nemo = require('nemo-core'),
   util = require(path.resolve(__dirname, 'util'));
 
 describe('nemo-view @locale@', function () {
-  before(function (done) {
-    nemo = Nemo({
+  before(async function () {
+    nemo = await Nemo({
       plugins: {
         view: {
           module: 'path:../',
           arguments: ['path:mocks/locale']
         }
       }
-    }, done);
+    });
   });
   after(function (done) {
     nemo.driver.quit().then(done);

@@ -3,7 +3,7 @@
 module.exports.once = function once(fn) {
   var called = false;
   return  (err) => {
-    if (!!called) {
+    if (called) {
       return undefined;
     }
     called = true;
