@@ -18,7 +18,6 @@
     "debug": "^4.3.3",
     "glob": "^7.2.0",
     "lodash": "^4.17.21",
-    "selenium-drivex": "^2.0.0",
     "shush": "^1.0.0"
   },
   "devDependencies": {
@@ -41,7 +40,8 @@
     "Vidya Aravind <varavind@paypal.com>",
     "Alex Feldman <afeldman@paypal.com>",
     "Jonathan Samines <jn.samines@gmail.com>",
-    "Samdish Suri <sasuri@paypal.com>"
+    "Samdish Suri <sasuri@paypal.com>",
+    "Alex Zheng <jianzheng@paypal.com>"
   ],
   "licenses": [
     {

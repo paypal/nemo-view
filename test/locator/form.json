@@ -1,10 +1,22 @@
 {
+    "fooParent": {
+        "locator": "div#foo",
+        "type": "css"
+    },
+    "fooLabel": {
+        "locator": "#foo label[for=foo_text]",
+        "type": "css"
+    },
     "fooText": {
         "locator": "#foo input.texty",
         "type": "css"
     },
     "fooButton": {
         "locator": "#foo input[type='button']",
+        "type": "css"
+    },
+    "barParent": {
+        "locator": "div#bar",
         "type": "css"
     },
     "barText": {
