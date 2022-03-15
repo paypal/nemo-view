@@ -58,18 +58,6 @@ describe('nemo-view @newMethods@', function () {
     await form.fooLabel.waitForText({"notInclude":"notExist"})
   });
 
-  it('should waitForText contain failed', async function () {
-    const {form} = nemo.view
-    await assert.rejects(
-      async () => {
-        await form.fooLabel.waitForText({"contain":"not exist"}, 1000)
-      },
-      {
-        name: "AssertionError",
-        message: "Wait for element text for [fooLabel] : expected 'foo Text:' to include 'not exist'"
-      }
-    );
-  });
 
   it('should waitForText match successfully', async function () {
     const {form} = nemo.view

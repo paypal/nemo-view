@@ -128,12 +128,10 @@ describe('nemo-view @methods@', function () {
       assert.equal(visible, true);
     });
   });
-  it('should throw error using @Visible@Negative@ method when element not present', async function () {
-    let err;
-    await nemo.view.simple.notExistVisible().catch(function (error) {
-      err = error;
+  it('should return false using @Visible@Negative@ method when element not present', async function () {
+    await nemo.view.simple.notExistVisible().then(function (visible) {
+      assert.equal(visible, false);
     });
-    assert(err);
   });
   it('should return true using @Present@Positive@ method', async function () {
     await nemo.view.simple.outBox.present().then(function (present) {
@@ -255,7 +253,7 @@ describe('nemo-view @methods@', function () {
     await nemo.view._wait('bordy.foo.blarg', 13000, msg)
     .catch(error => {err = error})
     .finally(() => {
-      assert.equal(msg, err.message)
+      assert.match(err.message, /Element did not load for specified timeout.*/)
       if(err){
         var found = Date.now() - start;
         if (found > 13800 || found < 12500) {
@@ -274,7 +272,7 @@ describe('nemo-view @methods@', function () {
     await nemo.view._wait('bordy.foo.blarg', 3000, msg)
     .catch(error => {err = error})
     .finally(() => {
-      assert.equal(msg, err.message)
+      assert.match(err.message, /Element did not load for specified timeout.*/)
       if(err){
         var found = Date.now() - start;
         if (found > 3800 || found < 2500) {
