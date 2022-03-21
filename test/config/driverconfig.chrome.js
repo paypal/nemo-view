@@ -7,7 +7,7 @@ function getConfig() {
   return new Builder()
     .forBrowser('chrome')
     .setChromeOptions(
-      new chrome.Options().headless().windowSize({ width, height })
+      new chrome.Options()./*headless().*/windowSize({ width, height })
     )
 }
 

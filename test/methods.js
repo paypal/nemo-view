@@ -2,29 +2,29 @@
 'use strict';
 
 var assert = require('assert'),
-    nemo,
-    Nemo = require('nemo-core'),
-    path = require('path'),
-    util = require(path.resolve(__dirname, 'util'));
+  nemo,
+  Nemo = require('nemo-core'),
+  path = require('path'),
+  util = require(path.resolve(__dirname, 'util'));
 
 describe('nemo-view @methods@', function () {
-  before(async function() {
+  before(async function () {
     nemo = await Nemo();
   });
 
-  after(async function() {
+  after(async function () {
     await nemo.driver.quit();
   });
 
-  beforeEach(async function() {
+  beforeEach(async function () {
     await nemo.driver.get(nemo.data.baseUrl);
     await util.waitForJSReady(nemo);
   });
-  
+
   it('should return a @locatorObject@', async function () {
     var locator = nemo.view.simple.outBoxBy();
-    assert(locator.using,'didnt get back a locator object');
-    assert(locator.value,'didnt get back a locator object');
+    assert(locator.using, 'didnt get back a locator object');
+    assert(locator.value, 'didnt get back a locator object');
   });
   it('should find an existing element using the @Wait@positive@ method', async function () {
     await nemo.view.simple.bodyTag.wait(3000, 'didnt find body tag').getTagName().then(function (tn) {
@@ -38,37 +38,37 @@ describe('nemo-view @methods@', function () {
     var start = Date.now();
     let err;
     await nemo.view.simple.notExistWait(13000, 'didnt find notExist')
-    .catch(error => {err = error})
-    .finally(() => {
-      if(err){
-        var found = Date.now() - start;
-        if (found > 13800 || found < 12500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 13800 || found < 12500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      else {
-        assert.fail('found notExist but should not have')
-      }
-    })
+        else {
+          assert.fail('found notExist but should not have')
+        }
+      })
 
   });
   it('should appropriately use a DIFFERENT timeout argument to the @Wait@negative@CustomTimeout@ method in a failure scenario', async function () {
     var start = Date.now();
     let err;
     await nemo.view.simple.notExistWait(3000, 'didnt find notExist')
-    .catch(error => {err = error})
-    .finally(() => {
-      if(err){
-        var found = Date.now() - start;
-        if (found > 3800 || found < 2500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 3800 || found < 2500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      else {
-        assert.fail('found notExist but should not have')
-      }
-    });
-    
+        else {
+          assert.fail('found notExist but should not have')
+        }
+      });
+
   });
   it('should use @WaitVisible@positive@ method', async function () {
     await nemo.driver.get(nemo.data.baseUrl + '/waits');
@@ -87,16 +87,16 @@ describe('nemo-view @methods@', function () {
     });
     let err;
     await nemo.view.simple.outBoxWaitVisible(3000, 'didnt find outbox')
-    .catch(error => {err = error})
-    .finally(() => {
-      if(err){
-        var found = Date.now() - start;
-        if (found > 3800 || found < 2500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 3800 || found < 2500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      assert(err, 'shouldn\'t have found the element to be visible')
-    })
+        assert(err, 'shouldn\'t have found the element to be visible')
+      })
   });
   it('should use @WaitVisible@negative@ method for element not present ', async function () {
     var start;
@@ -106,16 +106,16 @@ describe('nemo-view @methods@', function () {
     });
     let err;
     await nemo.view.simple.outBoxWaitVisible(3000, 'didnt find outbox')
-    .catch(error => {err = error})
-    .finally(() => {
-      if(err){
-        var found = Date.now() - start;
-        if (found > 3800 || found < 2500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 3800 || found < 2500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      assert(err, 'shouldn\'t have found the element to be visible')
-    });
+        assert(err, 'shouldn\'t have found the element to be visible')
+      });
   });
   it('should return true/false using @Visible@Positive@ method when element present', async function () {
     await nemo.view.simple.outBoxVisible().then(function (visible) {
@@ -199,10 +199,10 @@ describe('nemo-view @methods@', function () {
     assert(!visible, 'something went wrong here');
   });
   it('should resolve false if element not visible @_visible@withParent@negative@ method', async function () {
-    
+
     let visible = await nemo.view._visible('id:outy', await nemo.view.simple.form());
     assert(!visible, 'something went wrong here');
-    
+
   });
   it('should find an existing element using the @_find@positive@ method', async function () {
     let tn = await nemo.view._find('body').getTagName();
@@ -216,13 +216,13 @@ describe('nemo-view @methods@', function () {
   it('should throw error for non-present element with @_find@negative@ method', async function () {
     let err;
     await nemo.view._find('booody')
-    .catch(error => err = error)
+      .catch(error => err = error)
     assert(err, 'something went wrong here')
   });
   it('should find an array of elements using the @_finds@positive@ method', async function () {
     await nemo.view._finds('input[type=text]').then(async function (inputs) {
       var values = [], id = 0;
-      for(let input of inputs){
+      for (let input of inputs) {
         var inputAndCheck = await input.sendKeys('input', id++).then(function () {
           return input.getAttribute('value');
         });
@@ -243,48 +243,73 @@ describe('nemo-view @methods@', function () {
       assert.equal(divs.length, 4)
     });
   });
-  it('should find an existing element using the @_wait@positive@ method', async function () {
+  it('should find an existing element using the @_find@positive@ method', async function () {
     await nemo.view._wait('body', 3000).getTagName().then(function (tn) {
       assert.equal(tn.toLowerCase(), 'body')
     });
   });
+  it.only('should find and interact with existing element using the @_find@positive@ method', async function () {
+    // await nemo.view._wait('body', 3000).getTagName().then(function (tn) {
+    //   assert.equal(tn.toLowerCase(), 'body')
+    // });
+    debugger;
+    let {By} = require('selenium-webdriver');
+    let { baseUrl, input, button, result } = {
+      "baseUrl": "https://www.google.com",
+      "input": "input[name=q]",
+      "button": "input[type=submit][name=btnK]",
+      "result": "#search"
+    };
+    await nemo.driver.get(baseUrl);
+    let inp = await nemo.driver.findElement(By.css(input));
+    await nemo.driver.sleep(100);
+    await inp.sendKeys('nemo selenium');
+    // await inp.sendKeys(nemo.wd.Key.TAB); // close any modal overlay (like google has)
+    await nemo.driver.sleep(100);
+
+    let btn = await nemo.driver.findElement(By.css(button));
+    await nemo.driver.sleep(100);
+
+    await btn.click();
+    await nemo.view._waitVisible(result);
+  });
   it('should appropriately use a timeout argument to the @_wait@negative@CustomTimeout@ method in a failure scenario', async function () {
     var start = Date.now(), msg = 'Element did not load for specified timeout';
-    
+
     let err;
     await nemo.view._wait('bordy.foo.blarg', 13000, msg)
-    .catch(error => {err = error})
-    .finally(() => {
-      assert.equal(msg, err.message)
-      if(err){
-        var found = Date.now() - start;
-        if (found > 13800 || found < 12500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        assert.equal(msg, err.message)
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 13800 || found < 12500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      else {
-        assert.fail('found notExist but should not have')
-      }
-    })
+        else {
+          assert.fail('found notExist but should not have')
+        }
+      })
   });
 
   it('should appropriately use a DIFFERENT timeout argument to the @_wait@negative@CustomTimeout@ method in a failure scenario', async function () {
     var start = Date.now(), msg = 'Element did not load for specified timeout';
     let err;
     await nemo.view._wait('bordy.foo.blarg', 3000, msg)
-    .catch(error => {err = error})
-    .finally(() => {
-      assert.equal(msg, err.message)
-      if(err){
-        var found = Date.now() - start;
-        if (found > 3800 || found < 2500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        assert.equal(msg, err.message)
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 3800 || found < 2500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      else {
-        assert.fail('found notExist but should not have')
-      }
-    })
+        else {
+          assert.fail('found notExist but should not have')
+        }
+      })
   });
   it('should use @_waitVisible@positive@ method', async function () {
     await nemo.driver.get(nemo.data.baseUrl + '/waits');
@@ -303,19 +328,19 @@ describe('nemo-view @methods@', function () {
 
     let err;
     await nemo.view._waitVisible('#outy', 3000, msg)
-    .catch(error => {err = error})
-    .finally(() => {
-      assert.equal(msg, err.message)
-      if(err){
-        var found = Date.now() - start;
-        if (found > 3800 || found < 2500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        assert.equal(msg, err.message)
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 3800 || found < 2500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      else {
-        assert.fail('found notExist but should not have')
-      }
-    });
+        else {
+          assert.fail('found notExist but should not have')
+        }
+      });
   });
   it('should use @_waitVisible@negative@ method for element not present ', async function () {
     var start, msg = 'Element did not load for specified timeout';
@@ -326,19 +351,19 @@ describe('nemo-view @methods@', function () {
 
     let err;
     await nemo.view._waitVisible('#foo.bar.brrao', 3000, msg)
-    .catch(error => {err = error})
-    .finally(() => {
-      assert.equal(msg, err.message)
-      if(err){
-        var found = Date.now() - start;
-        if (found > 3800 || found < 2500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        assert.equal(msg, err.message)
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 3800 || found < 2500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      else {
-        assert.fail('found notExist but should not have')
-      }
-    });
+        else {
+          assert.fail('found notExist but should not have')
+        }
+      });
   });
   it('should use @_firstVisible@positive@ method to find an element which isnt initially visible', async function () {
     await nemo.driver.get(nemo.data.baseUrl + '/waits');
@@ -365,17 +390,17 @@ describe('nemo-view @methods@', function () {
       'noexisty': '#noexisty',
       'alsonoexisty': '#alsonoexisty'
     }, 3000)
-    .catch(error => {err = error})
-    .finally(() => {
-      if(err){
-        var found = Date.now() - start;
-        if (found > 3800 || found < 2500) {
-          assert.fail('error thrown but in the wrong period of time, ')
+      .catch(error => { err = error })
+      .finally(() => {
+        if (err) {
+          var found = Date.now() - start;
+          if (found > 3800 || found < 2500) {
+            assert.fail('error thrown but in the wrong period of time, ')
+          }
         }
-      }
-      else {
-        assert.fail('shouldnt have found an element')
-      }
-    });
+        else {
+          assert.fail('shouldnt have found an element')
+        }
+      });
   });
 });
