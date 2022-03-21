@@ -8,25 +8,25 @@ var Nemo = require('nemo-core'),
   nemo = {};
 
 describe('nemo-view @verySimple@', function () {
-  before(function (done) {
-    nemo = Nemo(done);
+  before(async function () {
+    nemo = await Nemo();
   });
-  after(function (done) {
-    nemo.driver.quit().then(done);
+  after(async function () {
+    await nemo.driver.quit();
   });
 
-  beforeEach(function (done) {
-    nemo.driver.get(nemo.data.baseUrl);
-    util.waitForJSReady(nemo).then(util.doneSuccess(done), util.doneError(done));
+  beforeEach(async function () {
+    await nemo.driver.get(nemo.data.baseUrl);
+    await util.waitForJSReady(nemo);
   });
-  it('should use the form view to enter values and write to outy div @useView@', function (done) {
-    nemo.view._find('css:#outy').getTagName().then(function (tn) {
+  it('should use the form view to enter values and write to outy div @useView@', async function () {
+    await nemo.view._find('css:#outy').getTagName().then(function (tn) {
       assert.equal(tn.toLowerCase(), 'div');
     });
-    nemo.view._finds('body').then(function (bodyArray) {
+    await nemo.view._finds('body').then(function (bodyArray) {
       return bodyArray[0].getTagName();
     }).then(function (tn) {
       assert.equal(tn.toLowerCase(), 'body');
-    }).then(done, util.doneError(done));
+    });
   });
 });

@@ -8,17 +8,19 @@ var Nemo = require('nemo-core'),
   nemo = {};
 
 describe('nemo-view @pluginContainedFunctionality@', function () {
-  before(function(done) {
-    nemo = Nemo(done);
+  before(async function() {
+    nemo = await Nemo();
   });
-  after(function(done) {
-    nemo.driver.quit().then(done);
+
+  after(async function() {
+    await nemo.driver.quit();
   });
-  it('should complete the shared functionality', function (done) {
-    nemo.login.getPage();
-    util.waitForJSReady(nemo);
-    nemo.login.login('medelman-buyer@paypal.com', '11111111');
-    nemo.login.logout().then(util.doneSuccess(done), util.doneError(done));
+
+  it('should complete the shared functionality', async function () {
+    await nemo.login.getPage();
+    await util.waitForJSReady(nemo);
+    await nemo.login.login('medelman-buyer@paypal.com', '11111111');
+    await nemo.login.logout();
   });
 
 });
